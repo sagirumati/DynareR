@@ -1,35 +1,3 @@
-gretlR Package: Integration of R and gretl
-================
-Sagiru Mati (PhD)
-
-# About gretlR
-
-DynareR is an R package that can run `Dynare` program from R Markdown.
-
-# Installation
-
-DynareR can be installed using the following commands in R.
-
-``` r
-install.packages("DynareR")
-
-          OR
-          
-devtools::install_github('sagirumati/DynareR')
-```
-
-# Usage
-
-Please load the DynareR package as follows:
-
-    ```{r DynareR}                                                             
-    library(DynareR)
-    ```
-
-Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown below:
-
-````` 
-```{dynare BKK,eval=T,echo=T,comment=NULL,results='hide'} `r ''`
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -79,6 +47,7 @@ Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown
 
 @#define countries = [ "H", "F" ]
 @#define J = 4
+
 
 @#for co in countries
 var C_@{co} L_@{co} N_@{co} A_@{co} K_@{co} Z_@{co} X_@{co} LAMBDA_@{co} S_@{co} NX_@{co} Y_@{co};
@@ -202,30 +171,4 @@ end;
 steady;
 check;
 
-stoch_simul(order=1, hp_filter=1600, nograph);
-```  
-`````
-
-The above chunk creates a Dynare program with the chunk’s content, then
-automatically run Dynare, which will save Dynare outputs in the
-current directory.
-
-
-The Impulse Response figures of the BKK model can be fetched using the following R chunk
-
-
-```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software"}
-
-knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
-
-```
-
-However, Dynare figure can only be dynamically included if the output format is pdf as Dynare produces pdf and eps graphs only.
-
-
-Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder BKK will be created in your current working directory.
-
-<br><br><br><br>
-
-Please visit my [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/) for a better explanation and example files.
-
+stoch_simul(order=1, hp_filter=1600,graph_format =(pdf,eps));

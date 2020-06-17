@@ -1,16 +1,43 @@
-gretlR Package: Integration of R and gretl
-================
-Sagiru Mati (PhD)
+---
+title: "DynareR: A Seamless Integration of R and Dynare"
+author: "Sagiru Mati"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DynareR: A Seamless Integration of R and Dynare}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-# About gretlR
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-DynareR is an R package that can run `Dynare` program from R Markdown.
+```{r setup1, include=FALSE}
+library(DynareR)
+```
+
+# About DynareR
+
+DynareR is an R package that can run `Dynare` program from R Markdown. 
+
+
+# Requirements
+
+Users need the following in order to knit this document:
+
+* Dynare 4.6.1 or above
+
+* Octave 5.2.0 or above
 
 # Installation
 
 DynareR can be installed using the following commands in R.
 
-``` r
+```{r installation,eval=FALSE}
 install.packages("DynareR")
 
           OR
@@ -20,11 +47,14 @@ devtools::install_github('sagirumati/DynareR')
 
 # Usage
 
-Please load the DynareR package as follows:
+Please load the DynareR package as follows: 
 
-    ```{r DynareR}                                                             
-    library(DynareR)
-    ```
+````
+```{r DynareR} `r ''`                                                            
+library(DynareR)
+```
+````
+
 
 Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown below:
 
@@ -214,8 +244,7 @@ current directory.
 The Impulse Response figures of the BKK model can be fetched using the following R chunk
 
 
-```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software"}
-
+```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software",eval=F}
 knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
 
 ```
