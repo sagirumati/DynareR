@@ -1,10 +1,19 @@
-gretlR Package: Integration of R and gretl
+DynareR Package: Integration of R and Dynare
 ================
 Sagiru Mati (PhD)
 
-# About gretlR
+# About DynareR
 
 DynareR is an R package that can run `Dynare` program from R Markdown.
+
+
+# Requirements
+
+Users need the following in order to knit this document:
+
+* Dynare 4.6.1 or above
+
+* Octave 5.2.0 or above
 
 # Installation
 
