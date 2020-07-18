@@ -1,7 +1,7 @@
 Package: DynareR
 Type: Package
 Title: A Seamless Integration of 'R' and 'Dynare'
-Version: 0.1.0
+Version: 0.1.1
 Author: Sagiru Mati [aut, cre]
 Authors@R: c(
     person("Sagiru", "Mati", role = c("aut", "cre"), email = "smati@smati.com.ng"))
