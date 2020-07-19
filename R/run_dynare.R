@@ -1,9 +1,9 @@
-#' Create and run Dynare `mod` files
+#' Create and run `Dynare` `mod` file
 #'
-#' Use `run_dynare(file,code)` if you want the `Dynare` files to live in the current working directory
-#' Use `run_dynare(file,code,path)` if you want the `Dynare` files to live in the path different from the current working directory
-
-#' @description Use this function to run `Dynare` `mod` or \code{dyn} files
+#' Use this function to create and run `Dynare` `mod` file.
+#' Use `run_dynare(file,code)`  if you want the `Dynare` files to live in the current working directory.
+#' Use `run_dynare(file,code,path)` if you want the `Dynare` files to live in the path different from the current working directory.
+#'
 #' @usage run_dynare(file,code,path)
 #' @param file Object or a character string representing the name of the file excluding \code{.mod} or \code{.dyn} file extension
 #'
@@ -55,7 +55,6 @@
 #' file<-"example1" # This is "example1" of the `Dynare` example files
 #' code<-DynareCodes
 #'run_dynare(file,code)
-#'run_dynare(file,code,path)
 #'}
 #' @seealso write_mod write_dyn eng_dynare run_model
 #' @keywords documentation

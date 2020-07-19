@@ -17,7 +17,7 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 \description{
 Use this function to execute multiple \bold{existing} \code{Dynare} files.
 Use \code{run_models(file)}  if the Dynare files live in the current working directory.
-Use \code{run_models(file,path)}  if the Dynare files live in the path different from the current working directory
+Use \code{run_models(file,path)}  if the Dynare files live in the path different from the current working directory.
 }
 \examples{
 library(DynareR)
@@ -27,7 +27,6 @@ file=c("example1","example2","agtrend","bkk")
 \dontrun{
 
 run_models(file)
-run_models(file,path)
 }
 }
 \seealso{

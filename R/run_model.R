@@ -1,7 +1,7 @@
 #' Run a single \bold{existing} `mod` or `dyn` file.
 #'
-#' Use `run_model(file)` if the `Dynare` files live in the current working directory
-#' Use `run_model(file,path)` if the `Dynare` files live in the path different from the current working directory
+#' Use `run_model(file)` if the `Dynare` files live in the current working directory.
+#' Use `run_model(file,path)` if the `Dynare` files live in the path different from the current working directory.
 #'
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs

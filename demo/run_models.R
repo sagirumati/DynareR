@@ -1,6 +1,6 @@
 # It is recommended to enclose your codes within a single quote.
 
-FileName<-c("example1","example1_reporting","example2","example2","agtrend","bkk","Ramsey_Example","ramst")
+FileName<-c("example1","example2","agtrend","bkk")
 
 library(DynareR)
 

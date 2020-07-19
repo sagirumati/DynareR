@@ -1,6 +1,6 @@
 agtrend agtrend Run agtrend of the Dynare example files
-bkk bkk Run bkk of the Dynare example files
-example1 example1 Run example1 of the Dynare example files
+bkk Bkk Run bkk of the Dynare example files
+example1 Example1 Run example1 of the Dynare example files
 example2 example2 Run example2 of the Dynare example files
 run_dynare dynare create and execute dynare model
 run_model model execute existing Dynare model

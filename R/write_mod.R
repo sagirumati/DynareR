@@ -1,8 +1,8 @@
 #' Write a new `mod` file.
 #'
 #' Use `write_mod(file,code)` if you want the `Dynare` file to live in the current working directory.
-#' Use `write_mod(file,code,path)` if you want the `Dynare` file to live in the path differnent from the current working directory
-
+#' Use `write_mod(file,code,path)` if you want the `Dynare` file to live in the path different from the current working directory.
+#'
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
@@ -48,7 +48,6 @@
 #' file<-"example1" # This is "example1" of the `Dynare` example files
 #' code<-DynareCodes
 #' write_mod(file,code)
-#' write_mod(file,code,path)
 #'}
 #' @seealso write_dynare eng_dynare run_model run_dynare
 #' @keywords documentation

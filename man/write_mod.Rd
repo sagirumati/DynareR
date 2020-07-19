@@ -18,7 +18,7 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
 Use \code{write_mod(file,code)} if you want the \code{Dynare} file to live in the current working directory.
-Use \code{write_mod(file,code,path)} if you want the \code{Dynare} file to live in the path differnent from the current working directory
+Use \code{write_mod(file,code,path)} if you want the \code{Dynare} file to live in the path different from the current working directory.
 }
 \examples{
 library(DynareR)
@@ -64,7 +64,6 @@ stoch_simul;'
 file<-"example1" # This is "example1" of the `Dynare` example files
 code<-DynareCodes
 write_mod(file,code)
-write_mod(file,code,path)
 }
 }
 \seealso{

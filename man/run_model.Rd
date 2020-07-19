@@ -15,8 +15,8 @@ run_model(file, path = "")
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
-Use \code{run_model(file)} if the \code{Dynare} files live in the current working directory
-Use \code{run_model(file,path)} if the \code{Dynare} files live in the path different from the current working directory
+Use \code{run_model(file)} if the \code{Dynare} files live in the current working directory.
+Use \code{run_model(file,path)} if the \code{Dynare} files live in the path different from the current working directory.
 }
 \examples{
 library(DynareR)

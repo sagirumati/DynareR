@@ -64,7 +64,6 @@ stoch_simul;'
 file<-"example1" # This is "example1" of the `Dynare` example files
 code<-DynareCodes
 write_dyn(file,code)
-write_dyn(file,code,path)
 }
 }
 \seealso{

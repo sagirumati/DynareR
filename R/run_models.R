@@ -2,7 +2,7 @@
 #'
 #' Use this function to execute multiple \bold{existing} \code{Dynare} files.
 #' Use `run_models(file)`  if the Dynare files live in the current working directory.
-#' Use `run_models(file,path)`  if the Dynare files live in the path different from the current working directory
+#' Use `run_models(file,path)`  if the Dynare files live in the path different from the current working directory.
 #'
 #' @param file Object or a  vector of character strings representing the names of the \code{Dynare} files excluding `.mod` or `.dyn` file extension
 #' @inheritParams run_dynare
@@ -14,7 +14,6 @@
 #' \dontrun{
 #'
 #' run_models(file)
-#' run_models(file,path)
 #'}
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
