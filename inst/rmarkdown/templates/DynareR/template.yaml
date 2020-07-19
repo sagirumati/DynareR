@@ -1,0 +1,4 @@
+name: DynareR
+description: >
+   A reproducible example for DynareR package
+create_dir: FALSE
