@@ -2,25 +2,26 @@
 % Please edit documentation in R/run_model.R
 \name{run_model}
 \alias{run_model}
-\title{Run existing \code{mod} or \code{dyn} file.}
+\title{Run a single \bold{existing} \code{mod} or \code{dyn} file.}
 \usage{
 run_model(file, path = "")
 }
 \arguments{
 \item{file}{Object or a character string representing the name of the file excluding \code{.mod} or \code{.dyn} file extension}
 
-\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}.}
+\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
-Run existing \code{mod} or \code{dyn} file.
+Use \code{run_model(file)} if the \code{Dynare} files live in the current working directory
+Use \code{run_model(file,path)} if the \code{Dynare} files live in the path different from the current working directory
 }
 \examples{
 library(DynareR)
 \dontrun{
-example1='var y, c, k, a, h, b;
+DynareCodes='var y, c, k, a, h, b;
 varexo e, u;
 parameters beta, rho, alpha, delta, theta, psi, tau;
 alpha = 0.36;
@@ -58,10 +59,11 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-file<-"example1"
-code<-example1
+file<-"example1" # This is "example1" of the `Dynare` example files
+code<-DynareCodes
 write_mod(file,code)
 run_model(file)
+
 }
 }
 \seealso{

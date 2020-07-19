@@ -1,2 +1,9 @@
-example1 example Run example1 of the Dynare example files
-bkk bk Run bkk of the Dynare example files
+agtrend agtrend Run agtrend of the Dynare example files
+bkk bkk Run bkk of the Dynare example files
+example1 example1 Run example1 of the Dynare example files
+example2 example2 Run example2 of the Dynare example files
+run_dynare dynare create and execute dynare model
+run_model model execute existing Dynare model
+run_models Run bkk of the Dynare example files
+write_dyn  dyn Write Dynare model with dyn extension
+write_mod mod Write Dynare model with mod extension

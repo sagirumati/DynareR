@@ -1,17 +1,30 @@
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"example1"
+FileName<-"example3"
 
 library(DynareR)
 
-DynareCodes='/*
+DynareCodes='
+/*
  * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
  * A practical guide" (see "guide.pdf" in the documentation directory).
+ *
+ * This file uses the steady_state_model-block to provide analytical steady state values.
+ * To do so, the equations of the model have been transformed into a non-linear equation in
+ * labor h. Within the steady_state_model-block, a helper function is called that uses fsolve
+ * to solve this non-linear equation. The use of the helper function is necessary to avoid
+ * interference of the MATLAB syntax with Dynare's preprocessor. A more complicated alternative
+ * that provides more flexibility in the type of commands executed and functions called is the use
+ * of an explicit steady state file. See the NK_baseline.mod in the Examples Folder.
+ *
+ * This mod-file also shows how to use Dynare's capacities to generate TeX-files of the model equations.
+ * If you want to see the model equations belonging to this mod-file, run it using Dynare
+ * and then use a TeX-editor to compile the TeX-files generated.
  */
 
 /*
- * Copyright (C) 2001-2010 Dynare Team
+ * Copyright (C) 2013 Dynare Team
  *
  * This file is part of Dynare.
  *
@@ -33,7 +46,13 @@ DynareCodes='/*
 var y, c, k, a, h, b;
 varexo e, u;
 
-parameters beta, rho, alpha, delta, theta, psi, tau;
+parameters beta $\beta$
+     rho $\rho$
+     alpha $\alpha$
+     delta $\delta$
+     theta $\theta$
+     psi $\psi$
+     tau $\tau$;
 
 alpha = 0.36;
 rho   = 0.95;
@@ -55,15 +74,13 @@ a = rho*a(-1)+tau*b(-1) + e;
 b = tau*a(-1)+rho*b(-1) + u;
 end;
 
-initval;
-y = 1.08068253095672;
-c = 0.80359242014163;
-h = 0.29175631001732;
-k = 11.08360443260358;
-a = 0;
-b = 0;
-e = 0;
-u = 0;
+steady_state_model;
+h=example3_steady_state_helper(alpha,beta,delta,psi,theta);
+k=((1/beta-(1-delta))/alpha)^(1/(alpha-1))*h;
+y = k^alpha*h^(1-alpha);
+c=(1-alpha)*y/(theta*h^(1+psi));
+a=0;
+b=0;
 end;
 
 shocks;
@@ -71,6 +88,10 @@ var e; stderr 0.009;
 var u; stderr 0.009;
 var e, u = phi*0.009*0.009;
 end;
+
+//use command to generate TeX-Files with dynamic and static model equations
+write_latex_dynamic_model;
+write_latex_static_model;
 
 stoch_simul;'
 

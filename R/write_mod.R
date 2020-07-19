@@ -1,9 +1,13 @@
 #' Write a new `mod` file.
+#'
+#' Use `write_mod(file,code)` if you want the `Dynare` file to live in the current working directory.
+#' Use `write_mod(file,code,path)` if you want the `Dynare` file to live in the path differnent from the current working directory
+
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
-#' example1='var y, c, k, a, h, b;
+#' DynareCodes='var y, c, k, a, h, b;
 #' varexo e, u;
 #' parameters beta, rho, alpha, delta, theta, psi, tau;
 #' alpha = 0.36;
@@ -41,15 +45,16 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1"
-#' code<-example1
+#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' code<-DynareCodes
 #' write_mod(file,code)
+#' write_mod(file,code,path)
 #'}
 #' @seealso write_dynare eng_dynare run_model run_dynare
 #' @keywords documentation
 #' @export
 write_mod <- function(file,code,path="") {
-  file=paste0("DynareR_",file)
+  #file=paste0("DynareR_",file)
 if(path==""){
   file.create(paste0(file, '.', "mod"))
   f <-paste0(file, '.', "mod")

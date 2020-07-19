@@ -1,9 +1,13 @@
-#' Run existing `mod` or `dyn` file.
+#' Run a single \bold{existing} `mod` or `dyn` file.
+#'
+#' Use `run_model(file)` if the `Dynare` files live in the current working directory
+#' Use `run_model(file,path)` if the `Dynare` files live in the path different from the current working directory
+#'
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
-#' example1='var y, c, k, a, h, b;
+#' DynareCodes='var y, c, k, a, h, b;
 #' varexo e, u;
 #' parameters beta, rho, alpha, delta, theta, psi, tau;
 #' alpha = 0.36;
@@ -41,22 +45,24 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1"
-#' code<-example1
+#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' code<-DynareCodes
 #' write_mod(file,code)
 #' run_model(file)
+#'
 #'}
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
 #' @export
 run_model <- function(file,path="") {
-  file=paste0("DynareR_",file)
+  #file=paste0("DynareR_",file)
    if(path==""){
     if(!dir.exists(file)) dir.create(file)
     }else{
   if(!dir.exists(paste0(path,"/",file))) dir.create(paste0(path,"/",file))
 }
-  # create the model from the chunk name
+
+
 if(path==""){
   if(file.exists(paste0(file, '.', "mod"))){
     file.copy(paste0(file, '.', "mod"),paste0(file,"/",file,'.', "mod"),overwrite = T)

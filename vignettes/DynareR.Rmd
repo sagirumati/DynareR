@@ -258,3 +258,6 @@ Please note that DynareR uses the chunk name as the model name. So, the outpus o
 
 Please visit my [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/) for a better explanation and example files.
 
+
+
+

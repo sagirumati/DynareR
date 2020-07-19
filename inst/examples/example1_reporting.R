@@ -1,7 +1,7 @@
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"example1"
+FileName<-"example1_reporting"
 
 library(DynareR)
 
@@ -11,7 +11,7 @@ DynareCodes='/*
  */
 
 /*
- * Copyright (C) 2001-2010 Dynare Team
+ * Copyright (C) 2001-2015 Dynare Team
  *
  * This file is part of Dynare.
  *
@@ -72,7 +72,38 @@ var u; stderr 0.009;
 var e, u = phi*0.009*0.009;
 end;
 
-stoch_simul;'
+stoch_simul;
+
+shocke = dseries();
+shocku = dseries();
+@#define endovars=["y", "c", "k", "a", "h", "b"]
+@#for var in endovars
+  shocke = [shocke dseries(@{var}_e, 2014q3, '@{var}')];
+  shocku = [shocku dseries(@{var}_u, 2014q3, '@{var}')];
+@#endfor
+
+r = report();
+@#for shock in ["e", "u"]
+    r = r.addPage('title',{'Dseries/Report Example','Shock @{shock}'},...
+                  'titleFormat', {'\Large\bfseries', '\large\bfseries'});
+    r = r.addSection('cols', 2);
+@#  for var in endovars
+      r = r.addGraph('data', shock@{shock}.@{var}, 'title', '@{var}', ...
+                     'showGrid', false, 'yTickLabelPrecision', 2, ...
+                     'yTickLabelZeroFill', false, ...
+                     'showZeroLine', true, 'zeroLineColor', 'red');
+@#  endfor
+    r = r.addVspace('number', 2);
+    r = r.addSection('cols', 1);
+    r = r.addTable('range', 2022q1:2024q1, 'precision', 5);
+
+@#  for var in endovars
+      r = r.addSeries('data', shock@{shock}.@{var});
+@#  endfor
+@#endfor
+
+r.write();
+r.compile();'
 
 file<-FileName
 code<-DynareCodes

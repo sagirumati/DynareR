@@ -1,12 +1,12 @@
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"example1"
+FileName<-"example2"
 
 library(DynareR)
 
 DynareCodes='/*
- * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
+ * Example 2 from F. Collard (2001): "Stochastic simulations with DYNARE:
  * A practical guide" (see "guide.pdf" in the documentation directory).
  */
 
@@ -43,36 +43,35 @@ delta = 0.025;
 psi   = 0;
 theta = 2.95;
 
-phi   = 0.1;
-
 model;
-c*theta*h^(1+psi)=(1-alpha)*y;
-k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
-    *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
-y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
-k = exp(b)*(y-c)+(1-delta)*k(-1);
+exp(c)*theta*exp(h)^(1+psi)=(1-alpha)*exp(y);
+exp(k) = beta*(((exp(b)*exp(c))/(exp(b(+1))*exp(c(+1))))
+         *(exp(b(+1))*alpha*exp(y(+1))+(1-delta)*exp(k)));
+exp(y) = exp(a)*(exp(k(-1))^alpha)*(exp(h)^(1-alpha));
+exp(k) = exp(b)*(exp(y)-exp(c))+(1-delta)*exp(k(-1));
 a = rho*a(-1)+tau*b(-1) + e;
 b = tau*a(-1)+rho*b(-1) + u;
 end;
 
 initval;
-y = 1.08068253095672;
-c = 0.80359242014163;
-h = 0.29175631001732;
-k = 11.08360443260358;
+y = 0.1;
+c = -0.2;
+h = -1.2;
+k =  2.4;
 a = 0;
 b = 0;
 e = 0;
 u = 0;
 end;
 
+steady;
+
 shocks;
-var e; stderr 0.009;
-var u; stderr 0.009;
-var e, u = phi*0.009*0.009;
+var e = 0.009^2;
+var u = 0.009^2;
 end;
 
-stoch_simul;'
+stoch_simul(periods=2000, drop=200);'
 
 file<-FileName
 code<-DynareCodes

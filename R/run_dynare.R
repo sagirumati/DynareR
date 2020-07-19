@@ -1,17 +1,20 @@
 #' Create and run Dynare `mod` files
 #'
+#' Use `run_dynare(file,code)` if you want the `Dynare` files to live in the current working directory
+#' Use `run_dynare(file,code,path)` if you want the `Dynare` files to live in the path different from the current working directory
+
 #' @description Use this function to run `Dynare` `mod` or \code{dyn} files
 #' @usage run_dynare(file,code,path)
 #' @param file Object or a character string representing the name of the file excluding \code{.mod} or \code{.dyn} file extension
 #'
 #' @param code Object or a character string representing the set of `Dynare` codes
 #'
-#' @param path Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default `path`.
+#' @param path Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default `path`. Specify the `path` only if the `Dynare` files live in different path from the current working directory.
 #'
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
-#' example1='var y, c, k, a, h, b;
+#' DynareCodes='var y, c, k, a, h, b;
 #' varexo e, u;
 #' parameters beta, rho, alpha, delta, theta, psi, tau;
 #' alpha = 0.36;
@@ -49,15 +52,15 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1"
-#' code<-example1
+#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' code<-DynareCodes
 #'run_dynare(file,code)
+#'run_dynare(file,code,path)
 #'}
 #' @seealso write_mod write_dyn eng_dynare run_model
 #' @keywords documentation
 #' @export
 run_dynare <- function(file,code,path="") {
-file=paste0("DynareR_",file)
   if(path==""){
   write_mod(file,code)
   run_model(file)

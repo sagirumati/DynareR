@@ -1,8 +1,36 @@
-# It is recommended to enclose your codes within a single quote.
+# We use "example1" of the Dynare example files to illustrate
+#how to use this function
+
+FileName<-"example1"
 
 library(DynareR)
 
-example1='var y, c, k, a, h, b;
+DynareCodes='/*
+ * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
+ * A practical guide" (see "guide.pdf" in the documentation directory).
+ */
+
+/*
+ * Copyright (C) 2001-2010 Dynare Team
+ *
+ * This file is part of Dynare.
+ *
+ * Dynare is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Dynare is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Dynare.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+var y, c, k, a, h, b;
 varexo e, u;
 
 parameters beta, rho, alpha, delta, theta, psi, tau;
@@ -20,7 +48,7 @@ phi   = 0.1;
 model;
 c*theta*h^(1+psi)=(1-alpha)*y;
 k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
-          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+    *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
 y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
 k = exp(b)*(y-c)+(1-delta)*k(-1);
 a = rho*a(-1)+tau*b(-1) + e;
@@ -45,14 +73,17 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-path="inst/examples"
-file<-"example1"
-code<-example1
-write_mod(file,code,path)
-write_mod("example1",example1)
-run_model("example1")
 
+file<-FileName
+code<-DynareCodes
+run_dynare(file,code)
 
-run_model(file,path)
+# You can create an absolute or relative path for the DynareR files.
+# The following writes and run mod file in "DynareR/run_dynare/"  folder
+# relative to the current path.
+
+path=paste0("DynareR","/",file)
+
+if(!dir.exists(path)) dir.create(path,recursive = T)
+
 run_dynare(file,code,path)
-

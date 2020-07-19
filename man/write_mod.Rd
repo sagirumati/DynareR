@@ -11,18 +11,19 @@ write_mod(file, code, path = "")
 
 \item{code}{Object or a character string representing the set of \code{Dynare} codes}
 
-\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}.}
+\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
-Write a new \code{mod} file.
+Use \code{write_mod(file,code)} if you want the \code{Dynare} file to live in the current working directory.
+Use \code{write_mod(file,code,path)} if you want the \code{Dynare} file to live in the path differnent from the current working directory
 }
 \examples{
 library(DynareR)
 \dontrun{
-example1='var y, c, k, a, h, b;
+DynareCodes='var y, c, k, a, h, b;
 varexo e, u;
 parameters beta, rho, alpha, delta, theta, psi, tau;
 alpha = 0.36;
@@ -60,9 +61,10 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-file<-"example1"
-code<-example1
+file<-"example1" # This is "example1" of the `Dynare` example files
+code<-DynareCodes
 write_mod(file,code)
+write_mod(file,code,path)
 }
 }
 \seealso{
