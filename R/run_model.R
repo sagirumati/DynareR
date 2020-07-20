@@ -53,7 +53,6 @@
 #'}
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
-#' @export
 run_model <- function(file,path="") {
   #file=paste0("DynareR_",file)
    if(path==""){

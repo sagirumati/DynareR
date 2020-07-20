@@ -2,7 +2,6 @@
 
 export(eng_dynare)
 export(run_dynare)
-export(run_model)
 export(run_models)
 export(write_dyn)
 export(write_mod)
