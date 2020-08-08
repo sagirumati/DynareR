@@ -1,6 +1,6 @@
 # It is recommended to enclose your codes within a single quote.
 
-FileName<-'example1'
+modelName<-'example1'
 library(DynareR)
 
 DynareCodes='var y, c, k, a, h, b;
@@ -47,10 +47,10 @@ end;
 
 stoch_simul;'
 
-file<-FileName
+model<-modelName
 code<-DynareCodes
-write_mod(file,code)
-run_model(file)
+write_mod(model,code)
+run_model(model)
 
 # You can create an absolute or relative path for the DynareR files.
 # The following execute existing mod file in "DynareR/run_model/"  folder
@@ -61,8 +61,8 @@ path="DynareR/run_model"
 
 if(!dir.exists(path)) dir.create(path,recursive = T)
 
-write_mod(file,code,path)
-run_model(file,path)
+write_mod(model,code,path)
+run_model(model,path)
 
 
 

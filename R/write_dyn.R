@@ -1,7 +1,7 @@
 #' write a new `dyn` file.
 #'
-#' Use `write_dyn(file,code)`  if you want the `Dynare` file to live in the current working directory.
-#' Use `write_dyn(file,code,path)`  if you want the `Dynare` file to live in the path different from the current working directory.
+#' Use `write_dyn(model,code)`  if you want the `Dynare` file to live in the current working directory.
+#' Use `write_dyn(model,code,path)`  if you want the `Dynare` file to live in the path different from the current working directory.
 
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
@@ -45,21 +45,21 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' model<-"example1" # This is "example1" of the `Dynare` example files
 #' code<-DynareCodes
-#' write_dyn(file,code)
+#' write_dyn(model,code)
 #'}
 #' @seealso write_mod eng_dynare run_model run_dynare
 #' @keywords documentation
 #' @export
-write_dyn <- function(file,code,path="") {
- # file=paste0("DynareR_",file)
+write_dyn <- function(model,code,path="") {
+ # model=paste0("DynareR_",model)
 if(path==""){
-  file.create(paste0(file, '.', "dyn"))
-  f <-paste0(file, '.', "dyn")
+  file.create(paste0(model, '.', "dyn"))
+  f <-paste0(model, '.', "dyn")
   }else{
-    file.create(paste0(path,"/",file, '.', "dyn"))
-  f <-paste0(path,"/",file, '.', "dyn")
+    file.create(paste0(path,"/",model, '.', "dyn"))
+  f <-paste0(path,"/",model, '.', "dyn")
   }
   writeLines(code, f)
 }

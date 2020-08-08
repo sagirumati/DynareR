@@ -4,10 +4,10 @@
 \alias{run_model}
 \title{Run a single \bold{existing} \code{mod} or \code{dyn} file.}
 \usage{
-run_model(file, path = "")
+run_model(model, path = "")
 }
 \arguments{
-\item{file}{Object or a character string representing the name of the file excluding \code{.mod} or \code{.dyn} file extension}
+\item{model}{Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension}
 
 \item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
 }
@@ -15,8 +15,8 @@ run_model(file, path = "")
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
-Use \code{run_model(file)} if the \code{Dynare} files live in the current working directory.
-Use \code{run_model(file,path)} if the \code{Dynare} files live in the path different from the current working directory.
+Use \code{run_model(model)} if the \code{Dynare} files live in the current working directory.
+Use \code{run_model(model,path)} if the \code{Dynare} files live in the path different from the current working directory.
 }
 \examples{
 library(DynareR)
@@ -59,10 +59,10 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-file<-"example1" # This is "example1" of the `Dynare` example files
+model<-"example1" # This is "example1" of the `Dynare` example files
 code<-DynareCodes
-write_mod(file,code)
-run_model(file)
+write_mod(model,code)
+run_model(model)
 
 }
 }

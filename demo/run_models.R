@@ -1,13 +1,13 @@
 # It is recommended to enclose your codes within a single quote.
 
-FileName<-c("example1","example2","agtrend","bkk")
+modelName<-c("example1","example2","agtrend","bkk")
 
 library(DynareR)
 
 
-file<-FileName
+model<-modelName
 code<-DynareCodes
-run_models(file)
+run_models(model)
 
 # You can create an absolute or relative path for the DynareR files.
 # The following execute existing mod file in "DynareR/run_model/"  folder
@@ -18,7 +18,7 @@ path="DynareR/run_models"
 
 if(!dir.exists(path)) dir.create(path,recursive = T)
 
-run_models(file,path)
+run_models(model,path)
 
 
 

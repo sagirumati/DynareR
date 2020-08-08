@@ -1,11 +1,11 @@
 #' Create and run `Dynare` `mod` file
 #'
 #' Use this function to create and run `Dynare` `mod` file.
-#' Use `run_dynare(file,code)`  if you want the `Dynare` files to live in the current working directory.
-#' Use `run_dynare(file,code,path)` if you want the `Dynare` files to live in the path different from the current working directory.
+#' Use `run_dynare(model,code)`  if you want the `Dynare` files to live in the current working directory.
+#' Use `run_dynare(model,code,path)` if you want the `Dynare` files to live in the path different from the current working directory.
 #'
-#' @usage run_dynare(file,code,path)
-#' @param file Object or a character string representing the name of the file excluding \code{.mod} or \code{.dyn} file extension
+#' @usage run_dynare(model,code,path)
+#' @param model Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension
 #'
 #' @param code Object or a character string representing the set of `Dynare` codes
 #'
@@ -52,22 +52,22 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' model<-"example1" # This is "example1" of the `Dynare` example files
 #' code<-DynareCodes
-#'run_dynare(file,code)
+#'run_dynare(model,code)
 #'}
 #' @seealso write_mod write_dyn eng_dynare run_model
 #' @keywords documentation
 #' @export
-run_dynare <- function(file,code,path="") {
+run_dynare <- function(model,code,path="") {
   if(path==""){
-  write_mod(file,code)
-  run_model(file)
-  on.exit(unlink(c(paste0(file,"/",file,".mod"),paste0(file,".mod"))))
+  write_mod(model,code)
+  run_model(model)
+  on.exit(unlink(c(paste0(model,"/",model,".mod"),paste0(model,".mod"))))
 }else{
-  write_mod(file,code,path)
-  run_model(file,path)
-  on.exit(unlink(c(paste0(path,"/",file,"/",file,".mod"),paste0(path,"/",file,".mod"))))
+  write_mod(model,code,path)
+  run_model(model,path)
+  on.exit(unlink(c(paste0(path,"/",model,"/",model,".mod"),paste0(path,"/",model,".mod"))))
 }
 
 }

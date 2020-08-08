@@ -1,7 +1,7 @@
 ---
 title: "DynareR: A Seamless Integration of R and Dynare"
 author: Sagiru Mati (PhD)
-output: bookdown::html_document2
+output: bookdown::pdf_document2
 linkcolor: blue
 toc: false
 ---
@@ -228,7 +228,7 @@ stoch_simul(order=1, hp_filter=1600,format=pdf);
 `````
 
 
-```{dynare BKK,eval=T,echo=F,comment=NULL}
+```{dynare BKK,eval=F,echo=F,comment=NULL}
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -418,6 +418,22 @@ The Impulse Response figures of the BKK model can be fetched using the following
 knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
 
 ```
+
+
+```{r BKKFigure1,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"}
+include_IRF <- function(model="",IRF="",path="") {
+if(path==""){
+  knitr::include_graphics(paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf"))
+} else{
+    knitr::include_graphics(paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf"))
+ }
+}
+
+include_IRF("BKK","E_H2")
+
+```
+
+
 
 However, Dynare figure can only be dynamically included if the output format is pdf as Dynare produces pdf and eps graphs only.
 

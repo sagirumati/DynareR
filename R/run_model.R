@@ -1,7 +1,7 @@
 #' Run a single \bold{existing} `mod` or `dyn` file.
 #'
-#' Use `run_model(file)` if the `Dynare` files live in the current working directory.
-#' Use `run_model(file,path)` if the `Dynare` files live in the path different from the current working directory.
+#' Use `run_model(model)` if the `Dynare` files live in the current working directory.
+#' Use `run_model(model,path)` if the `Dynare` files live in the path different from the current working directory.
 #'
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
@@ -45,56 +45,56 @@
 #' end;
 #'
 #' stoch_simul;'
-#' file<-"example1" # This is "example1" of the `Dynare` example files
+#' model<-"example1" # This is "example1" of the `Dynare` example files
 #' code<-DynareCodes
-#' write_mod(file,code)
-#' run_model(file)
+#' write_mod(model,code)
+#' run_model(model)
 #'
 #'}
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
-run_model <- function(file,path="") {
-  #file=paste0("DynareR_",file)
+run_model <- function(model,path="") {
+  #model=paste0("DynareR_",model)
    if(path==""){
-    if(!dir.exists(file)) dir.create(file)
+    if(!dir.exists(model)) dir.create(model)
     }else{
-  if(!dir.exists(paste0(path,"/",file))) dir.create(paste0(path,"/",file))
+  if(!dir.exists(paste0(path,"/",model))) dir.create(paste0(path,"/",model))
 }
 
 
 if(path==""){
-  if(file.exists(paste0(file, '.', "mod"))){
-    file.copy(paste0(file, '.', "mod"),paste0(file,"/",file,'.', "mod"),overwrite = T)
+  if(file.exists(paste0(model, '.', "mod"))){
+    file.copy(paste0(model, '.', "mod"),paste0(model,"/",model,'.', "mod"),overwrite = T)
   } else{
-  file.copy(paste0(file, '.', "dyn"),paste0(file,"/",file,'.', "dyn"),overwrite = T)
+  file.copy(paste0(model, '.', "dyn"),paste0(model,"/",model,'.', "dyn"),overwrite = T)
     }
   }
 
 if(path!=""){
-if(file.exists(paste0(path,"/",file, '.', "mod"))){
-  file.copy(paste0(path,"/",file, '.', "mod"),paste0(path,"/",file,"/",file,'.', "mod"),overwrite = T)
-  f <-paste0(path,"/",file,"/",file, '.', "mod")
+if(file.exists(paste0(path,"/",model, '.', "mod"))){
+  file.copy(paste0(path,"/",model, '.', "mod"),paste0(path,"/",model,"/",model,'.', "mod"),overwrite = T)
+  f <-paste0(path,"/",model,"/",model, '.', "mod")
    } else{
-    file.copy(paste0(path,"/",file, '.', "dyn"),paste0(path,"/",file,"/",file,'.', "dyn"),overwrite = T)
-   f <-paste0(path,"/",file,"/",file, '.', "dyn")
+    file.copy(paste0(path,"/",model, '.', "dyn"),paste0(path,"/",model,"/",model,'.', "dyn"),overwrite = T)
+   f <-paste0(path,"/",model,"/",model, '.', "dyn")
    }
 }
 
 
   # Creating a new path to run the mod or dyn files
 if(path==""){
-  new.path <-file
+  new.path <-model
 }else{
-  new.path <-shQuote(paste0(path,"/",file))
+  new.path <-shQuote(paste0(path,"/",model))
 }
 
 
-  m<-basename(tempfile(file, '.',paste(".", "m", sep = '')))   # m is file extension of octave/matlab
+  m<-basename(tempfile(model, '.',paste(".", "m", sep = '')))   # m is file extension of octave/matlab
  if (path==""){
-   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',file, sep = ''),sprintf("dynare %s",file)), m)
+   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',model, sep = ''),sprintf("dynare %s",model)), m)
  }else{
 
-   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',new.path, sep = ''),sprintf("dynare %s",file)), m)
+   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',new.path, sep = ''),sprintf("dynare %s",model)), m)
 
  }
    on.exit(unlink(m))

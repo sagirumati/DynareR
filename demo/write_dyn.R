@@ -1,5 +1,5 @@
 # It is recommended to enclose your codes within a single quote.
-FileName="example1"
+modelName="example1"
 
 library(DynareR)
 
@@ -48,9 +48,9 @@ end;
 stoch_simul;'
 
 
-file<-FileName
+model<-modelName
 code<-DynareCodes
-write_dyn(file,code)
+write_dyn(model,code)
 # You can create an absolute or relative path for the DynareR files.
 # The following writes the dyn file in "DynareR/write_dyn/" folder
 # relative to the current path.
@@ -60,7 +60,7 @@ path="DynareR/write_dyn"
 
 if(!dir.exists(path)) dir.create(path,recursive = T)
 
-write_dyn(file,code,path)
+write_dyn(model,code,path)
 
 
 
