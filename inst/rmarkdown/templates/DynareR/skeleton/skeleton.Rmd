@@ -411,24 +411,13 @@ The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the
 current directory named with their respective chunk name.
 
-The Impulse Response figures of the BKK model can be fetched using the following R chunk
 
+# Plotting the IRF
 
-```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software"}
-knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
-
-```
+The Impulse Response Function (IRF) of the BKK model can be fetched using the following R chunk
 
 
 ```{r BKKFigure1,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"}
-include_IRF <- function(model="",IRF="",path="") {
-if(path==""){
-  knitr::include_graphics(paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf"))
-} else{
-    knitr::include_graphics(paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf"))
- }
-}
-
 include_IRF("BKK","E_H2")
 
 ```

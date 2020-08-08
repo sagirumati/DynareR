@@ -1,19 +1,19 @@
-DynareR Package: Integration of R and Dynare
+DynareR: A Seamless Integration of R and Dynare
 ================
-Sagiru Mati (PhD)
+Sagiru Mati
+2020-08-08
 
 # About DynareR
 
 DynareR is an R package that can run `Dynare` program from R Markdown.
 
-
 # Requirements
 
 Users need the following in order to knit this document:
 
-* Dynare 4.6.1 or above
+  - Dynare 4.6.1 or above
 
-* Octave 5.2.0 or above
+  - Octave 5.2.0 or above
 
 # Installation
 
@@ -35,10 +35,11 @@ Please load the DynareR package as follows:
     library(DynareR)
     ```
 
-Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown below:
+Then create a chunk for `dynare` (adopted from Dynare example file BKK)
+as shown below:
 
-````` 
-```{dynare BKK,eval=T,echo=T,comment=NULL,results='hide'} `r ''`
+```` 
+```{dynare BKK,eval=T,echo=T,comment=NULL,results='hide'} 
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -213,28 +214,261 @@ check;
 
 stoch_simul(order=1, hp_filter=1600, nograph);
 ```  
-`````
+````
 
 The above chunk creates a Dynare program with the chunk’s content, then
-automatically run Dynare, which will save Dynare outputs in the
-current directory.
+automatically run Dynare, which will save Dynare outputs in the current
+directory.
 
+Please note that DynareR uses the chunk name as the model name. So, the
+outpus of Dynare are saved in a folder with its respective chunk name.
+Thus a new folder BKK will be created in your current working directory.
 
-The Impulse Response figures of the BKK model can be fetched using the following R chunk
+# Plotting the IRF
 
+The Impulse Response Function (IRF) is saved by default in
+`BKK/BKK/graphs/` folder with the IRF’s name `BKK_IRF_E_H2.pdf`, where
+`BKK` is the Dynare model’s name.
 
-```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software"}
+## The include\_IRF function
 
-knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
+Use this function to embed the graphs Impulse Response Function (IRF) in
+R Markdown document.
 
+``` r
+include_IRF(model="",IRF="",path="")
 ```
 
-However, Dynare figure can only be dynamically included if the output format is pdf as Dynare produces pdf and eps graphs only.
+The Impulse Response Function (IRF) of the BKK model can be fetched
+using the following R chunk. Note that only the last part of the IRF’s
+name (`E_H2`) is need, that is `BKK_IRF_` is excluded. Also note that
+`out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white
+space above and below the IRF
 
+    ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} 
+    include_IRF("BKK","E_H2")
+    ```
 
-Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder BKK will be created in your current working directory.
+However, Dynare figure can only be dynamically included if the output
+format is pdf as Dynare produces pdf and eps graphs only.
+
+# DynareR functions for base R
+
+The DynareR package is also designed to work with base R. The following
+functions show how to work with DynareR outside R Markdown.
+
+## The write\_dyn function
+
+This function writes a new `dyn` file.
+
+``` r
+write_dyn(model, code, path = "")
+```
+
+Use `write_dyn(model,code)` if you want the `Dynare` file to live in the
+current working directory. Use `write_dyn(model,code,path)` if you want
+the Dynare file to live in the path different from the current working
+directory.
+
+``` r
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+model<-"example1"  
+code<-DynareCodes
+
+write_dyn(model,code)
+```
+
+## The write\_mod function
+
+This function writes a new `mod` file.
+
+``` r
+write_mod(model, code, path = "")
+```
+
+Use `write_mod(model,code)` if you want the `Dynare` file to live in the
+current working directory. Use `write_mod(model,code,path)` if you want
+the Dynare file to live in the path different from the current working
+directory.
+
+``` r
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+model<-"example1"  
+code<-DynareCodes
+
+write_mod(model,code)
+```
+
+## The run\_dynare function
+
+Create and run Dynare `mod` file
+
+``` r
+run_dynare(model,code,path)
+```
+
+Use this function to create and run Dynare mod file. Use
+run\_dynare(model,code) if you want the Dynare files to live in the
+current working directory. Use run\_dynare(model,code,path) if you want
+the Dynare files to live in the path different from the current working
+directory.
+
+``` r
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+model<-"example1"  
+code<-DynareCodes
+
+run_dynare(model,code)
+```
+
+## The run\_models function
+
+Run multiple existing `mod` or `dyn` files.
+
+``` r
+run_models(model, path = "")
+```
+
+Use this function to execute multiple existing Dynare files. Use
+`run_models(file)` if the Dynare files live in the current working
+directory. Use `run_models(file,path)` if the Dynare files live in the
+path different from the current working directory.
+
+``` r
+model=c("example1","example2","agtrend","bkk")
+run_models(model)
+```
+
+Where `example1`, `example2`, `agtrend` and `bkk` are the Dynare model
+files (with `mod` or `dyn` extension), which live in the current working
+directory.
+
+# Demo
+
+The demo files are included and can be accessed via
+demo(package=“DynareR”)
+
+# Template
+
+Template for R Markdown is created. Go to `file->New File->R Markdown->
+From Template->DynareR`.
 
 <br><br><br><br>
 
-Please visit my [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/) for a better explanation and example files.
-
+Please visit my
+[Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/)
+for a better explanation and example files.
