@@ -1,4 +1,5 @@
 # We use "example1" of the Dynare example files to illustrate
+library(DynareR)
 #how to use this function
 
 ModelName<-"bkk"

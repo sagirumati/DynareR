@@ -1,3 +1,4 @@
+library(DynareR)
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 

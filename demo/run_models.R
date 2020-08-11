@@ -1,8 +1,9 @@
+library(DynareR)
+
 # It is recommended to enclose your codes within a single quote.
 
 modelName<-c("example1","example2","agtrend","bkk")
 
-library(DynareR)
 
 
 model<-modelName

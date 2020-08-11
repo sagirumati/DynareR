@@ -1,7 +1,8 @@
+library(DynareR)
+
 # It is recommended to enclose your codes within a single quote.
 modelName="example1"
 
-library(DynareR)
 
 example1='var y, c, k, a, h, b;
 varexo e, u;
