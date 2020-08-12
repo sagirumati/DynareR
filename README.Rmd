@@ -1,7 +1,12 @@
+---
+output: github_document
+number_sections: true
+---
 
-# DynareR: A Seamless Integration of R and Dynare
-
-Sagiru Mati 2020-08-08
+DynareR: A Seamless Integration of R and Dynare
+================
+Sagiru Mati
+2020-08-08
 
 # About DynareR
 
@@ -31,7 +36,7 @@ devtools::install_github('sagirumati/DynareR')
 
 Please load the DynareR package as follows:
 
-    ```r
+    ```{r DynareR,eval=F}                                                             
     library(DynareR)
     ```
 
@@ -39,8 +44,7 @@ Then create a chunk for `dynare` (adopted from Dynare example file BKK)
 as shown below:
 
 ```` 
-
-```dynare
+```{dynare BKK,eval=T,echo=T,comment=NULL,results='hide'} 
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -214,7 +218,7 @@ steady;
 check;
 
 stoch_simul(order=1, hp_filter=1600, nograph);
-```
+```  
 ````
 
 The above chunk creates a Dynare program with the chunk’s content, then
@@ -231,41 +235,29 @@ The Impulse Response Function (IRF) is saved by default in
 `BKK/BKK/graphs/` folder with the IRF’s name `BKK_IRF_E_H2.pdf`, where
 `BKK` is the Dynare model’s name.
 
-## The include\_IRF function
+## The include_IRF function
 
-Use this function to embed the graphs Impulse Response Function (IRF) in
+Use this function to embed the graphs of Impulse Response Function (IRF) in
 R Markdown document.
 
-``` r
+```{r,eval=F}
 include_IRF(model="",IRF="",path="")
 ```
 
 The Impulse Response Function (IRF) of the BKK model can be fetched
 using the following R chunk. Note that only the last part of the IRF’s
-name (`E_H2`) is need, that is `BKK_IRF_` is excluded. Also note that
+name (`E_H2`) is needed, that is `BKK_IRF_` is excluded. Also note that
 `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white
 space above and below the IRF
 
-    ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"}  
-    include_IRF("BKK","E_H2")
-    ```
-
-``` r
+````
+```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} `r ''` 
+include_IRF("BKK","E_H2")
+```
+````
+```{r irgg,fig.cap='Example of an IRF imported using include_IRF function'}
 knitr::include_graphics("inst/images/IRF.png")
 ```
-
-<div class="figure">
-
-<img src="inst/images/IRF.png" alt="Example of an IRF imported using include_IRF function" width="993" />
-
-<p class="caption">
-
-Example of an IRF imported using include\_IRF function
-
-</p>
-
-</div>
-
 However, Dynare figure can only be dynamically included if the output
 format is pdf as Dynare produces pdf and eps graphs only.
 
@@ -486,29 +478,28 @@ From Template->DynareR`.
 
 # Examples
 
-The
-[examples](https://github.com/sagirumati/DynareR/tree/master/inst/examples)
-folder contains R scripts for demonstrating the use of DynareR. We use
-“example1” of the Dynare example files for all the functions.
 
-# STEPS to run the Dynare files
 
-1.  Please load the DynareR package in R using the following code
+  The [examples](https://github.com/sagirumati/DynareR/tree/master/inst/examples) folder contains R scripts for
+demonstrating the use of DynareR. We use "example1" of the Dynare
+example files for all the functions.
 
-<!-- end list -->
 
-``` r
+# STEPS to run the Dynare files 
+
+
+1. Please load the DynareR package in R using the following code
+
+```{r,eval=F}
 library(DynareR)
 ```
 
-2.  Please enusre that the “current working directory” is “examples”
-    folder.
 
-3.  Please run the R scripts individually using the following codes:
+2. Please enusre that the "current working directory" is "examples" folder.
 
-<!-- end list -->
+3. Please run the R scripts individually using the following codes:
 
-``` r
+```{r,eval=F}
 source("agtrend.R")
 source("bkk.R")
 source("example1.R")
@@ -518,90 +509,81 @@ source("write_dyn.R")
 source("write_mod.R")
 ```
 
-If you are using R Studio, you can open each of the files above and run
-the entire codes.
+If you are using R Studio, you can open each of the files above and run the entire codes.
 
-4.  Please run all the above models using the following code:
+4. Please run all the above models using the following code:
 
-<!-- end list -->
-
-``` r
+```{r,eval=F}
 source("run_all.R")
 ```
 
-You can also open the `run_all.R` file in R Studio and run the entire
-code.
+You can also open the `run_all.R` file in R Studio and run the entire code.
 
-The outputs of each model (example1, bkk, agtrend etc) will be saved in
-a new folder with the model’s name created in the current working
-directory (demo). The outputs of each DynareR function (write\_mod,
-write\_dyn, run\_dynare) will be saved in a folder with the function’s
-name.
+The outputs of each model (example1, bkk, agtrend etc) will be saved in a new folder with the model's name created in the current working directory (demo). The outputs of each DynareR function (write_mod, write_dyn, run_dynare) will be saved in a folder with the function's name.
 
 # Working existing mod files
 
-The folder
-[DynareFiles](https://github.com/sagirumati/DynareR/tree/master/inst/examples/DynareFiles/)
-contains the Dynare built-in example files
+The folder [DynareFiles](https://github.com/sagirumati/DynareR/tree/master/inst/examples/DynareFiles/) contains the Dynare built-in example files
+
 
 # STEPS to run the Dynare built-in example files
 
-1.  If DynareR package is not installed on your R, please install it
-    using the following codes
 
-2.  Please load the DynareR package in R using the following code
+1. If DynareR package is not installed on your R, please install it
+using the following codes
 
-<!-- end list -->
+2. Please load the DynareR package in R using the following code
 
-``` r
+```{r,eval=F}
 library(DynareR)
 ```
 
-3.  Please enusre that the “current working directory” is `DynareFiles`
-    folder.
 
-4.  Please run a single model using the following code:
+3. Please enusre that the "current working directory" is `DynareFiles` folder.
 
-<!-- end list -->
 
-``` r
+4. Please run a single model using the following code:
+
+```{r,eval=F}
 run_models("example1")
 ```
 
-5.  Please run multiple models using the following code
 
-<!-- end list -->
+5. Please run multiple models using the following code
 
-``` r
+```{r,eval=F}
 run_models(c("agtrend","example1","bkk","example2"))
 ```
 
-7)  If the files live in different folder from the R “current working
-    directory”, please provide the folder,for example, as follows:
 
-<!-- end list -->
+7) If the files live in different folder from the R "current working directory",
+please provide the folder,for example, as follows:
 
-``` r
+```{r,eval=F}
 path="path/to/the/Dynare_files"
 ```
+
 
 Then use the following codes to run the models:
 
 To run a single Dynare model;
 
-``` r
+```{r,eval=F}
 run_models("example1",path)
 ```
+ 
 
 To run multiple existing Dynare models;
 
-``` r
+
+```{r,eval=F}
 run_models(c("agtrend","example1","bkk","example2"),path) 
 ```
+ 
 
-The outputs of each model (example1, bkk, agtrend etc) will be saved in
-a new folder with the model’s name created in the current working
-directory (DynareFiles).
+
+The outputs of each model (example1, bkk, agtrend etc) will be saved in a new folder with the model's name 
+created in the current working directory (DynareFiles).
 
 <br><br><br><br>
 
