@@ -6,9 +6,10 @@ linkcolor: blue
 toc: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,comment = NULL)
+```{r setup, include=T}
+knitr::opts_chunk$set(echo = TRUE,comment = NULL,eval=F)
 library(DynareR)
+# set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
 ```
 
 # About DynareR

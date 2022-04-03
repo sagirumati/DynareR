@@ -1,25 +1,24 @@
 Package: DynareR
 Type: Package
 Title: A Seamless Integration of 'R' and 'Dynare'
-Version: 0.1.1
-Author: Sagiru Mati [aut, cre]
+Version: 0.1.2
 Authors@R: c(
-    person("Sagiru", "Mati", role = c("aut", "cre"), email = "smati@smati.com.ng"))
+    person("Sagiru", "Mati", role = c("aut", "cre"), email = "smati@smati.com.ng",comment=c(ORCID="0000-0003-1413-3974")))
 Maintainer: Sagiru Mati <smati@smati.com.ng>
-Description: It allows running 'Dynare' program from R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models.  This package serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' 4.6.1 (<https://www.dynare.org/>) and 'Octave' 5.2.0 (<https://www.gnu.org/software/octave/download.html>).  Write all your 'Dynare' commands in R Markdown chunk.
+Description: It allows running 'Dynare' program from base R and R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models.  This package does not only integrate R and Dynare but also serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' (<https://www.dynare.org/>) and 'Octave' (<https://www.gnu.org/software/octave/download.html>).  Write all your 'Dynare' commands in R or R Markdown chunk.
 Depends: R (>= 3.2.3)
 Imports: knitr (>= 1.20)
-SystemRequirements: Dynare (>= 4.6.1), Octave (=5.2.0)
+SystemRequirements: Dynare, Octave
 Suggests: rmarkdown
 License: GPL
-URL: https://github.com/sagirumati/DynareR/
+URL:  https://CRAN.R-project.org/package=DynareR
 BugReports: https://github.com/sagirumati/DynareR/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
 NeedsCompilation: no
 Packaged: 2020-06-09 15:31:44 UTC; Sagiru
 Repository: CRAN
 LazyData: true
 Date/Publication: 2020-06-09 17:10:03 UTC
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
