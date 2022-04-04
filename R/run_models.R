@@ -18,7 +18,12 @@
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
 #' @export
-run_models=function(model,path=""){
-  for(i in model)  run_model(i,path)
+run_models=function(model="",path="."){
+if(model=="") {
+  model=list.files(path = path,pattern = "\\.mod|\\.dyn")
+model=gsub("\\.mod|\\.dyn","",model)
+model=unique(model)
+  }
+    for(i in model)  run_model(i,path)
 }
 

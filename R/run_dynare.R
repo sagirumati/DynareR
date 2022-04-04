@@ -59,11 +59,14 @@
 #' @seealso write_mod write_dyn eng_dynare run_model
 #' @keywords documentation
 #' @export
-run_dynare <- function(model,code,path="") {
+run_dynare <- function(model,code,path=".") {
+
+  dynareFile <-paste0(path,"/",model, '.', "mod")
 
   write_mod(model=model,code=code,path = path)
   run_model(model,path=path)
-  # on.exit(unlink(c(paste0(model,"/",model,".mod"),paste0(model,".mod"))))
+
+  on.exit(unlink(dynareFile),add = T)
 
 }
 

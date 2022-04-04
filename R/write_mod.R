@@ -52,10 +52,10 @@
 #' @seealso write_dynare eng_dynare run_model run_dynare
 #' @keywords documentation
 #' @export
-write_mod <- function(model,code,path="") {
+write_mod <- function(model,code,path=".") {
 
-if(path=="") dynareFile <-paste0(model, '.', "mod") else dynareFile <-paste0(path,"/",model, '.', "mod")
-if(path!="") if(!dir.exists(path)) dir.create(path,recursive = T)
+dynareFile <-paste0(path,"/",model, '.', "mod")
+if(!dir.exists(path)) dir.create(path,recursive = T)
   writeLines(code, dynareFile)
 }
 

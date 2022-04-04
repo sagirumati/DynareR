@@ -1,3 +1,6 @@
+
+# .onload
+
 .onLoad<-function(libname,pkgname){
   knitr::knit_engines$set(dynare=eng_dynare)
   set_dynare_version()
@@ -5,22 +8,39 @@
 }
 
 
+# system_exec
+
 system_exec=function(){
   octave_system_path=eval(expression(octave_system_path),envir = parent.frame())
   octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
   system2(set_octave_path(octave_system_path),paste("--eval",shQuote(paste("run",octaveFile))))
 }
 
-unlink_eviews=function(){
 
-  unlink(list.files(pattern=".~f1"))
-  unlink(list.files(pattern=".~rg"))
-  unlink(list.files(pattern="_Snapshots"),recursive = T,force = T)
+# Run_model
+
+run_model <- function(model,path=".") {
+
+  modelDir=paste0(path,"/",model)
+  if(!dir.exists(modelDir)) dir.create(modelDir)
+
+  modFile=paste0(path,"/",model,".mod")
+  dynFile=paste0(path,"/",model,".dyn")
+
+  if(file.exists(modFile)){
+    file.copy(modFile,modelDir,overwrite = T)
+    dynarePath=basename(modFile)
+  } else{
+    file.copy(dynFile,modelDir,overwrite = T)
+    dynarePath=basename(dynFile)
+  }
+
+  octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
+
+  writeLines(c(dynare_version,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
 
 
-  fileName=eval(expression(fileName), parent.frame())
-  if(exists('table_name.csv',envir = parent.frame()))  table_name.csv=eval(expression(table_name.csv), parent.frame()) #for deleting table_name.csv in import_table function
-
-  unlink(fileName)
-  if(exists('table_name.csv',envir = parent.frame())) unlink(table_name.csv)
+  on.exit(unlink(octaveFile),add = T)
+  system_exec()
 }
+

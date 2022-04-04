@@ -43,7 +43,8 @@ eng_dynare <- function(options) {
   writeLines(c(dynare_version,paste0('cd ',options$label),sprintf("dynare %s.mod",options$label)), octaveFile)
 
   # "warning('off','all')",
-   # on.exit(unlink(octaveFile),add = T)
+
+  on.exit(unlink(octaveFile),add = T)
 
 
   if (options$eval) {
