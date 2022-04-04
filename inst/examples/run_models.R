@@ -14,7 +14,7 @@ run_models(file)
 # relative to the current path.
 
 
-path="DynareR/run_models"
+# path="DynareR/run_models"
 
 if(!dir.exists(path)) dir.create(path,recursive = T)
 

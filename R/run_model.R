@@ -73,10 +73,10 @@ if(path==""){
 if(path!=""){
 if(file.exists(paste0(path,"/",model, '.', "mod"))){
   file.copy(paste0(path,"/",model, '.', "mod"),paste0(path,"/",model,"/",model,'.', "mod"),overwrite = T)
-  f <-paste0(path,"/",model,"/",model, '.', "mod")
+  dynareFile <-paste0(path,"/",model,"/",model, '.', "mod")
    } else{
     file.copy(paste0(path,"/",model, '.', "dyn"),paste0(path,"/",model,"/",model,'.', "dyn"),overwrite = T)
-   f <-paste0(path,"/",model,"/",model, '.', "dyn")
+     dynareFile <-paste0(path,"/",model,"/",model, '.', "dyn")
    }
 }
 
@@ -89,16 +89,15 @@ if(path==""){
 }
 
 
-  m<-basename(tempfile(model, '.',paste(".", "m", sep = '')))   # m is file extension of octave/matlab
+  octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
  if (path==""){
-   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',model, sep = ''),sprintf("dynare %s",model)), m)
+   writeLines(c(dynare_version,paste0('cd ',model),sprintf("dynare %s",model)), octaveFile)
  }else{
 
-   writeLines(c("addpath C:/dynare/4.6.1/matlab",paste('cd',' ',new.path, sep = ''),sprintf("dynare %s",model)), m)
+   writeLines(c(dynare_version,paste0('cd ',new.path),sprintf("dynare %s",model)), octaveFile)
 
  }
-   on.exit(unlink(m))
-
-shell(paste("octave --eval",shQuote(sprintf("run %s",m))))
+   on.exit(unlink(octaveFile),add = T)
+system_exec()
 }
 
