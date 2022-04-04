@@ -55,48 +55,46 @@
 #' @keywords documentation
 run_model <- function(model,path="") {
 
-   if(path==""){
-    if(!dir.exists(model)) dir.create(model)
-    }else{
-  if(!dir.exists(paste0(path,"/",model))) dir.create(paste0(path,"/",model))
-}
+modelDir=ifelse(path=="",model,paste0(path,"/",model))
+if(!dir.exists(modelDir)) dir.create(modelDir)
+
+modFile=ifelse(path=="",paste0(model,".mod"),paste0(path,"/",model,".mod"))
+dynFile=ifelse(path=="",paste0(model,".dyn"),paste0(path,"/",model,".dyn"))
+
+  if(file.exists(modFile)){
+    file.copy(modFile,modelDir,overwrite = T)
+  dynarePath=basename(modFile)
+    } else{
+    file.copy(dynFile,modelDir,overwrite = T)
+    dynarePath=basename(dynFile)
+        }
 
 
-if(path==""){
-  if(file.exists(paste0(model, '.', "mod"))){
-    file.copy(paste0(model, '.', "mod"),paste0(model,"/",model,'.', "mod"),overwrite = T)
-  } else{
-  file.copy(paste0(model, '.', "dyn"),paste0(model,"/",model,'.', "dyn"),overwrite = T)
-    }
-  }
 
-if(path!=""){
-if(file.exists(paste0(path,"/",model, '.', "mod"))){
-  file.copy(paste0(path,"/",model, '.', "mod"),paste0(path,"/",model,"/",model,'.', "mod"),overwrite = T)
-  dynareFile <-paste0(path,"/",model,"/",model, '.', "mod")
-   } else{
-    file.copy(paste0(path,"/",model, '.', "dyn"),paste0(path,"/",model,"/",model,'.', "dyn"),overwrite = T)
-     dynareFile <-paste0(path,"/",model,"/",model, '.', "dyn")
-   }
-}
+# if(path!=""){
+# if(file.exists(paste0(path,"/",model, '.', "mod"))){
+#   file.copy(paste0(path,"/",model, '.', "mod"),paste0(path,"/",model,"/",model,'.', "mod"),overwrite = T)
+#   dynareFile <-paste0(path,"/",model,"/",model, '.', "mod")
+#    } else{
+#     file.copy(paste0(path,"/",model, '.', "dyn"),paste0(path,"/",model,"/",model,'.', "dyn"),overwrite = T)
+#      dynareFile <-paste0(path,"/",model,"/",model, '.', "dyn")
+#    }
+# }
 
 
   # Creating a new path to run the mod or dyn files
-if(path==""){
-  new.path <-model
-}else{
-  new.path <-shQuote(paste0(path,"/",model))
-}
+# if(path==""){
+#   new.path <-model
+# }else{
+#   new.path <-shQuote(paste0(path,"/",model))
+# }
 
 
   octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
- if (path==""){
-   writeLines(c(dynare_version,paste0('cd ',model),sprintf("dynare %s",model)), octaveFile)
- }else{
 
-   writeLines(c(dynare_version,paste0('cd ',new.path),sprintf("dynare %s",model)), octaveFile)
+ writeLines(c(dynare_version,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
 
- }
+
    on.exit(unlink(octaveFile),add = T)
 system_exec()
 }
