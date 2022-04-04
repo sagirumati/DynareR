@@ -1,8 +1,10 @@
-Starting preprocessing of the model file ...
-Found 6 equation(s).
-Evaluating expressions...done
-Computing static model derivatives (order 1).
-Computing dynamic model derivatives (order 2).
-Processing outputs ...
-done
-Preprocessing completed.
+Starting Dynare (version 5.0).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 6 equation(s).
+Evaluating expressions...done
+Computing static model derivatives (order 1).
+Computing dynamic model derivatives (order 2).
+terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
+  what():  filesystem error: cannot remove all: Input/output error [NJudqlGY4L]
+

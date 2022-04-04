@@ -54,7 +54,7 @@
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation
 run_model <- function(model,path="") {
-  #model=paste0("DynareR_",model)
+
    if(path==""){
     if(!dir.exists(model)) dir.create(model)
     }else{
@@ -100,4 +100,4 @@ if(path==""){
    on.exit(unlink(octaveFile),add = T)
 system_exec()
 }
- #ook
+

@@ -60,15 +60,10 @@
 #' @keywords documentation
 #' @export
 run_dynare <- function(model,code,path="") {
-  if(path==""){
-  write_mod(model,code)
-  run_model(model)
-  on.exit(unlink(c(paste0(model,"/",model,".mod"),paste0(model,".mod"))))
-}else{
-  write_mod(model,code,path)
-  run_model(model,path)
-  on.exit(unlink(c(paste0(path,"/",model,"/",model,".mod"),paste0(path,"/",model,".mod"))))
-}
+
+  write_mod(model=model,code=code,path = path)
+  run_model(model,path=path)
+  # on.exit(unlink(c(paste0(model,"/",model,".mod"),paste0(model,".mod"))))
 
 }
 

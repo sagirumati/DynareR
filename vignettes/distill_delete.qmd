@@ -1,0 +1,34 @@
+---
+title: "Untitled"
+format: pdf
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+Equations (@eq-vecm) and (@eq-ardl) 
+
+$$\Delta Y_t=\alpha_0+\alpha_2 t+\sum_{i=1}^{n-1} \theta_i  \Delta Y_{t-i}+\sum_{i=0}^{m-1} \gamma_i  \Delta \mathbf{X_{t-i}}+\delta_0 Y_{t-1}+\delta_i \mathbf{X_{t-1}}+u_t$${#eq-ardl}
+
+
+
+$$\mathbf{\Delta y_t=\alpha \beta ' y_t+\Gamma_1 \Delta y_{t-1}+ ... +\Gamma_{p-1} \Delta y_{t-p+1}+\omega D_t+u_t}$${#eq-vecm}
+

@@ -53,15 +53,10 @@
 #' @keywords documentation
 #' @export
 write_mod <- function(model,code,path="") {
-  #model=paste0("DynareR_",model)
-if(path==""){
-  file.create(paste0(model, '.', "mod"))
-  f <-paste0(model, '.', "mod")
-  }else{
-    file.create(paste0(path,"/",model, '.', "mod"))
-  f <-paste0(path,"/",model, '.', "mod")
-  }
-  writeLines(code, f)
+
+if(path=="") dynareFile <-paste0(model, '.', "mod") else dynareFile <-paste0(path,"/",model, '.', "mod")
+if(path!="") if(!dir.exists(path)) dir.create(path,recursive = T)
+  writeLines(code, dynareFile)
 }
 
 

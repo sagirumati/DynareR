@@ -195,6 +195,6 @@ run_dynare(model,code)
 
 path=paste0("DynareR","/",model)
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
+# if(!dir.exists(path)) dir.create(path,recursive = T)
 
 run_dynare(model,code,path)
