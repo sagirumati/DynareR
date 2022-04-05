@@ -55,7 +55,7 @@
 write_dyn <- function(model,code,path=".") {
 
   dynareFile <-paste0(path,"/",model, '.', "dyn")
-  if(path!="") if(!dir.exists(path)) dir.create(path,recursive = T)
+  if(!dir.exists(path)) dir.create(path,recursive = T)
   writeLines(code, dynareFile)
 }
 

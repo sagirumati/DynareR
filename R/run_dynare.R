@@ -63,8 +63,8 @@ run_dynare <- function(model,code,path=".") {
 
   dynareFile <-paste0(path,"/",model, '.', "mod")
 
-  write_mod(model=model,code=code,path = path)
-  run_model(model,path=path)
+  write_mod(model,code,path)
+  run_model(model,path)
 
   on.exit(unlink(dynareFile),add = T)
 

@@ -29,25 +29,7 @@
 #' @keywords documentation
 #' @export
 eng_dynare <- function(options) {
-
-  if(!dir.exists(options$label)) dir.create(options$label)
-
-  # create the model from the chunk name
-  # file.create(paste(options$label,'/', options$label, '.', "mod", sep = ''))
-  dynareFile <-paste0(options$label,'/',options$label,".mod")
-  writeLines(options$code, dynareFile)
-  on.exit(unlink(dynareFile),add = T)
-
-  octaveFile<-basename(tempfile(options$label, '.',".m"))   # m is file extension of octave/matlab
-
-  writeLines(c(dynare_version,paste0('cd ',options$label),sprintf("dynare %s.mod",options$label)), octaveFile)
-
-  # "warning('off','all')",
-
-  on.exit(unlink(octaveFile),add = T)
-
-
-  if (options$eval) {
-    system_exec()
-        }
+  path=model=options$label
+  code=options$code
+  if(options$eval) run_dynare(model,code,path)
 }

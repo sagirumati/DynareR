@@ -29,7 +29,7 @@ Users need the following in order to knit this document:
 
 DynareR can be installed using the following commands in R.
 
-```{r installation,eval=FALSE}
+```{r installation}
 install.packages("DynareR")
 
           OR
@@ -228,8 +228,11 @@ stoch_simul(order=1, hp_filter=1600,format=pdf);
 ```  
 `````
 
+```{r error=T,eval=T}
+1+"a"
+```
 
-```{dynare BKK,eval=T,echo=F,comment=NULL}
+```{dynare BKKBBBB,eval=T,echo=F,comment=NULL}
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
