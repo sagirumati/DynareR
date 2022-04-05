@@ -20,8 +20,10 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 Use this function to include \code{Dynare} IRF into the R Markdown document
 }
 \examples{
-knitr::knit_engines$set(dynare = DynareR::eng_dynare)
+\dontrun{
 library(DynareR)
+# include_IRF(model="BKK",IRF="E_H2",path=".")
+}# The above code fetches the IRF graph from "BKK/BKK/graphs/BKK_IRF_E_H2.pdf"
 }
 \references{
 Bob Rudis (2015).Running Go language chunks in R Markdown (Rmd) files. Available at:  https://gist.github.com/hrbrmstr/9accf90e63d852337cb7

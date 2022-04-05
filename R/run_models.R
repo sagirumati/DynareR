@@ -12,7 +12,8 @@
 #' # Provide the list of the `Dynare` files in a vector
 #'
 #' # Ensure that "example1.mod","example2.mod","agtrend.mod"
-#'  and "bkk.mod" live in the path.
+#' # and "bkk.mod" live in the path.
+#'
 #' \dontrun{
 #'
 #' run_models(model=c("example1","example2","agtrend","bkk"))

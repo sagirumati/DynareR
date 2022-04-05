@@ -248,7 +248,7 @@ Please note that DynareR uses the chunk name as the model name. So, the outpus o
 
 # Plotting the IRF
 
-The Impulse Response Function (IRF) is saved by default in `BKK/BKK/graphs/` folder with the IRF's name `BKK_IRF_E_H2.pdf`, where `BKK` is the Dynare model's name.
+The Impulse Response Function (IRF) is saved by default in `BKK/BKK/graphs/` folder with the IRF's name `BKK_IRF_E_H2.pdf`, where `BKK` is the Dynare model's name. Therefore, you need to add `stoch_simul(graph_format = (pdf))` to change the default saving behaviour of `Dynare` from `eps` to  `pdf`.
 
 ## The include_IRF function
 
@@ -260,7 +260,7 @@ include_IRF(model="",IRF="",path=".")
 
  
 
-The Impulse Response Function (IRF) of the BKK model can be fetched using the following R chunk. Note that only the last part of the IRF's name (`E_H2`)  is need, that is `BKK_IRF_` is excluded. Also note that `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white space above and below the IRF
+The Impulse Response Function (IRF) of the BKK model can be fetched using the following R chunk. Note that only the last part of the IRF's name (`E_H2`)  is needed, that is `BKK_IRF_` is excluded. Also note that `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white space above and below the IRF
 
 ````
 ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} `r ''`

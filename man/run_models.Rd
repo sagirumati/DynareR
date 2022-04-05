@@ -4,7 +4,7 @@
 \alias{run_models}
 \title{Run multiple \bold{existing} \code{mod} or \code{dyn} files.}
 \usage{
-run_models(model, path = "")
+run_models(model = "", path = ".")
 }
 \arguments{
 \item{model}{Object or a  vector of character strings representing the names of the \code{Dynare} model files excluding \code{.mod} or \code{.dyn} file extension}
@@ -23,10 +23,17 @@ Use \code{run_models(file,path)}  if the Dynare files live in the path different
 library(DynareR)
 
 # Provide the list of the `Dynare` files in a vector
-model=c("example1","example2","agtrend","bkk")
+
+# Ensure that "example1.mod","example2.mod","agtrend.mod"
+# and "bkk.mod" live in the path.
+
 \dontrun{
 
-run_models(model)
+run_models(model=c("example1","example2","agtrend","bkk"))
+
+# You can run all models that live in "DynareR/run_models/" folder
+
+run_models(path="DynareR/run_models")
 }
 }
 \seealso{

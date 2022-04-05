@@ -4,7 +4,7 @@
 \alias{write_mod}
 \title{Write a new \code{mod} file.}
 \usage{
-write_mod(model, code, path = "")
+write_mod(model, code, path = ".")
 }
 \arguments{
 \item{model}{Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension}
@@ -61,9 +61,13 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-model<-"example1" # This is "example1" of the `Dynare` example files
-code<-DynareCodes
-write_mod(model,code)
+
+# This writes "example1" of the `Dynare` example with mod extension
+write_mod(model="example1",code=dynareCodes)
+
+# This writes "example1" of the `Dynare` example with mod extension in "DynareR/write_mod" folder
+
+write_mod(model="example1",code=dynareCodes,path="DynareR/write_mod")
 }
 }
 \seealso{

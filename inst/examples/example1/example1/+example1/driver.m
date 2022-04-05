@@ -14,7 +14,7 @@ tic0 = tic;
 % Define global variables.
 global M_ options_ oo_ estim_params_ bayestopt_ dataset_ dataset_info estimation_info ys0_ ex0_
 options_ = [];
-M_.fname = 'example2';
+M_.fname = 'example1';
 M_.dynare_version = '5.0';
 oo_.dynare_version = '5.0';
 options_.dynare_version = '5.0';
@@ -209,6 +209,7 @@ M_.Sigma_e(1, 2) = 0.009*0.009*phi;
 M_.Sigma_e(2, 1) = M_.Sigma_e(1, 2);
 M_.sigma_e_is_diagonal = 0;
 options_.order = 2;
+options_.graph_format = {'pdf'};
 var_list_ = {};
 [info, oo_, options_, M_] = stoch_simul(M_, options_, oo_, var_list_);
 
@@ -218,24 +219,24 @@ disp(['Total computing time : ' dynsec2hms(oo_.time) ]);
 if ~exist([M_.dname filesep 'Output'],'dir')
     mkdir(M_.dname,'Output');
 end
-save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'oo_', 'M_', 'options_');
+save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'oo_', 'M_', 'options_');
 if exist('estim_params_', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'estim_params_', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'estim_params_', '-append');
 end
 if exist('bayestopt_', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'bayestopt_', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'bayestopt_', '-append');
 end
 if exist('dataset_', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'dataset_', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'dataset_', '-append');
 end
 if exist('estimation_info', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'estimation_info', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'estimation_info', '-append');
 end
 if exist('dataset_info', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'dataset_info', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'dataset_info', '-append');
 end
 if exist('oo_recursive_', 'var') == 1
-  save([M_.dname filesep 'Output' filesep 'example2_results.mat'], 'oo_recursive_', '-append');
+  save([M_.dname filesep 'Output' filesep 'example1_results.mat'], 'oo_recursive_', '-append');
 end
 if ~isempty(lastwarn)
   disp('Note: warning(s) encountered in MATLAB/Octave code')

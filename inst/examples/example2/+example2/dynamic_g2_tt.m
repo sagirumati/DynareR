@@ -22,6 +22,5 @@ assert(length(T) >= 14);
 
 T = example2.dynamic_g1_tt(T, y, x, params, steady_state, it_);
 
-T(14) = (params(3)*exp(y(12))*exp(y(10))+exp(y(6))*(1-params(4)))*((-(exp(y(5))*exp(y(9))*exp(y(12))*exp(y(11))))*T(7)-(-(exp(y(5))*exp(y(9))*exp(y(12))*exp(y(11))))*(T(7)+T(7)))/(T(7)*T(7));
 
 end

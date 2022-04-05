@@ -62,9 +62,12 @@ var e, u = phi*0.009*0.009;
 end;
 
 stoch_simul;'
-model<-"example1" # This is "example1" of the `Dynare` example files
-code<-DynareCodes
-run_dynare(model,code)
+# This is "example1" of the `Dynare` example files in current working directory
+
+run_dynare(model="example1",code=DynareCodes)
+
+# This is "example1" of the `Dynare` example files in "DynareR/run_dynare"
+run_dynare(model="example1",code=DynareCodes,path="DynareR/run_dynare")
 }
 }
 \seealso{

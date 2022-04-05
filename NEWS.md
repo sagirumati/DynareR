@@ -1,5 +1,12 @@
-# DynareR 0.1.1
 
+# Dynare 0.1.2
+
+What is new? 
+
+* DynareR is now platform independent. It works on the major operating systems
+
+
+# Dynare 0.1.1
 
 What's new?
 

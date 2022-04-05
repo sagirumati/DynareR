@@ -6,8 +6,8 @@ linkcolor: blue
 toc: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,comment = NULL)
+```{r setup, include=T}
+knitr::opts_chunk$set(echo = TRUE,comment = NULL,eval = T)
 library(DynareR)
 ```
 
@@ -228,7 +228,7 @@ stoch_simul(order=1, hp_filter=1600,format=pdf);
 `````
 
 
-```{dynare BKK,eval=F,echo=F,comment=NULL}
+```{dynare BKK,echo=F,comment=NULL}
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business

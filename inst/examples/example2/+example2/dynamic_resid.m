@@ -23,17 +23,17 @@ if T_flag
     T = example2.dynamic_resid_tt(T, y, x, params, steady_state, it_);
 end
 residual = zeros(6, 1);
-lhs = T(1);
-rhs = (1-params(3))*exp(y(4));
+lhs = y(5)*params(5)*T(1);
+rhs = (1-params(3))*y(4);
 residual(1) = lhs - rhs;
-lhs = exp(y(6));
-rhs = params(1)*T(2)*(params(3)*exp(y(12))*exp(y(10))+exp(y(6))*(1-params(4)));
+lhs = y(6);
+rhs = params(1)*T(2)*T(3);
 residual(2) = lhs - rhs;
-lhs = exp(y(4));
-rhs = T(5);
+lhs = y(4);
+rhs = T(6);
 residual(3) = lhs - rhs;
-lhs = exp(y(6));
-rhs = exp(y(9))*(exp(y(4))-exp(y(5)))+(1-params(4))*exp(y(1));
+lhs = y(6);
+rhs = exp(y(9))*(y(4)-y(5))+(1-params(4))*y(1);
 residual(4) = lhs - rhs;
 lhs = y(7);
 rhs = params(2)*y(2)+params(7)*y(3)+x(it_, 1);

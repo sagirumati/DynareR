@@ -26,8 +26,11 @@
 #' @keywords documentation
 #' @export
 include_IRF <- function(model="",IRF="",path=".") {
-    IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF",IRF,".pdf")
-    if(!exists(IRFPath)) IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF",IRF,".eps")
-  include_graphics(IRFPath)
+    IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf")
+    # if(!exists(IRFPath)) IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".eps")
+    if(!exists(IRFPath)) IRFPath=paste0(path,"/",model,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf")
+    # if(!exists(IRFPath)) IRFPath=paste0(path,"/",model,"/",model,"/",model,"/","graphs/",model,"_IRF_",IRF,".eps")
+    IRFPath=gsub("^\\./","",IRFPath)
+    knitr::include_graphics(IRFPath)
 }
 

@@ -18,7 +18,7 @@ Use this function to set \code{Octave} path
 \examples{
 library(DynareR)
 \dontrun{
-set_octave_path('C:/Program Files/octave 10/octave10.exe')
+set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin')
 }
 }
 \seealso{

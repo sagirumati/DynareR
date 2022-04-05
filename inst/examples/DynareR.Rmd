@@ -1,15 +1,25 @@
 ---
 title: "DynareR: A Seamless Integration of R and Dynare"
 author: Sagiru Mati (PhD)
-output: bookdown::html_document2
+output: bookdown::pdf_document2
 linkcolor: blue
 toc: false
 ---
 
-```{r setup, include=T}
-knitr::opts_chunk$set(echo = TRUE,comment = NULL,eval=F)
+```{r setup, include = T}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval=F,
+  echo = T
+  
+)
 library(DynareR)
 # set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
+```
+
+```{r setup1, include=FALSE}
+library(DynareR)
 ```
 
 # About DynareR
@@ -29,7 +39,7 @@ Users need the following in order to knit this document:
 
 DynareR can be installed using the following commands in R.
 
-```{r installation}
+```{r installation,eval=FALSE}
 install.packages("DynareR")
 
           OR
@@ -48,40 +58,17 @@ library(DynareR)
 ````
 
 
-Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown below:
+Then create a chunk for `dynare` (adopted from Dynare example file example1) as shown below:
 
 ````` 
-```{dynare DynareR1,eval=T,echo=T,comment=NULL,results='hide'} `r ''`
+```{dynare example1,eval=T,echo=T,comment=NULL,results='hide'} `r ''`
 /*
- * This file implements the multi-country RBC model with time to build,
- * described in Backus, Kehoe and Kydland (1992): "International Real Business
- * Cycles", Journal of Political Economy, 100(4), 745-775.
- *
- * The notation for the variable names are the same in this file than in the paper.
- * However the timing convention is different: we had to taken into account the
- * fact that in Dynare, if a variable is denoted at the current period, then
- * this variable must be also decided at the current period.
- * Concretely, here are the differences between the paper and the model file:
- * - z_t in the model file is equal to z_{t+1} in the paper
- * - k_t in the model file is equal to k_{t+J} in the paper
- * - s_t in the model file is equal to s_{J,t}=s_{J-1,t+1}=...=s_{1,t+J-1} in the paper
- *
- * The macroprocessor is used in this file to create a loop over countries.
- * Only two countries are used here (as in the paper), but it is easy to add
- * new countries in the corresponding macro-variable and completing the
- * calibration.
- *
- * The calibration is the same than in the paper. The results in terms of
- * moments of variables are very close to that of the paper (but not equal
- * since the authors a different solution method).
- *
- * This implementation was written by Sebastien Villemot. Please note that the
- * following copyright notice only applies to this Dynare implementation of the
- * model.
+ * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
+ * A practical guide" (see "guide.pdf" in the documentation directory).
  */
 
 /*
- * Copyright (C) 2010 Dynare Team
+ * Copyright (C) 2001-2010 Dynare Team
  *
  * This file is part of Dynare.
  *
@@ -99,170 +86,61 @@ Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown
  * along with Dynare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@#define countries = [ "H", "F" ]
-@#define J = 4
 
-@#for co in countries
-var C_@{co} L_@{co} N_@{co} A_@{co} K_@{co} Z_@{co} X_@{co} LAMBDA_@{co} S_@{co} NX_@{co} Y_@{co};
+var y, c, k, a, h, b;
+varexo e, u;
 
-varexo E_@{co};
+parameters beta, rho, alpha, delta, theta, psi, tau;
 
-parameters beta_@{co} alpha_@{co} eta_@{co} mu_@{co} gamma_@{co} theta_@{co} nu_@{co} sigma_@{co} delta_@{co} phi_@{co} psi_@{co} rho_@{co}_@{co};
-@#endfor
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
 
-// Lagrange multiplier of aggregate constraint
-var LGM;
-
-parameters rho_@{countries[1]}_@{countries[2]} rho_@{countries[2]}_@{countries[1]};
+phi   = 0.1;
 
 model;
-@#for co in countries
-
-Y_@{co} = ((LAMBDA_@{co}*K_@{co}(-@{J})^theta_@{co}*N_@{co}^(1-theta_@{co}))^(-nu_@{co}) + sigma_@{co}*Z_@{co}(-1)^(-nu_@{co}))^(-1/nu_@{co});
-K_@{co} = (1-delta_@{co})*K_@{co}(-1) + S_@{co};
-X_@{co} =
-@# for lag in (-J+1):0
-          + phi_@{co}*S_@{co}(@{lag})
-@# endfor
-;
-
-A_@{co} = (1-eta_@{co})*A_@{co}(-1) + N_@{co};
-L_@{co} = 1 - alpha_@{co}*N_@{co} - (1-alpha_@{co})*eta_@{co}*A_@{co}(-1);
-
-// Utility multiplied by gamma
-# U_@{co} = (C_@{co}^mu_@{co}*L_@{co}^(1-mu_@{co}))^gamma_@{co};
-
-// FOC with respect to consumption
-psi_@{co}*mu_@{co}/C_@{co}*U_@{co} = LGM;
-
-// FOC with respect to labor
-// NOTE: this condition is only valid for alpha = 1
-psi_@{co}*(1-mu_@{co})/L_@{co}*U_@{co}*(-alpha_@{co}) = - LGM * (1-theta_@{co})/N_@{co}*(LAMBDA_@{co}*K_@{co}(-@{J})^theta_@{co}*N_@{co}^(1-theta_@{co}))^(-nu_@{co})*Y_@{co}^(1+nu_@{co});
-
-// FOC with respect to capital
-@# for lag in 0:(J-1)
- +beta_@{co}^@{lag}*LGM(+@{lag})*phi_@{co}
-@# endfor
-@# for lag in 1:J
- -beta_@{co}^@{lag}*LGM(+@{lag})*phi_@{co}*(1-delta_@{co})
-@# endfor
- = beta_@{co}^@{J}*LGM(+@{J})*theta_@{co}/K_@{co}*(LAMBDA_@{co}(+@{J})*K_@{co}^theta_@{co}*N_@{co}(+@{J})^(1-theta_@{co}))^(-nu_@{co})*Y_@{co}(+@{J})^(1+nu_@{co});
-
-// FOC with respect to stock of inventories
- LGM=beta_@{co}*LGM(+1)*(1+sigma_@{co}*Z_@{co}^(-nu_@{co}-1)*Y_@{co}(+1)^(1+nu_@{co}));
-
-// Shock process
-@# if co == countries[1]
-@#  define alt_co = countries[2]
-@# else
-@#  define alt_co = countries[1]
-@# endif
- (LAMBDA_@{co}-1) = rho_@{co}_@{co}*(LAMBDA_@{co}(-1)-1) + rho_@{co}_@{alt_co}*(LAMBDA_@{alt_co}(-1)-1) + E_@{co};
-
-
-NX_@{co} = (Y_@{co} - (C_@{co} + X_@{co} + Z_@{co} - Z_@{co}(-1)))/Y_@{co};
-
-@#endfor
-
-// World ressource constraint
-@#for co in countries
-  +C_@{co} + X_@{co} + Z_@{co} - Z_@{co}(-1)
-@#endfor
-    =
-@#for co in countries
-  +Y_@{co}
-@#endfor
-    ;
-
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+    *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
 end;
 
-@#for co in countries
-beta_@{co} = 0.99;
-mu_@{co} = 0.34;
-gamma_@{co} = -1.0;
-alpha_@{co} = 1;
-eta_@{co} = 0.5; // Irrelevant when alpha=1
-theta_@{co} = 0.36;
-nu_@{co} = 3;
-sigma_@{co} = 0.01;
-delta_@{co} = 0.025;
-phi_@{co} = 1/@{J};
-psi_@{co} = 0.5;
-@#endfor
-
-rho_H_H = 0.906;
-rho_F_F = 0.906;
-rho_H_F = 0.088;
-rho_F_H = 0.088;
-
 initval;
-@#for co in countries
-LAMBDA_@{co} = 1;
-NX_@{co} = 0;
-Z_@{co} = 1;
-A_@{co} = 1;
-L_@{co} = 0.5;
-N_@{co} = 0.5;
-Y_@{co} = 1;
-K_@{co} = 1;
-C_@{co} = 1;
-S_@{co} = 1;
-X_@{co} = 1;
-
-E_@{co} = 0;
-@#endfor
-
-LGM = 1;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
 end;
 
 shocks;
-var E_H; stderr 0.00852;
-var E_F; stderr 0.00852;
-corr E_H, E_F = 0.258;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
 end;
 
-steady;
-check;
-
-stoch_simul(order=1, hp_filter=1600,format=pdf);
+stoch_simul;
 ```  
 `````
 
-```{r error=T,eval=T}
-1+"a"
-```
-
-```{dynare BKKBBBB,eval=T,echo=F,comment=NULL}
+```{dynare example1,eval=T,echo=F,comment=NULL} 
 /*
- * This file implements the multi-country RBC model with time to build,
- * described in Backus, Kehoe and Kydland (1992): "International Real Business
- * Cycles", Journal of Political Economy, 100(4), 745-775.
- *
- * The notation for the variable names are the same in this file than in the paper.
- * However the timing convention is different: we had to taken into account the
- * fact that in Dynare, if a variable is denoted at the current period, then
- * this variable must be also decided at the current period.
- * Concretely, here are the differences between the paper and the model file:
- * - z_t in the model file is equal to z_{t+1} in the paper
- * - k_t in the model file is equal to k_{t+J} in the paper
- * - s_t in the model file is equal to s_{J,t}=s_{J-1,t+1}=...=s_{1,t+J-1} in the paper
- *
- * The macroprocessor is used in this file to create a loop over countries.
- * Only two countries are used here (as in the paper), but it is easy to add
- * new countries in the corresponding macro-variable and completing the
- * calibration.
- *
- * The calibration is the same than in the paper. The results in terms of
- * moments of variables are very close to that of the paper (but not equal
- * since the authors a different solution method).
- *
- * This implementation was written by Sebastien Villemot. Please note that the
- * following copyright notice only applies to this Dynare implementation of the
- * model.
+ * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
+ * A practical guide" (see "guide.pdf" in the documentation directory).
  */
 
 /*
- * Copyright (C) 2010 Dynare Team
+ * Copyright (C) 2001-2010 Dynare Team
  *
  * This file is part of Dynare.
  *
@@ -280,154 +158,278 @@ stoch_simul(order=1, hp_filter=1600,format=pdf);
  * along with Dynare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@#define countries = [ "H", "F" ]
-@#define J = 4
 
+var y, c, k, a, h, b;
+varexo e, u;
 
-@#for co in countries
-var C_@{co} L_@{co} N_@{co} A_@{co} K_@{co} Z_@{co} X_@{co} LAMBDA_@{co} S_@{co} NX_@{co} Y_@{co};
+parameters beta, rho, alpha, delta, theta, psi, tau;
 
-varexo E_@{co};
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
 
-parameters beta_@{co} alpha_@{co} eta_@{co} mu_@{co} gamma_@{co} theta_@{co} nu_@{co} sigma_@{co} delta_@{co} phi_@{co} psi_@{co} rho_@{co}_@{co};
-@#endfor
-
-// Lagrange multiplier of aggregate constraint
-var LGM;
-
-parameters rho_@{countries[1]}_@{countries[2]} rho_@{countries[2]}_@{countries[1]};
+phi   = 0.1;
 
 model;
-@#for co in countries
-
-Y_@{co} = ((LAMBDA_@{co}*K_@{co}(-@{J})^theta_@{co}*N_@{co}^(1-theta_@{co}))^(-nu_@{co}) + sigma_@{co}*Z_@{co}(-1)^(-nu_@{co}))^(-1/nu_@{co});
-K_@{co} = (1-delta_@{co})*K_@{co}(-1) + S_@{co};
-X_@{co} =
-@# for lag in (-J+1):0
-          + phi_@{co}*S_@{co}(@{lag})
-@# endfor
-;
-
-A_@{co} = (1-eta_@{co})*A_@{co}(-1) + N_@{co};
-L_@{co} = 1 - alpha_@{co}*N_@{co} - (1-alpha_@{co})*eta_@{co}*A_@{co}(-1);
-
-// Utility multiplied by gamma
-# U_@{co} = (C_@{co}^mu_@{co}*L_@{co}^(1-mu_@{co}))^gamma_@{co};
-
-// FOC with respect to consumption
-psi_@{co}*mu_@{co}/C_@{co}*U_@{co} = LGM;
-
-// FOC with respect to labor
-// NOTE: this condition is only valid for alpha = 1
-psi_@{co}*(1-mu_@{co})/L_@{co}*U_@{co}*(-alpha_@{co}) = - LGM * (1-theta_@{co})/N_@{co}*(LAMBDA_@{co}*K_@{co}(-@{J})^theta_@{co}*N_@{co}^(1-theta_@{co}))^(-nu_@{co})*Y_@{co}^(1+nu_@{co});
-
-// FOC with respect to capital
-@# for lag in 0:(J-1)
- +beta_@{co}^@{lag}*LGM(+@{lag})*phi_@{co}
-@# endfor
-@# for lag in 1:J
- -beta_@{co}^@{lag}*LGM(+@{lag})*phi_@{co}*(1-delta_@{co})
-@# endfor
- = beta_@{co}^@{J}*LGM(+@{J})*theta_@{co}/K_@{co}*(LAMBDA_@{co}(+@{J})*K_@{co}^theta_@{co}*N_@{co}(+@{J})^(1-theta_@{co}))^(-nu_@{co})*Y_@{co}(+@{J})^(1+nu_@{co});
-
-// FOC with respect to stock of inventories
- LGM=beta_@{co}*LGM(+1)*(1+sigma_@{co}*Z_@{co}^(-nu_@{co}-1)*Y_@{co}(+1)^(1+nu_@{co}));
-
-// Shock process
-@# if co == countries[1]
-@#  define alt_co = countries[2]
-@# else
-@#  define alt_co = countries[1]
-@# endif
- (LAMBDA_@{co}-1) = rho_@{co}_@{co}*(LAMBDA_@{co}(-1)-1) + rho_@{co}_@{alt_co}*(LAMBDA_@{alt_co}(-1)-1) + E_@{co};
-
-
-NX_@{co} = (Y_@{co} - (C_@{co} + X_@{co} + Z_@{co} - Z_@{co}(-1)))/Y_@{co};
-
-@#endfor
-
-// World ressource constraint
-@#for co in countries
-  +C_@{co} + X_@{co} + Z_@{co} - Z_@{co}(-1)
-@#endfor
-    =
-@#for co in countries
-  +Y_@{co}
-@#endfor
-    ;
-
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+    *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
 end;
 
-@#for co in countries
-beta_@{co} = 0.99;
-mu_@{co} = 0.34;
-gamma_@{co} = -1.0;
-alpha_@{co} = 1;
-eta_@{co} = 0.5; // Irrelevant when alpha=1
-theta_@{co} = 0.36;
-nu_@{co} = 3;
-sigma_@{co} = 0.01;
-delta_@{co} = 0.025;
-phi_@{co} = 1/@{J};
-psi_@{co} = 0.5;
-@#endfor
-
-rho_H_H = 0.906;
-rho_F_F = 0.906;
-rho_H_F = 0.088;
-rho_F_H = 0.088;
-
 initval;
-@#for co in countries
-LAMBDA_@{co} = 1;
-NX_@{co} = 0;
-Z_@{co} = 1;
-A_@{co} = 1;
-L_@{co} = 0.5;
-N_@{co} = 0.5;
-Y_@{co} = 1;
-K_@{co} = 1;
-C_@{co} = 1;
-S_@{co} = 1;
-X_@{co} = 1;
-
-E_@{co} = 0;
-@#endfor
-
-LGM = 1;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
 end;
 
 shocks;
-var E_H; stderr 0.00852;
-var E_F; stderr 0.00852;
-corr E_H, E_F = 0.258;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
 end;
+stoch_simul(graph_format = (pdf));
 
-steady;
-check;
-
-stoch_simul(order=1, hp_filter=1600,graph_format =(pdf,eps));
 ```
-
-
-
 The above chunk creates a Dynare program with the chunk’s content, then
-automatically run Dynare, which will save Dynare outputs in the
-current directory named with their respective chunk name.
+automatically run Dynare, which will save Dynare outputs in the current directory.
 
-The Impulse Response figures of the BKK model can be fetched using the following R chunk
+Please note that DynareR uses the chunk name as the model name. So, the outputs of Dynare are saved in a folder with its respective chunk name. Thus a new folder example1 will be created in your current working directory.
 
 
-```{r BKKFigure,fig.cap="A sample of figure generated from Dynare software"}
-knitr::include_graphics("BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
+# Plotting the IRF
 
+The Impulse Response Function (IRF) is saved by default in `example1/example1/graphs/` folder with the IRF's name `example1_IRF_u.pdf`, where `example1` is the Dynare model's name.
+
+## The include_IRF function
+
+Use this function to embed the graphs Impulse Response Function (IRF) in R Markdown document. This function supports IRF graph saved in pdf format only. Therefore, you need to add `stoch_simul(graph_format = (pdf))` to change the default saving behaviour of `Dynare` from `eps` to  `pdf`. 
+
+```{r includeIRF,eval=TRUE,out.width="\\textwidth",out.height="\\textwidth",out.extra='trim={0cm 7cm 0cm 7cm},clip'}
+#| fig.cap= "IRF automatically fetched" 
+
+include_IRF(model="example1",IRF="u",path=".")
 ```
+
+ 
+
+The Impulse Response Function (IRF) of the example1 model can be fetched using the following R chunk. Note that only the last part of the IRF's name (`u`)  is needed, that is `example1_IRF_` is excluded. Also note that `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white space above and below the IRF
+
+````
+```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} `r ''`
+include_IRF("example1","u")
+```
+````
 
 However, Dynare figure can only be dynamically included if the output format is pdf as Dynare produces pdf and eps graphs only.
 
+# DynareR functions for base R
 
-Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder BKK will be created in your current working directory.
+The DynareR package is also designed to work with base R. The following functions show how to work with DynareR outside R Markdown.
+
+##  The write_dyn function
+
+This function writes a new `dyn` file. Use `write_dyn(model,code)` if you want the `Dynare` file to live in the current working directory. Use `write_dyn(model,code,path)` if you want the Dynare file to live in the path different from the current working directory.
+
+```{r exampleDyn}
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+
+write_dyn(model="example1",code=DynareCodes)
+write_dyn(model="agtrend",code=DynareCodes)
+```
+
+
+##  The write_mod function
+
+This function writes a new `mod` file. Use `write_mod(model,code)` if you want the `Dynare` file to live in the current working directory. Use `write_mod(model,code,path)` if you want the Dynare file to live in the path different from the current working directory.
+
+```{r examplemod}
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+
+write_mod(model="example2",code=DynareCodes)
+```
+
+## The run_dynare function
+
+Create and run Dynare `mod` file. Use this function to create and run Dynare mod file. Use run_dynare(model,code) if you want the Dynare files to live in the current working directory. Use run_dynare(model,code,path) if you want the Dynare files to live in the path different from the current working directory.
+
+```{r exampleRunDynare}
+DynareCodes='var y, c, k, a, h, b;
+varexo e, u;
+parameters beta, rho, alpha, delta, theta, psi, tau;
+alpha = 0.36;
+rho   = 0.95;
+tau   = 0.025;
+beta  = 0.99;
+delta = 0.025;
+psi   = 0;
+theta = 2.95;
+phi   = 0.1;
+model;
+c*theta*h^(1+psi)=(1-alpha)*y;
+k = beta*(((exp(b)*c)/(exp(b(+1))*c(+1)))
+          *(exp(b(+1))*alpha*y(+1)+(1-delta)*k));
+y = exp(a)*(k(-1)^alpha)*(h^(1-alpha));
+k = exp(b)*(y-c)+(1-delta)*k(-1);
+a = rho*a(-1)+tau*b(-1) + e;
+b = tau*a(-1)+rho*b(-1) + u;
+end;
+initval;
+y = 1.08068253095672;
+c = 0.80359242014163;
+h = 0.29175631001732;
+k = 11.08360443260358;
+a = 0;
+b = 0;
+e = 0;
+u = 0;
+end;
+
+shocks;
+var e; stderr 0.009;
+var u; stderr 0.009;
+var e, u = phi*0.009*0.009;
+end;
+
+stoch_simul;'
+
+
+run_dynare(model="agtrend",code=DynareCodes)
+
+```
+
+
+## The run_models function
+
+Run multiple existing `mod` or `dyn` files. Use this function to execute multiple existing Dynare files. Use `run_models(file)` if the Dynare files live in the current working directory. Use `run_models(file,path)` if the Dynare files live in the path different from the current working directory.
+
+Where `example1.mod`, `example2.mod`, `agtrend.mod` and `bkk.mod` are the Dynare model files (with `mod` or `dyn` extension), which live in the current working directory. 
+
+```{r exampleRunModels}
+
+run_models(model=c("example1","example2","agtrend","bkk"))
+
+```
+
+
+To run all `Dynare` models that live in the current working directory, use the following:
+
+
+```{r runAllDynare}
+run_models()
+
+```
+
+To run all `Dynare` models that live in particular path (for example 'DynareR/run_models/' folder), use the following:
+
+```{r runAllDynare1}
+run_models(path = 'DynareR/run_models')
+
+```
+
+
+
+
+# Demo
+
+The demo files are included and can be accessed via demo(package="DynareR")
+
+# Template
+
+Template for R Markdown is created. Go to `file->New File->R Markdown-> From Template->DynareR`.
 
 <br><br><br><br>
 
 Please visit my [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/) for a better explanation and example files.
+
+
+
+
