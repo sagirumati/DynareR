@@ -1,10 +1,9 @@
 library(DynareR)
 
 # It is recommended to enclose your codes within a single quote.
-modelName="example1"
 
 
-example1='var y, c, k, a, h, b;
+DynareCodes='var y, c, k, a, h, b;
 varexo e, u;
 
 parameters beta, rho, alpha, delta, theta, psi, tau;
@@ -49,19 +48,15 @@ end;
 stoch_simul;'
 
 
-model<-modelName
-code<-DynareCodes
-write_dyn(model,code)
+write_dyn(model="write_dyn",code=DynareCodes)
+
 # You can create an absolute or relative path for the DynareR files.
 # The following writes the dyn file in "DynareR/write_dyn/" folder
 # relative to the current path.
 
 
-path="DynareR/write_dyn"
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
-
-write_dyn(model,code,path)
+write_dyn(model="write_dyn",code=DynareCodes,path="DynareR/write_dyn")
 
 
 

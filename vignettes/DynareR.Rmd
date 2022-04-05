@@ -255,7 +255,7 @@ The Impulse Response Function (IRF) is saved by default in `BKK/BKK/graphs/` fol
 Use this function to embed the graphs Impulse Response Function (IRF) in R Markdown document.
 
 ```{r includeIRF}
-include_IRF(model="",IRF="",path="")
+include_IRF(model="",IRF="",path=".")
 ```
 
  
@@ -279,7 +279,7 @@ The DynareR package is also designed to work with base R. The following function
 This function writes a new `dyn` file.
 
 ```{r dyn}
-write_dyn(model, code, path = "")
+write_dyn(model, code, path = ".")
 
 ```
 
@@ -337,7 +337,7 @@ write_dyn(model,code)
 This function writes a new `mod` file.
 
 ```{r mod}
-write_mod(model, code, path = "")
+write_mod(model, code, path = ".")
 
 ```
 
@@ -453,21 +453,38 @@ run_dynare(model,code)
 Run multiple existing `mod` or `dyn` files.
 
 ```{r runModels}
-run_models(model, path = "")
+run_models(model, path = ".")
 
 ```
 
 
 Use this function to execute multiple existing Dynare files. Use `run_models(file)` if the Dynare files live in the current working directory. Use `run_models(file,path)` if the Dynare files live in the path different from the current working directory.
 
-```{r exampleRunModels}
-model=c("example1","example2","agtrend","bkk")
-run_models(model)
+Where `example1.mod`, `example2.mod`, `agtrend.mod` and `bkk.mod` are the Dynare model files (with `mod` or `dyn` extension), which live in the current working directory. 
 
+```{r exampleRunModels}
+
+run_models(model=c("example1","example2","agtrend","bkk"))
 
 ```
 
-Where `example1`, `example2`, `agtrend` and `bkk` are the Dynare model files (with `mod` or `dyn` extension), which live in the current working directory. 
+
+To run all `Dynare` models that live in the current working directory, use the following:
+
+
+```{r runAllDynare}
+run_models()
+
+```
+
+To run all `Dynare` models that live in particular path (for example 'DynareR/run_models/' folder), use the following:
+
+```{r runAllDynare1}
+run_models(path = 'DynareR/run_models')
+
+```
+
+
 
 
 # Demo

@@ -2,7 +2,8 @@ library(DynareR)
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 
-modelName<-"example2"
+
+# It is recommended to enclose your codes within single quotes.
 
 library(DynareR)
 
@@ -74,16 +75,11 @@ end;
 
 stoch_simul(periods=2000, drop=200);'
 
-model<-modelName
-code<-DynareCodes
-run_dynare(model,code)
+run_dynare(model="example2",code=DynareCodes)
 
 # You can create an absolute or relative path for the DynareR files.
-# The following writes and run mod file in "DynareR/run_dynare/"  folder
+# The following writes and run mod file in "DynareR/example2/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",model)
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
-
-run_dynare(model,code,path)
+run_dynare(model="example2",code=DynareCodes,path="DynareR/example2")

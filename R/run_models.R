@@ -10,10 +10,16 @@
 #' @examples library(DynareR)
 #'
 #' # Provide the list of the `Dynare` files in a vector
-#' model=c("example1","example2","agtrend","bkk")
+#'
+#' # Ensure that "example1.mod","example2.mod","agtrend.mod"
+#'  and "bkk.mod" live in the path.
 #' \dontrun{
 #'
-#' run_models(model)
+#' run_models(model=c("example1","example2","agtrend","bkk"))
+#'
+#' # You can run all models that live in "DynareR/run_models/" folder
+#'
+#' run_models(path="DynareR/run_models")
 #'}
 #' @seealso write_mod write_dynare eng_dynare run_dynare
 #' @keywords documentation

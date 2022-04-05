@@ -45,9 +45,13 @@
 #' end;
 #'
 #' stoch_simul;'
-#' model<-"example1" # This is "example1" of the `Dynare` example files
-#' code<-DynareCodes
-#' write_dyn(model,code)
+#'
+#' # This writes "example1" of the `Dynare` example with dyn extension
+#' write_dyn(model="example1",code=dynareCodes)
+#'
+#' # This writes "example1" of the `Dynare` example with dyn extension in "DynareR/write_dyn" folder
+#'
+#' write_dyn(model="example1",code=dynareCodes,path="DynareR/write_dyn")
 #'}
 #' @seealso write_mod eng_dynare run_model run_dynare
 #' @keywords documentation

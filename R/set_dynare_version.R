@@ -8,7 +8,13 @@
 #'
 #' @examples library(DynareR)
 #' \dontrun{
+#'
+#' # If you want to use the development version of Dynare
+#'
 #' set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a") # The development version of Dynare
+#'
+#' # If you want to use Dynare version 5.2
+#'
 #' set_dynare_version("5.2")
 #'}
 #' @seealso eng_dynare

@@ -9,8 +9,11 @@
 #' @author Sagiru Mati, ORCID: 0000-0003-1413-3974, https://smati.com.ng
 #' * Yusuf Maitama Sule (Northwest) University Kano, Nigeria
 #' * SMATI Academy
-#' @examples knitr::knit_engines$set(dynare = DynareR::eng_dynare)
+#' @examples
+#' \dontrun{
 #' library(DynareR)
+#' # include_IRF(model="BKK",IRF="E_H2",path=".")
+#'}# The above code fetches the IRF graph from "BKK/BKK/graphs/BKK_IRF_E_H2.pdf"
 #' @references Bob Rudis (2015).Running Go language chunks in R Markdown (Rmd) files. Available at:  https://gist.github.com/hrbrmstr/9accf90e63d852337cb7
 #'
 #' Yihui Xie (2019). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.24.
@@ -22,11 +25,9 @@
 #' @seealso  write_mod write_dynare run_model run_dynare
 #' @keywords documentation
 #' @export
-include_IRF <- function(model="",IRF="",path="") {
-if(path==""){
-  knitr::include_graphics(paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf"))
-} else{
-    knitr::include_graphics(paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF",IRF,".pdf"))
- }
+include_IRF <- function(model="",IRF="",path=".") {
+    IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF",IRF,".pdf")
+    if(!exists(IRFPath)) IRFPath=paste0(path,"/",model,"/",model,"/","graphs/",model,"_IRF",IRF,".eps")
+  include_graphics(IRFPath)
 }
 

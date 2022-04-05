@@ -2,7 +2,7 @@ library(DynareR)
 # We use "example1" of the Dynare example files to illustrate
 #how to use this function
 
-ModelName<-"agtrend"
+# It is recommended to enclose your codes within single quotes.
 
 library(DynareR)
 
@@ -185,16 +185,13 @@ check;
 // Plot impulse response functions (Figure 4)
 stoch_simul(order=1) tb_y c_y i_y;'
 
-model<-ModelName
-code<-DynareCodes
-run_dynare(model,code)
+run_dynare(model="agtrend",code=DynareCodes)
 
 # You can create an absolute or relative path for the DynareR files.
-# The following writes and run mod file in "DynareR/run_dynare/"  folder
+# The following writes and run mod file in "DynareR/bkk/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",model)
 
-# if(!dir.exists(path)) dir.create(path,recursive = T)
 
-run_dynare(model,code,path)
+
+run_dynare(model="agtrend",code=DynareCodes,path="DynareR/agtrend")

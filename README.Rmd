@@ -521,7 +521,7 @@ You can also open the `run_all.R` file in R Studio and run the entire code.
 
 The outputs of each model (example1, bkk, agtrend etc) will be saved in a new folder with the model's name created in the current working directory (demo). The outputs of each DynareR function (write_mod, write_dyn, run_dynare) will be saved in a folder with the function's name.
 
-# Working existing mod files
+# Working with existing mod files
 
 The folder [DynareFiles](https://github.com/sagirumati/DynareR/tree/master/inst/examples/DynareFiles/) contains the Dynare built-in example files
 
@@ -539,7 +539,7 @@ library(DynareR)
 ```
 
 
-3. Please enusre that the "current working directory" is `DynareFiles` folder.
+3. Please ensure that the "current working directory" is `DynareFiles` folder.
 
 
 4. Please run a single model using the following code:
