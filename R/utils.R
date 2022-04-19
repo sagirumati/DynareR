@@ -38,7 +38,7 @@ run_model <- function(model,path=".") {
 
   octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
 
-  writeLines(c(dynare_version,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
+  writeLines(c(addPath,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
 
 
   on.exit(unlink(octaveFile),add = T)

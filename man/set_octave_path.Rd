@@ -22,6 +22,15 @@ set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin')
 }
 }
 \seealso{
-eng_dynare
+Other important functions: 
+\code{\link{add_path}()},
+\code{\link{eng_dynare}()},
+\code{\link{include_IRF}()},
+\code{\link{run_dynare}()},
+\code{\link{run_models}()},
+\code{\link{set_dynare_version}()},
+\code{\link{write_dyn}()},
+\code{\link{write_mod}()}
 }
+\concept{important functions}
 \keyword{documentation}

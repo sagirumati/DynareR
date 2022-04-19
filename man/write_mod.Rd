@@ -71,6 +71,15 @@ write_mod(model="example1",code=dynareCodes,path="DynareR/write_mod")
 }
 }
 \seealso{
-write_dynare eng_dynare run_model run_dynare
+Other important functions: 
+\code{\link{add_path}()},
+\code{\link{eng_dynare}()},
+\code{\link{include_IRF}()},
+\code{\link{run_dynare}()},
+\code{\link{run_models}()},
+\code{\link{set_dynare_version}()},
+\code{\link{set_octave_path}()},
+\code{\link{write_dyn}()}
 }
+\concept{important functions}
 \keyword{documentation}

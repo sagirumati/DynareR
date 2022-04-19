@@ -22,7 +22,7 @@
 #'
 #' run_models(path="DynareR/run_models")
 #'}
-#' @seealso write_mod write_dynare eng_dynare run_dynare
+#' @family important functions
 #' @keywords documentation
 #' @export
 run_models=function(model="",path="."){

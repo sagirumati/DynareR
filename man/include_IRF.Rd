@@ -35,7 +35,15 @@ Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Ha
 Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
 }
 \seealso{
-write_mod write_dynare run_model run_dynare
+Other important functions: 
+\code{\link{add_path}()},
+\code{\link{eng_dynare}()},
+\code{\link{run_dynare}()},
+\code{\link{run_models}()},
+\code{\link{set_dynare_version}()},
+\code{\link{set_octave_path}()},
+\code{\link{write_dyn}()},
+\code{\link{write_mod}()}
 }
 \author{
 Sagiru Mati, ORCID: 0000-0003-1413-3974, https://smati.com.ng
@@ -44,4 +52,5 @@ Sagiru Mati, ORCID: 0000-0003-1413-3974, https://smati.com.ng
 \item SMATI Academy
 }
 }
+\concept{important functions}
 \keyword{documentation}

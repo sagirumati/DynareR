@@ -37,6 +37,15 @@ run_models(path="DynareR/run_models")
 }
 }
 \seealso{
-write_mod write_dynare eng_dynare run_dynare
+Other important functions: 
+\code{\link{add_path}()},
+\code{\link{eng_dynare}()},
+\code{\link{include_IRF}()},
+\code{\link{run_dynare}()},
+\code{\link{set_dynare_version}()},
+\code{\link{set_octave_path}()},
+\code{\link{write_dyn}()},
+\code{\link{write_mod}()}
 }
+\concept{important functions}
 \keyword{documentation}

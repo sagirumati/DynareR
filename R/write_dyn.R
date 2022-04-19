@@ -53,7 +53,7 @@
 #'
 #' write_dyn(model="example1",code=dynareCodes,path="DynareR/write_dyn")
 #'}
-#' @seealso write_mod eng_dynare run_model run_dynare
+#' @family important functions
 #' @keywords documentation
 #' @export
 write_dyn <- function(model,code,path=".") {
