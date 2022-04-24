@@ -25,12 +25,16 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-run_models=function(model="",path="."){
-if(model=="") {
-  model=list.files(path = path,pattern = "\\.mod|\\.dyn")
-model=gsub("\\.mod|\\.dyn","",model)
-model=unique(model)
+run_models=function(model="*"){
+
+ if (endsWith(model,"*")) {
+   path=gsub("\\*","",model)
+   if(path=="") path="."
+
+model=list.files(path = path,pattern = "\\.mod|\\.dyn") %>%
+gsub("\\.mod|\\.dyn","",.) %>% unique() %>% paste0(path,'/',.)
   }
-    for(i in model)  run_model(i,path)
+
+    for(i in model)  run_model(i)
 }
 

@@ -56,10 +56,16 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-write_dyn <- function(model,code,path=".") {
+write_dyn <- function(model,code) {
 
-  dynareFile <-paste0(path,"/",model, '.', "dyn")
-  if(!dir.exists(path)) dir.create(path,recursive = T)
+  path=dirname(model) %>% dir_create()
+  model=basename(model)
+
+
+  dynareFile=paste0(path,'/',model) %>%
+    gsub("\\.dyn","",.) %>%
+    paste0(".dyn")
+
   writeLines(code, dynareFile)
 }
 

@@ -62,12 +62,15 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-run_dynare <- function(model,code,path=".") {
+run_dynare <- function(model,code) {
 
-  dynareFile <-paste0(path,"/",model, '.', "mod")
 
-  write_mod(model,code,path)
-  run_model(model,path)
+  dynareFile=model %>%
+    gsub("\\.mod","",.) %>%
+    paste0(".mod")
+
+  write_mod(code,dynareFile)
+  run_model(dynareFile)
 
   on.exit(unlink(dynareFile),add = T)
 

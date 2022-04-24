@@ -56,10 +56,16 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-write_mod <- function(model,code,path=".") {
+write_mod <- function(code,model) {
 
-dynareFile <-paste0(path,"/",model, '.', "mod")
-if(!dir.exists(path)) dir.create(path,recursive = T)
+  path=dirname(model) %>% dir_create()
+  model=basename(model)
+
+
+  dynareFile=paste0(path,'/',model) %>%
+    gsub("\\.mod","",.) %>%
+    paste0(".mod")
+
   writeLines(code, dynareFile)
 }
 
