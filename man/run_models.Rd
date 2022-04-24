@@ -40,6 +40,7 @@ run_models(path="DynareR/run_models")
 Other important functions: 
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
+\code{\link{import_log}()},
 \code{\link{include_IRF}()},
 \code{\link{run_dynare}()},
 \code{\link{set_dynare_version}()},

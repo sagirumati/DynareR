@@ -133,7 +133,7 @@ stoch_simul;
 ```  
 `````
 
-```{dynare example1,eval=T,echo=F,comment=NULL} 
+```{dynare example1,eval=T} 
 /*
  * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
  * A practical guide" (see "guide.pdf" in the documentation directory).
@@ -203,6 +203,9 @@ end;
 stoch_simul(graph_format = (pdf));
 
 ```
+
+Dynamic `r dynare$example1$moments[3,4]`
+
 The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the current directory.
 

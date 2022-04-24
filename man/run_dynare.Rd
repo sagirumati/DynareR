@@ -74,6 +74,7 @@ run_dynare(model="example1",code=DynareCodes,path="DynareR/run_dynare")
 Other important functions: 
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
+\code{\link{import_log}()},
 \code{\link{include_IRF}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},

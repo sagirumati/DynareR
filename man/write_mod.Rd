@@ -74,6 +74,7 @@ write_mod(model="example1",code=dynareCodes,path="DynareR/write_mod")
 Other important functions: 
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
+\code{\link{import_log}()},
 \code{\link{include_IRF}()},
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},

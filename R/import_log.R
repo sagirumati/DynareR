@@ -12,82 +12,123 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-import_log <- function(path=".",chunk="") {
+import_log <- function(model="",path=".") {
 
-  if(chunk!="") path
-  path="inst/examples/bkk/bkk.log"
-  if(chunk!="") path=paste0(chunk,'/',chunk,'.log')
+  if(model!="" && path==".") path=paste0(model,"/",model,".log")
+  if(path!=".") {
+    path=path
+    model=basename(path) %>%  gsub("\\.log","",.)
+
+    }
+  if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
+    # path="inst/examples/bkk/bkk.log"
+  # if(chunk!="") path=paste0(chunk,'/',chunk,'.log')
 
   log=readLines(path)
+  blank=grep("^\\s*$", log)
+  outputs=list()
 
   # STEADY-STATE RESULTS:
 
+  if(any(grepl("STEADY-STATE",log))){
   n1=grep("STEADY-STATE",log)+2
-  n2=grep("EIGENVALUES:",log)-2
-
-  steady=log[n1:n2]
-  steady1=gsub("[[:blank:]]{1,}",",",steady)
+  n2=(blank[blank>n1][1])-1
+  steady=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+  outputs$steady=read.csv(text = steady,header = T)
+  }
 
   # EIGENVALUES:
-  blank=grep("^\\s*$", log)
-  n1=grep("EIGENVALUES:",log)+1
+
+  if(any(grepl("EIGENVALUES:",log))){
+    n1=grep("EIGENVALUES:",log)+1
   n2=(blank[blank>n1][2])-1
-  eigenvalues=log[n1:n2]
-  eigenvalues=gsub("[[:blank:]]{1,}",",",eigenvalues)
-  eigenvalues=eigenvalues[-grep("^\\s*$", eigenvalues)]
+  eigenvalues=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+if(any(grepl("^\\s*$",eigenvalues)))  eigenvalues=eigenvalues[-grep("^\\s*$", eigenvalues)]
+eigenvalues=gsub('^,','',eigenvalues)
+outputs$eigenvalues=read.csv(text = eigenvalues,header = T)
+}
 
 
   # MODEL SUMMARY
-  blank=grep("^\\s*$", log)
+
+  if(any(grepl("MODEL SUMMARY",log))){
   n1=grep("MODEL SUMMARY",log)+2
   n2=(blank[blank>n1][1])-1
-  summary=log[n1:n2]
-  summary=gsub(":",",",summary)
-
+  summary=log[n1:n2] %>%
+  gsub(":",",",.)
+  outputs$summary=read.csv(text = summary,header = T,check.names = F)
+    }
 
   # MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
 
-  n1=grep("MATRIX OF COVARIANCE",log)+1
+  if(any(grepl("MATRIX OF COVARIANCE",log))){
+   n1=grep("MATRIX OF COVARIANCE",log)+1
   n2=(blank[blank>n1][1])-1
-  shocks=log[n1:n2]
-  shocks=gsub("[[:blank:]]{1,}",",",shocks)
+  shocks=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+  outputs$shocks=read.csv(text = shocks,header = T)
+    }
+
 
   # POLICY AND TRANSITION FUNCTIONS
 
+  if(any(grepl("POLICY AND TRANSITION",log))){
   n1=grep("POLICY AND TRANSITION",log)+1
   n2=(blank[blank>n1][1])-1
-  policy=log[n1:n2]
-  policy=gsub("[[:blank:]]{1,}",",",policy)
-
+  policy=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+  outputs$policy=read.csv(text = policy,header = T)
+  }
 
   # THEORETICAL MOMENTS (HP filter, lambda = 1600)
 
-  n1=grep("THEORETICAL MOMENTS",log)+1
+  if(any(grepl("THEORETICAL MOMENTS",log))){
+   n1=grep("THEORETICAL MOMENTS",log)+1
   n2=(blank[blank>n1][1])-1
-  moments=log[n1:n2]
-  moments=gsub("[[:blank:]]{1,}",",",moments)
+  moments=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.) %>%
+  gsub("STD\\.,DEV\\.","STD. DEV.",.)
+  outputs$moments=read.csv(text = moments,header = T,check.names = F)
+  }
+
 
   # VARIANCE DECOMPOSITION (in percent)
 
+  if(any(grepl("VARIANCE DECOMPOSITION",log))){
   n1=grep("VARIANCE DECOMPOSITION",log)+1
   n2=(blank[blank>n1][1])-1
-  decomposition=log[n1:n2]
-  decomposition=gsub("[[:blank:]]{1,}",",",decomposition)
-
+  decomposition=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+  outputs$decomposition=read.csv(text = decomposition,header = T)
+  }
 
   # MATRIX OF CORRELATIONS
 
+  if(any(grepl("MATRIX OF CORRELATIONS",log))){
   n1=grep("MATRIX OF CORRELATIONS",log)+1
   n2=(blank[blank>n1][1])-1
-  correlations=log[n1:n2]
-  correlations=gsub("[[:blank:]]{1,}",",",correlations)
+  correlations=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+  outputs$correlations=read.csv(text = correlations,header = T)
+  }
 
-  # COEFFICIENTS OF AUTOCORRELATION
+   # COEFFICIENTS OF AUTOCORRELATION
 
+  if(any(grepl("COEFFICIENTS OF AUTOCORRELATION",log))){
    n1=grep("COEFFICIENTS OF AUTOCORRELATION",log)+1
   n2=length(log)-1
-  autocorrelation=log[n1:n2]
-  autocorrelation=gsub("[[:blank:]]{1,}",",",autocorrelation)
+  autocorrelation=log[n1:n2] %>%
+  gsub("[[:blank:]]{1,}",",",.)
+   outputs$autocorrelation=read.csv(text = autocorrelation,header = T)
   }
+
+
+
+  assign(model,outputs,envir = dynare)
+
+return()
+}
 
 

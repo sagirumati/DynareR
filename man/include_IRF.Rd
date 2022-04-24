@@ -38,6 +38,7 @@ Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In 
 Other important functions: 
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
+\code{\link{import_log}()},
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},

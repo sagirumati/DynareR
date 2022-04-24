@@ -15,9 +15,9 @@ tic0 = tic;
 global M_ options_ oo_ estim_params_ bayestopt_ dataset_ dataset_info estimation_info ys0_ ex0_
 options_ = [];
 M_.fname = 'example1';
-M_.dynare_version = '5.0';
-oo_.dynare_version = '5.0';
-options_.dynare_version = '5.0';
+M_.dynare_version = '5.1';
+oo_.dynare_version = '5.1';
+options_.dynare_version = '5.1';
 %
 % Some global variables initialization
 %
@@ -209,6 +209,7 @@ M_.Sigma_e(1, 2) = 0.009*0.009*phi;
 M_.Sigma_e(2, 1) = M_.Sigma_e(1, 2);
 M_.sigma_e_is_diagonal = 0;
 options_.order = 2;
+options_.graph_format = {'pdf'};
 var_list_ = {};
 [info, oo_, options_, M_] = stoch_simul(M_, options_, oo_, var_list_);
 

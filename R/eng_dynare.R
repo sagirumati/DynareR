@@ -29,7 +29,10 @@
 #' @keywords documentation
 #' @export
 eng_dynare <- function(options) {
-  path=model=options$label
+  model=options$label
   code=options$code
-  if(options$eval) run_dynare(model,code,path)
+  if(options$eval) {
+    run_dynare(model,code)
+    import_log(model)
+    }
 }

@@ -7,7 +7,7 @@ Authors@R: c(
 Maintainer: Sagiru Mati <smati@smati.com.ng>
 Description: It allows running 'Dynare' program from base R and R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models.  This package does not only integrate R and Dynare but also serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' (<https://www.dynare.org/>) and 'Octave' (<https://www.gnu.org/software/octave/download.html>).  Write all your 'Dynare' commands in R or R Markdown chunk.
 Depends: R (>= 3.2.3)
-Imports: knitr (>= 1.20)
+Imports: knitr (>= 1.20),magrittr
 SystemRequirements: Dynare, Octave
 Suggests: rmarkdown
 License: GPL

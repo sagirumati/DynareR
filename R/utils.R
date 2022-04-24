@@ -1,11 +1,13 @@
-
+#' @import knitr
+#' @importFrom utils read.csv
+#' @importFrom magrittr %>%
 # .onload
 
 .onLoad<-function(libname,pkgname){
   knitr::knit_engines$set(dynare=eng_dynare)
   set_dynare_version()
   set_octave_path()
-
+if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
 
@@ -44,4 +46,29 @@ run_model <- function(model,path=".") {
   on.exit(unlink(octaveFile),add = T)
   system_exec()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ROUGH WORK
+
+
+# summary,steady,eigenvalues,shocks,policy,moments,decomposition,correlations,autocorrelation
+
+# extract_output=function(path,start,end,adjust=c(),pattern="[[:blank:]]{1,}"){
+  # }
+# any(grepl("COEFFICIENTS OF AUTOCORRELATION",log))
 

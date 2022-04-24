@@ -17,6 +17,12 @@ knitr::opts_chunk$set(
   echo = T
   
 )
+
+docx= function() knitr::opts_knit$get("rmarkdown.pandoc.to")=="docx"
+
+latex= function() knitr::opts_knit$get("rmarkdown.pandoc.to")=="latex"
+
+html= function() knitr::opts_knit$get("rmarkdown.pandoc.to")=="html"
 ```
 
 ```{r setup1, include=FALSE}
@@ -502,3 +508,21 @@ Please visit my [Github](https://github.com/sagirumati/DynareR/tree/master/inst/
 
 
 
+(ref:chunkFootnote) insert footnote here
+```{r chunk,echo=F}
+chunk=read.csv("TABLES/table.csv",allowEscapes = T,header = T,check.names = FALSE,colClasses = "character")
+chunkKable=kable(chunk,format=ifelse(knitr::opts_knit$get("rmarkdown.pandoc.to")=="docx","pandoc","latex"),booktabs=T,caption="caption",escape=F,linesep="")
+```
+
+```{r chunk-latex, eval=latex()}
+chunkKable=kable_styling(chunkKable,latex_options = c("basic","hold_positon","scale_down")) %>%
+footnote(general="(ref:chunkFootnote)", general_title = "",footnote_as_chunk=T,threeparttable=T,escape=F) %>%
+row_spec(0,bold=T)
+chunkKable
+```
+
+```{r chunk-docx, eval=docx()}
+chunkKable
+y="(ref:chunkFootnote)"
+kable(y,format=ifelse(knitr::opts_knit$get("rmarkdown.pandoc.to")=="docx","pandoc","latex"),booktabs=T,escape=F,col.names = NULL,linesep="")
+```

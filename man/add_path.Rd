@@ -25,6 +25,7 @@ app_path('path/to/matlab')
 \seealso{
 Other important functions: 
 \code{\link{eng_dynare}()},
+\code{\link{import_log}()},
 \code{\link{include_IRF}()},
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
