@@ -58,7 +58,8 @@
 #' @export
 write_mod <- function(code,model) {
 
-  path=dirname(model) %>% dir_create()
+  path=dirname(model)
+  dir_create(path)
   model=basename(model)
 
 

@@ -58,7 +58,8 @@
 #' @export
 write_dyn <- function(model,code) {
 
-  path=dirname(model) %>% dir_create()
+  path=dirname(model)
+  dir_create(path)
   model=basename(model)
 
 
