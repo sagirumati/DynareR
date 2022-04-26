@@ -17,7 +17,7 @@ if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 dir_create=function(x) if(!dir.exists(x)) dir.create(x,recursive = T)
 
 
-# Run_model
+# run_model
 
 run_model <- function(model) {
 
@@ -25,7 +25,8 @@ run_model <- function(model) {
   model=basename(model)
 
 
-  modelDir=paste0(path,"/",model) %>% dir_create()
+  modelDir=paste0(path,"/",model)
+  dir_create(modelDir)
 
   modFile=paste0(path,"/",model,".mod")
   dynFile=paste0(path,"/",model,".dyn")
