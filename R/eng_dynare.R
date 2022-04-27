@@ -33,6 +33,6 @@ eng_dynare <- function(options) {
   code=options$code
   if(options$eval) {
     run_dynare(model,code)
-    import_log(model)
+    import_log(model=model)
     }
 }

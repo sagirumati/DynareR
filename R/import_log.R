@@ -2,7 +2,7 @@
 #'
 #' Use `write_dyn(model,code)`  if you want the `Dynare` file to live in the current working directory.
 #' Use `write_dyn(model,code,path)`  if you want the `Dynare` file to live in the path different from the current working directory.
-
+#' @usage import_log(path=".",model="")
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
@@ -12,16 +12,18 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-import_log <- function(model="",path=".") {
+import_log <- function(path=".",model="") {
 
-  if(path!=".") {
-    path=path
-    model=basename(path) %>%  gsub("\\.log$","",.)
 
-    }
 
-  if(model!="" && path==".") path=paste0(model,"/",model,".log")
+  if(path!=".") path=path
 
+
+
+  if(model!="" && path==".") {
+    model=gsub("\\.log$","",model)
+    path=paste0(model,"/",model,".log")
+}
     if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 
   log=readLines(path)
