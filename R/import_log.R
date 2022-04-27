@@ -21,8 +21,8 @@ import_log <- function(path=".",model="") {
 
 
   if(model!="" && path==".") {
-    model=gsub("\\.log$","",model)
-    path=paste0(model,"/",model,".log")
+    path=gsub("\\.log$","",model) %>%
+    paste0(.,"/",.,".log")
 }
     if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 
