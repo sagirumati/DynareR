@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   
 )
 library(DynareR)
+add_path("some/path")
 # set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
 ```
 

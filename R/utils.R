@@ -5,8 +5,8 @@
 
 .onLoad<-function(libname,pkgname){
   knit_engines$set(dynare=eng_dynare)
-  set_dynare_version()
-  set_octave_path()
+ if(!exists("addPath")) set_dynare_version()
+  if(!exists("octave_system_path")) set_octave_path()
 if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
@@ -23,7 +23,7 @@ run_model <- function(model) {
 
   path=dirname(model)
   model=basename(model)%>%
-    gsub("\\.mod|\\.dyn","",.)
+    gsub("(\\.mod|\\.dyn)$","",.)
 
 
   modelDir=paste0(path,"/",model)

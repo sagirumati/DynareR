@@ -31,8 +31,8 @@ run_models=function(model="*"){
    path=gsub("\\*","",model)
    if(path=="") path="."
 
-model=list.files(path = path,pattern = "\\.mod|\\.dyn") %>%
-gsub("\\.mod|\\.dyn","",.) %>% unique() %>% paste0(path,'/',.)
+model=list.files(path = path,pattern = "(\\.mod|\\.dyn)$") %>%
+gsub("(\\.mod|\\.dyn)$","",.) %>% unique() %>% paste0(path,'/',.)
   }
 
     for(i in model)  run_model(i)

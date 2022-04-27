@@ -66,7 +66,7 @@ run_dynare <- function(model,code) {
 
 
   dynareFile=model %>%
-    gsub("\\.mod","",.) %>%
+    gsub("\\.mod$","",.) %>%
     paste0(".mod")
 
   write_mod(code,dynareFile)

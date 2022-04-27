@@ -14,15 +14,15 @@
 #' @export
 import_log <- function(model="",path=".") {
 
-  if(model!="" && path==".") path=paste0(model,"/",model,".log")
   if(path!=".") {
     path=path
-    model=basename(path) %>%  gsub("\\.log","",.)
+    model=basename(path) %>%  gsub("\\.log$","",.)
 
     }
-  if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
-    # path="inst/examples/bkk/bkk.log"
-  # if(chunk!="") path=paste0(chunk,'/',chunk,'.log')
+
+  if(model!="" && path==".") path=paste0(model,"/",model,".log")
+
+    if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 
   log=readLines(path)
   blank=grep("^\\s*$", log)
