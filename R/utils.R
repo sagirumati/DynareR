@@ -22,7 +22,8 @@ dir_create=function(x) if(!dir.exists(x)) dir.create(x,recursive = T)
 run_model <- function(model) {
 
   path=dirname(model)
-  model=basename(model)
+  model=basename(model)%>%
+    gsub("\\.mod|\\.dyn","",.)
 
 
   modelDir=paste0(path,"/",model)

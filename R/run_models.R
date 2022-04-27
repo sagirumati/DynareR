@@ -27,7 +27,7 @@
 #' @export
 run_models=function(model="*"){
 
- if (endsWith(model,"*")) {
+ if (length(model)==1 && endsWith(model,"*")) {
    path=gsub("\\*","",model)
    if(path=="") path="."
 

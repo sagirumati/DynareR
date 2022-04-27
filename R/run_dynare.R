@@ -70,7 +70,7 @@ run_dynare <- function(model,code) {
     paste0(".mod")
 
   write_mod(code,dynareFile)
-  run_model(dynareFile)
+  run_models(dynareFile)
 
   on.exit(unlink(dynareFile),add = T)
 
