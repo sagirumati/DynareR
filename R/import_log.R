@@ -15,16 +15,15 @@
 import_log <- function(path=".",model="") {
 
 
+  if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 
   if(path!=".") path=path
-
-
 
   if(model!="" && path==".") {
     path=gsub("\\.log$","",model) %>%
     paste0(.,"/",.,".log")
 }
-    if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
+
 
   log=readLines(path)
   blank=grep("^\\s*$", log)
