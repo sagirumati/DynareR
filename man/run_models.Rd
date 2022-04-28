@@ -4,12 +4,12 @@
 \alias{run_models}
 \title{Run multiple \bold{existing} \code{mod} or \code{dyn} files.}
 \usage{
-run_models(model = "", path = ".")
+run_models(model = "*", import_log = FALSE)
 }
 \arguments{
 \item{model}{Object or a  vector of character strings representing the names of the \code{Dynare} model files excluding \code{.mod} or \code{.dyn} file extension}
 
-\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
+\item{import_log}{Logical. Whether or not to import \code{dynare} log file.}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs

@@ -55,8 +55,8 @@ write_mod(model="write_mod",code=DynareCodes)
 # relative to the current path.
 
 
-
-write_mod(model="write_mod",code=DynareCodes,path="DynareR/write_mod")
+write_mod(code=DynareCodes,model="write_mod")
+write_mod(code=DynareCodes,model="DynareR/write_mod/write_mod")
 
 
 

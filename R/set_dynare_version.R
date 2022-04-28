@@ -21,7 +21,7 @@
 #' @keywords documentation
 #' @export
 set_dynare_version <- function(dynare_version="") {
-  if(dynare_version=="") dynare_version=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,7,0.1),2,nsmall = 1)) else dynare_version=dynare_version
+  if(dynare_version=="") dynare_version=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,9.9,0.1),2,nsmall = 1)) else dynare_version=dynare_version
 
   if(dir.exists("C:/dynare")){
   dynare_version=paste0("C:/dynare/",dynare_version,"/matlab")

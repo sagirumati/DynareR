@@ -1,12 +1,15 @@
-#' @import knitr
-#' @importFrom utils read.csv
-#' @importFrom magrittr %>%
+#' @import kableExtra magrittr knitr utils
+
+
+
 # .onload
 
 .onLoad<-function(libname,pkgname){
   knit_engines$set(dynare=eng_dynare)
- if(!exists("addPath")) set_dynare_version()
-  if(!exists("octave_system_path")) set_octave_path()
+ # if(!exists("addPath"))
+   set_dynare_version()
+  # if(!exists("octave_system_path"))
+   set_octave_path()
 if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
@@ -16,10 +19,13 @@ if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 
 dir_create=function(x) if(!dir.exists(x)) dir.create(x,recursive = T)
 
+#  globalVariables
+
+globalVariables(".")
 
 # run_model
 
-run_model <- function(model) {
+run_model <- function(model,import_log=F) {
 
   path=dirname(model)
   model=basename(model)%>%
@@ -47,7 +53,9 @@ run_model <- function(model) {
 
   on.exit(unlink(octaveFile),add = T)
   system_exec()
-}
+
+  if(import_log) import_log(paste0(modelDir,'/',model,'.log'))
+  }
 
 # system_exec
 

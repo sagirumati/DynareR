@@ -32,7 +32,7 @@ eng_dynare <- function(options) {
   model=options$label
   code=options$code
   if(options$eval) {
-    run_dynare(model,code)
-    import_log(model=model)
+    run_dynare(code,model,import_log=T)
+    # import_log(model=model)
     }
 }

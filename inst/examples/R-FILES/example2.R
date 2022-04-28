@@ -1,7 +1,6 @@
-# We use "example1" of the Dynare example files to illustrate
+# We use "example2" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"example2"
 
 library(DynareR)
 
@@ -73,16 +72,11 @@ end;
 
 stoch_simul(periods=2000, drop=200);'
 
-file<-FileName
-code<-DynareCodes
-run_dynare(file,code)
+
+run_dynare(code=DynareCodes,model="example2") # Executed in the current working directory
 
 # You can create an absolute or relative path for the DynareR files.
 # The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",file)
-
-if(!dir.exists(path)) dir.create(path,recursive = T)
-
-run_dynare(file,code,path)
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/example2")

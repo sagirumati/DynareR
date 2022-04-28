@@ -1,7 +1,6 @@
-# We use "example1" of the Dynare example files to illustrate
+# We use "Ramsey_Example" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"Ramsey_Example"
 
 library(DynareR)
 
@@ -245,16 +244,13 @@ end;
     @# endif
 @# endif'
 
-file<-FileName
-code<-DynareCodes
-run_dynare(file,code)
+
+run_dynare(code=DynareCodes,model = "Ramsey_Example")
 
 # You can create an absolute or relative path for the DynareR files.
 # The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",file)
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
 
-run_dynare(file,code,path)
+run_dynare(code=DynareCodes,model = "DynareR/run_dynare/Ramsey_Example")

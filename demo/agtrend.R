@@ -1,8 +1,6 @@
-library(DynareR)
-# We use "example1" of the Dynare example files to illustrate
+# We use "agtrend" of the Dynare example files to illustrate
 #how to use this function
 
-# It is recommended to enclose your codes within single quotes.
 
 library(DynareR)
 
@@ -185,13 +183,12 @@ check;
 // Plot impulse response functions (Figure 4)
 stoch_simul(order=1) tb_y c_y i_y;'
 
-run_dynare(model="agtrend",code=DynareCodes)
+
+run_dynare(code=DynareCodes,model="agtrend")
 
 # You can create an absolute or relative path for the DynareR files.
-# The following writes and run mod file in "DynareR/bkk/"  folder
+# The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
 
-
-
-run_dynare(model="agtrend",code=DynareCodes,path="DynareR/agtrend")
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/agtrend")

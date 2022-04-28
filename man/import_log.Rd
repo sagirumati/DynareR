@@ -2,14 +2,14 @@
 % Please edit documentation in R/import_log.R
 \name{import_log}
 \alias{import_log}
-\title{Import log as R variables}
+\title{Import \code{dynare} log file as a list of R dataframes.}
 \usage{
-import_log(model = "", path = ".")
+import_log(path=".",model="")
 }
 \arguments{
-\item{model}{Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension}
+\item{path}{A character string for the path to the \code{dynare} log file.}
 
-\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
+\item{model}{Object or a character string representing the name of the \code{Dynare} model file (\code{.mod} or \code{.dyn} extension)}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
@@ -21,7 +21,11 @@ Use \code{write_dyn(model,code,path)}  if you want the \code{Dynare} file to liv
 \examples{
 library(DynareR)
 \dontrun{
-import_log(b)
+import_log(model="BKK")
+
+# Alternatively, use the path to the log file
+
+import_log(path="BKK/BKK.log")
 }
 }
 \seealso{

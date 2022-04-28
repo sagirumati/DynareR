@@ -47,11 +47,12 @@
 #' stoch_simul;'
 #'
 #' # This writes "example1" of the `Dynare` example with mod extension
+#'
 #' write_mod(model="example1",code=dynareCodes)
 #'
 #' # This writes "example1" of the `Dynare` example with mod extension in "DynareR/write_mod" folder
 #'
-#' write_mod(model="example1",code=dynareCodes,path="DynareR/write_mod")
+#' write_mod(code=dynareCodes,model="DynareR/write_mod/example1")
 #'}
 #' @family important functions
 #' @keywords documentation

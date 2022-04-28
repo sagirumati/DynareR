@@ -4,14 +4,12 @@
 \alias{write_dyn}
 \title{write a new \code{dyn} file.}
 \usage{
-write_dyn(model, code, path = ".")
+write_dyn(code, model)
 }
 \arguments{
-\item{model}{Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension}
-
 \item{code}{Object or a character string representing the set of \code{Dynare} codes}
 
-\item{path}{Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default \code{path}. Specify the \code{path} only if the \code{Dynare} files live in different path from the current working directory.}
+\item{model}{Object or a character string representing the name of the \code{Dynare} model file (\code{.mod} or \code{.dyn} extension)}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
@@ -63,11 +61,12 @@ end;
 stoch_simul;'
 
 # This writes "example1" of the `Dynare` example with dyn extension
+
 write_dyn(model="example1",code=dynareCodes)
 
 # This writes "example1" of the `Dynare` example with dyn extension in "DynareR/write_dyn" folder
 
-write_dyn(model="example1",code=dynareCodes,path="DynareR/write_dyn")
+write_dyn(code=dynareCodes,model="DynareR/write_dyn/example1")
 }
 }
 \seealso{

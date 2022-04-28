@@ -1,7 +1,0 @@
-source("agtrend.R")
-source("bkk.R")
-source("example1.R")
-source("example2.R")
-source("run_dynare.R")
-source("write_dyn.R")
-source("write_mod.R")

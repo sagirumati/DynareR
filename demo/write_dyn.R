@@ -48,15 +48,15 @@ end;
 stoch_simul;'
 
 
-write_dyn(model="write_dyn",code=DynareCodes)
+write_mod(model="write_mod",code=DynareCodes)
 
 # You can create an absolute or relative path for the DynareR files.
-# The following writes the dyn file in "DynareR/write_dyn/" folder
+# The following writes the mod file in "DynareR/write_mod/" folder
 # relative to the current path.
 
 
-
-write_dyn(model="write_dyn",code=DynareCodes,path="DynareR/write_dyn")
+write_dyn(code=DynareCodes,model="write_dyn")
+write_mod(code=DynareCodes,model="DynareR/write_dyn/write_dyn")
 
 
 

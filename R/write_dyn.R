@@ -47,16 +47,17 @@
 #' stoch_simul;'
 #'
 #' # This writes "example1" of the `Dynare` example with dyn extension
+#'
 #' write_dyn(model="example1",code=dynareCodes)
 #'
 #' # This writes "example1" of the `Dynare` example with dyn extension in "DynareR/write_dyn" folder
 #'
-#' write_dyn(model="example1",code=dynareCodes,path="DynareR/write_dyn")
+#' write_dyn(code=dynareCodes,model="DynareR/write_dyn/example1")
 #'}
 #' @family important functions
 #' @keywords documentation
 #' @export
-write_dyn <- function(model,code) {
+write_dyn <- function(code,model) {
 
   path=dirname(model)
   dir_create(path)

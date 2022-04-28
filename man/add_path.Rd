@@ -7,7 +7,7 @@
 add_path(path)
 }
 \arguments{
-\item{path}{Path to the \code{matlab} folder. Default \code{path} is \verb{/usr/lib/dynare/matlab} for \code{Linux}, \verb{/usr/lib/dynare/matlab} for \code{macOs} and \verb{c:/dynare/x.y/matlab} for \code{Windows}, where x.y is \code{Dynare} version number.}
+\item{path}{Path to the \code{matlab} folder. Default \code{path} is \verb{/usr/lib/dynare/matlab} for \code{Linux}, \verb{/usr/lib/dynare/matlab} for \code{macOS} and \verb{c:/dynare/x.y/matlab} for \code{Windows}, where x.y is \code{Dynare} version number.}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs

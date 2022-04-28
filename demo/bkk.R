@@ -1,7 +1,6 @@
-# We use "example1" of the Dynare example files to illustrate
+# We use "BKK" of the Dynare example files to illustrate
 #how to use this function
 
-# It is recommended to enclose your codes within single quotes.
 
 library(DynareR)
 
@@ -180,13 +179,12 @@ check;
 stoch_simul(order=1, hp_filter=1600, nograph);
 '
 
-run_dynare(model="bkk",code=DynareCodes)
+
+run_dynare(code=DynareCodes,model="BKK")
 
 # You can create an absolute or relative path for the DynareR files.
-# The following writes and run mod file in "DynareR/bkk/"  folder
+# The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
 
-
-
-run_dynare(model="bkk",code=DynareCodes,path="DynareR/bkk")
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/BKK")

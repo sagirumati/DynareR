@@ -1,13 +1,18 @@
-#' Import log as R variables
+#' Import `dynare` log file as a list of R dataframes.
 #'
 #' Use `write_dyn(model,code)`  if you want the `Dynare` file to live in the current working directory.
 #' Use `write_dyn(model,code,path)`  if you want the `Dynare` file to live in the path different from the current working directory.
 #' @usage import_log(path=".",model="")
 #' @inheritParams run_dynare
+#' @param path A character string for the path to the `dynare` log file.
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
-#' import_log(b)
+#' import_log(model="BKK")
+#'
+#' # Alternatively, use the path to the log file
+#'
+#' import_log(path="BKK/BKK.log")
 #'}
 #' @family important functions
 #' @keywords documentation
@@ -17,7 +22,10 @@ import_log <- function(path=".",model="") {
 
   if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 
-  if(path!=".") path=path
+  if(path!=".") {
+    path=path
+    model=basename(path) %>% gsub("\\.log$","",.)
+    }
 
   if(model!="" && path==".") {
     path=gsub("\\.log$","",model) %>%

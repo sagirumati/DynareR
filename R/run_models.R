@@ -25,16 +25,23 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-run_models=function(model="*"){
+run_models=function(model="*",import_log=FALSE){
 
  if (length(model)==1 && endsWith(model,"*")) {
    path=gsub("\\*","",model)
    if(path=="") path="."
 
-model=list.files(path = path,pattern = "(\\.mod|\\.dyn)$") %>%
-gsub("(\\.mod|\\.dyn)$","",.) %>% unique() %>% paste0(path,'/',.)
-  }
+    model=list.files(path = path,pattern = "(\\.mod|\\.dyn)$") %>%
+     gsub("(\\.mod|\\.dyn)$","",.) %>% unique()
 
-    for(i in model)  run_model(i)
+    if(length(model)==0) stop(paste0("Dynare mod/dyn files are not available in '",normalizePath(path),"'"))
+
+    if(path!=".") model= paste0(path,'/',model)
+ }
+
+  print(model)
+
+
+    for(i in model)  run_model(i,import_log=import_log)
 }
 

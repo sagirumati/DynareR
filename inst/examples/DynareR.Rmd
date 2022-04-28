@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   
 )
 library(DynareR)
-add_path("some/path")
+# add_path("some/path")
 # set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
 ```
 
@@ -134,7 +134,8 @@ stoch_simul;
 ```  
 `````
 
-```{dynare example1,eval=T} 
+
+```{dynare example123,eval=T} 
 /*
  * Example 1 from F. Collard (2001): "Stochastic simulations with DYNARE:
  * A practical guide" (see "guide.pdf" in the documentation directory).
@@ -205,7 +206,7 @@ stoch_simul(graph_format = (pdf));
 
 ```
 
-Dynamic `r dynare$example1$moments[3,4]`
+Dynamic `r dynare$example123$moments[3,4]`
 
 The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the current directory.
@@ -415,7 +416,7 @@ run_models()
 To run all `Dynare` models that live in particular path (for example 'DynareR/run_models/' folder), use the following:
 
 ```{r runAllDynare1}
-run_models(path = 'DynareR/run_models')
+run_models(model = 'DynareR/run_models*',import_log=T)
 
 ```
 

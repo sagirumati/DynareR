@@ -4,13 +4,9 @@
 #' Use `run_dynare(model,code)`  if you want the `Dynare` files to live in the current working directory.
 #' Use `run_dynare(model,code,path)` if you want the `Dynare` files to live in the path different from the current working directory.
 #'
-#' @usage run_dynare(model,code,path)
-#' @param model Object or a character string representing the name of the model excluding \code{.mod} or \code{.dyn} file extension
-#'
+#' @param model Object or a character string representing the name of the `Dynare` model file (`.mod` or `.dyn` extension)
 #' @param code Object or a character string representing the set of `Dynare` codes
-#'
-#' @param path Object or a character string representing the path to the folder for the \code{Dynare} file. The current working directory is the default `path`. Specify the `path` only if the `Dynare` files live in different path from the current working directory.
-#'
+#' @param import_log Logical. Whether or not to import `dynare` log file.
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
@@ -52,17 +48,22 @@
 #' end;
 #'
 #' stoch_simul;'
-#' # This is "example1" of the `Dynare` example files in current working directory
 #'
-#' run_dynare(model="example1",code=DynareCodes)
+#' # This is "example1" of the `Dynare` example files executed in current working directory
 #'
-#' # This is "example1" of the `Dynare` example files in "DynareR/run_dynare"
-#' run_dynare(model="example1",code=DynareCodes,path="DynareR/run_dynare")
+#' run_dynare(code=DynareCodes,model="example1",import_log=T)
+#'
+#' # import_log=T returns the `dynare` log file as a list of dataframes in an environment `dynare`,
+#' which can be accessed using `dynare$example1`
+#'
+#' # This is "example1" of the `Dynare` example files executed in "DynareR/run_dynare"
+#'
+#' run_dynare(code=DynareCodes,model="DynareR/run_dynare/example1")
 #'}
 #' @family important functions
 #' @keywords documentation
 #' @export
-run_dynare <- function(model,code) {
+run_dynare <- function(code,model,import_log=FALSE) {
 
 
   dynareFile=model %>%
@@ -70,7 +71,7 @@ run_dynare <- function(model,code) {
     paste0(".mod")
 
   write_mod(code,dynareFile)
-  run_models(dynareFile)
+  run_models(dynareFile,import_log = import_log)
 
   on.exit(unlink(dynareFile),add = T)
 

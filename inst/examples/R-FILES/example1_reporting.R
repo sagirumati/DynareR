@@ -105,16 +105,12 @@ r = report();
 r.write();
 r.compile();)'
 
-file<-FileName
-code<-DynareCodes
-run_dynare(file,code)
+run_dynare(code = DynareCodes,model = "example1_reporting")
 
 # You can create an absolute or relative path for the DynareR files.
 # The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",file)
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
 
-run_dynare(file,code,path)
+run_dynare(code=DynareCodes,model = "DynareR/run_dynare/example1_reporting")

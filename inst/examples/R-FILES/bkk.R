@@ -1,7 +1,6 @@
-# We use "example1" of the Dynare example files to illustrate
+# We use "BKK" of the Dynare example files to illustrate
 #how to use this function
 
-FileName<-"bkk"
 
 library(DynareR)
 
@@ -180,16 +179,12 @@ check;
 stoch_simul(order=1, hp_filter=1600, nograph);
 '
 
-file<-FileName
-code<-DynareCodes
-run_dynare(file,code)
+
+run_dynare(code=DynareCodes,model="BKK")
 
 # You can create an absolute or relative path for the DynareR files.
 # The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
-path=paste0("DynareR","/",file)
 
-if(!dir.exists(path)) dir.create(path,recursive = T)
-
-run_dynare(file,code,path)
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/BKK")
