@@ -15,9 +15,22 @@ Useful links:
   \item Report bugs at \url{https://github.com/sagirumati/DynareR/issues}
 }
 
+
+Other important functions: 
+\code{\link{add_path}()},
+\code{\link{eng_dynare}()},
+\code{\link{import_log}()},
+\code{\link{include_IRF}()},
+\code{\link{run_dynare}()},
+\code{\link{run_models}()},
+\code{\link{set_dynare_version}()},
+\code{\link{set_octave_path}()},
+\code{\link{write_dyn}()},
+\code{\link{write_mod}()}
 }
 \author{
 \strong{Maintainer}: Sagiru Mati \email{smati@smati.com.ng} (\href{https://orcid.org/0000-0003-1413-3974}{ORCID})
 
 }
+\concept{important functions}
 \keyword{documentation}

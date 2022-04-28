@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_path.R
 \name{add_path}
 \alias{add_path}
-\title{A wrapper for \code{addpath} to add \code{matlab} folder.}
+\title{A wrapper for \verb{Octave's} \code{addpath} to add \code{matlab} folder.}
 \usage{
 add_path(path)
 }
@@ -19,11 +19,15 @@ Use this function if \code{Dynare} is not installed in the standard location
 \examples{
 library(DynareR)
 \dontrun{
-app_path('path/to/matlab')
+app_path('/usr/lib/dynare/matlab⁠' )#  Default for Linux
+app_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of `Dynare` is installed
+app_path('/usr/lib/dynare/matlab') # Default for macOS
+
 }
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},
 \code{\link{include_IRF}()},

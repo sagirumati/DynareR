@@ -23,6 +23,7 @@ set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave20.e
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},

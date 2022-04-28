@@ -30,6 +30,7 @@ import_log(path="BKK/BKK.log")
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{include_IRF}()},

@@ -2,18 +2,18 @@
 % Please edit documentation in R/set_dynare_version.R
 \name{set_dynare_version}
 \alias{set_dynare_version}
-\title{Set \code{Dynare} path}
+\title{Set \code{Dynare} version}
 \usage{
 set_dynare_version(dynare_version="")
 }
 \arguments{
-\item{dynare_version}{Path to the Dynare executable}
+\item{dynare_version}{Character representing \code{Dynare} version (for example 6.1, 4.6.1 and so on). This has effect on Windows only.}
 }
 \value{
 Character
 }
 \description{
-Use this function to set \code{Dynare} path
+Use this function to set \code{Dynare} version
 }
 \examples{
 library(DynareR)
@@ -30,6 +30,7 @@ set_dynare_version("5.2")
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},

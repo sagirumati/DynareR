@@ -1,9 +1,9 @@
-#' Set `Dynare` path
+#' Set `Dynare` version
 #'
-#' Use this function to set `Dynare` path
+#' Use this function to set `Dynare` version
 #'
 #' @usage set_dynare_version(dynare_version="")
-#' @param dynare_version Path to the Dynare executable
+#' @param dynare_version Character representing `Dynare` version (for example 6.1, 4.6.1 and so on). This has effect on Windows only.
 #' @return Character
 #'
 #' @examples library(DynareR)

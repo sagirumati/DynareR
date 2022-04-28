@@ -77,6 +77,7 @@ run_dynare(code=DynareCodes,model="DynareR/run_dynare/example1")
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},

@@ -38,6 +38,7 @@ run_models(path="DynareR/run_models")
 }
 \seealso{
 Other important functions: 
+\code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},
