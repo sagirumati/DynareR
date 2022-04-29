@@ -30,7 +30,7 @@
 #'
 #' # Copy the dynare files to the 'DynareR/run_dynare' directory
 #'
-#' lapply(c("agtrend","BKK","example1"),\(x) file.copy(paste0(x,".mod"),"DynareR/run_dynare"))
+#' lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,".mod"),"DynareR/run_dynare"))
 #'
 #' run_models("DynareR/run_dynare*") # Note the * at the end.
 #'}

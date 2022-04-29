@@ -33,9 +33,9 @@ set_dynare_version <- function(dynare_version="") {
   }
 
 
-  if(dir.exists("/usr/lib/dynare/matlab")) dynare_version<<-"addpath /usr/lib/dynare/matlab"
+  if(dir.exists("/usr/lib/dynare/matlab")) dynare_version<-"addpath /usr/lib/dynare/matlab"
 
-  if(dir.exists("/usr/local/lib/dynare/matlab")) dynare_version<<-"addpath /usr/local/lib/dynare/matlab"
+  if(dir.exists("/usr/local/lib/dynare/matlab")) dynare_version<-"addpath /usr/local/lib/dynare/matlab"
 
 
   addPath<<-dynare_version

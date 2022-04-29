@@ -661,10 +661,15 @@ To run all `Dynare` models that live in the current working directory, use the f
 run_models() # Run all models in Current Working Directory.
 ```
 
-To run all `Dynare` models that live in particular path (for example 'DynareR/run_models/' folder), use the following:
+To run all `Dynare` models that live in particular path (for example 'DynareR/run_dynare/' folder), use the following:
 
 ```{r runAllDynare1}
-run_models(model = 'DynareR/run_models*') # notice the * at the end
+
+# Copy the dynare files to the 'DynareR/run_dynare' directory
+
+lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,".mod"),"DynareR/run_dynare"))
+
+run_models(model = 'DynareR/run_dynare*') # notice the * at the end
 
 ```
 
