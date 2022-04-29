@@ -4,7 +4,7 @@
 \alias{import_log}
 \title{Import \code{dynare} log file as a list of R dataframes.}
 \usage{
-import_log(path=".",model="")
+import_log(path = ".", model = "")
 }
 \arguments{
 \item{path}{A character string for the path to the \code{dynare} log file.}
@@ -15,17 +15,29 @@ import_log(path=".",model="")
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
-Use \code{write_dyn(model,code)}  if you want the \code{Dynare} file to live in the current working directory.
-Use \code{write_dyn(model,code,path)}  if you want the \code{Dynare} file to live in the path different from the current working directory.
+Use  this function to import \code{dynare} log file as a list of R dataframes.
+The imported list can be accessed via \code{dynare$modelNmae}.
 }
 \examples{
-library(DynareR)
 \dontrun{
-import_log(model="BKK")
+
+library(DynareR)
+
+demo(bkk)
+
+import_log(model="bkk")
 
 # Alternatively, use the path to the log file
 
-import_log(path="BKK/BKK.log")
+import_log(path="bkk/bkk.log")
+
+# Access the mported list
+
+dynare$bkk
+
+dynare$bkk$moments
+
+knitr::kable(dynare$bkk$decomposition,format='pandoc')
 }
 }
 \seealso{

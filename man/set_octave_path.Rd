@@ -4,10 +4,10 @@
 \alias{set_octave_path}
 \title{Set \code{Octave} path}
 \usage{
-set_octave_path(octave_system_path="octave")
+set_octave_path(engine_path="octave")
 }
 \arguments{
-\item{octave_system_path}{Path to the Octave executable}
+\item{engine_path}{Path to the Octave executable}
 }
 \value{
 Character

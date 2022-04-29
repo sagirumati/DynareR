@@ -6,10 +6,7 @@
 
 .onLoad<-function(libname,pkgname){
   knit_engines$set(dynare=eng_dynare)
- # if(!exists("addPath"))
-   set_dynare_version()
-  # if(!exists("octave_system_path"))
-   set_octave_path()
+  set_dynare_version()
 if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
@@ -21,7 +18,7 @@ dir_create=function(x) if(!dir.exists(x)) dir.create(x,recursive = T)
 
 #  globalVariables
 
-globalVariables(".")
+globalVariables(c("."))
 
 # run_model
 
@@ -48,6 +45,8 @@ run_model <- function(model,import_log=F) {
 
   octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
 
+  if(!exists("addPath")) set_dynare_version()
+
   writeLines(c(addPath,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
 
 
@@ -60,9 +59,10 @@ run_model <- function(model,import_log=F) {
 # system_exec
 
 system_exec=function(){
-  octave_system_path=eval(expression(octave_system_path),envir = parent.frame())
+  if(!exists("engine_path")) set_octave_path()
+  engine_path=eval(expression(engine_path),envir = parent.frame())
   octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
-  system2(set_octave_path(octave_system_path),paste("--eval",shQuote(paste("run",octaveFile))))
+  system2(set_octave_path(engine_path),paste("--eval",shQuote(paste("run",octaveFile))))
 }
 
 

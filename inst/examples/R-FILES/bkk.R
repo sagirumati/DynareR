@@ -1,4 +1,4 @@
-# We use "BKK" of the Dynare example files to illustrate
+# We use "bkk" of the Dynare example files to illustrate
 #how to use this function
 
 
@@ -180,11 +180,11 @@ stoch_simul(order=1, hp_filter=1600, nograph);
 '
 
 
-run_dynare(code=DynareCodes,model="BKK")
+run_dynare(code=DynareCodes,model="bkk")
 
 # You can create an absolute or relative path for the DynareR files.
 # The following writes and run mod file in "DynareR/run_dynare/"  folder
 # relative to the current path.
 
 
-run_dynare(code=DynareCodes,model="DynareR/run_dynare/BKK")
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/bkk")

@@ -14,14 +14,16 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
 Use this function to add \code{matlab} folder.
-Use this function if \code{Dynare} is not installed in the standard location
+Use this function if \code{Dynare} is \strong{NOT} installed in the standard location
 }
 \examples{
 library(DynareR)
 \dontrun{
-app_path('/usr/lib/dynare/matlab⁠' )#  Default for Linux
-app_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of `Dynare` is installed
-app_path('/usr/lib/dynare/matlab') # Default for macOS
+add_path('/usr/lib/dynare/matlab') #  Default for Linux
+add_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of
+# `Dynare` is installed.
+
+add_path('/usr/lib/dynare/matlab') # Default for macOS
 
 }
 }

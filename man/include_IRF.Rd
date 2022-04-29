@@ -23,13 +23,15 @@ Use this function to include \code{Dynare} IRF into the R Markdown document
 \dontrun{
 library(DynareR)
 
-include_IRF(model="BKK",IRF="E_H2")
+demo(bkk)
 
-# The above code fetches the IRF graph from "BKK/BKK/graphs/BKK_IRF_E_H2.pdf"
+include_IRF(model="bkk",IRF="E_H2")
+
+# The above code fetches the IRF graph from "bkk/bkk/graphs/bkk_IRF_E_H2.pdf"
 
 # Alternatively, the `path` argument can be used as follows
 
-include_IRF(path="BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
+include_IRF(path="bkk/bkk/graphs/bkk_IRF_E_H2.pdf")
 }
 }
 \references{

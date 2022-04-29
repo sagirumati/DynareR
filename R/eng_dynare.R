@@ -33,6 +33,5 @@ eng_dynare <- function(options) {
   code=options$code
   if(options$eval) {
     run_dynare(code,model,import_log=T)
-    # import_log(model=model)
     }
 }

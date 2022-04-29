@@ -2,8 +2,8 @@
 #'
 #' Use this function to set `Octave` path
 #'
-#' @usage set_octave_path(octave_system_path="octave")
-#' @param octave_system_path Path to the Octave executable
+#' @usage set_octave_path(engine_path="octave")
+#' @param engine_path Path to the Octave executable
 #' @return Character
 #'
 #' @examples library(DynareR)
@@ -13,4 +13,4 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-set_octave_path <- function(octave_system_path="octave") octave_system_path<<-octave_system_path
+set_octave_path <- function(engine_path="octave") engine_path<<-engine_path

@@ -65,10 +65,10 @@ library(DynareR)
 ````
 
 
-Then create a chunk for `dynare` (adopted from Dynare example file BKK) as shown below:
+Then create a chunk for `dynare` (adopted from Dynare example file `bkk`) as shown below:
 
 ````` 
-```{dynare BKK,eval=T} `r ''`
+```{dynare bkk,eval=T} `r ''`
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -246,7 +246,7 @@ stoch_simul(order=1, hp_filter=1600);
 `````
 
 
-```{dynare BKK,echo=F} 
+```{dynare bkk,echo=F} 
 /*
  * This file implements the multi-country RBC model with time to build,
  * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -426,12 +426,12 @@ The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the
 current directory.
 
-Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder BKK will be created in your current working directory.
+Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder `bkk/` will be created in your current working directory.
 
 
 # Plotting the IRF
 
-The Impulse Response Function (IRF) is saved by default in `BKK/BKK/graphs/` folder with the IRF's name `BKK_IRF_E_H2.pdf`, where `BKK` is the Dynare model's name. Therefore, you need to add `stoch_simul(graph_format = (pdf))` to change the default saving behaviour of `Dynare` from `eps` to  `pdf`.
+The Impulse Response Function (IRF) is saved by default in `bkk/bkk/graphs/` folder with the IRF's name `bkk_IRF_E_H2.pdf`, where `bkk` is the Dynare model's name. Therefore, you need to add `stoch_simul(graph_format = (pdf))` to change the default saving behaviour of `Dynare` from `eps` to  `pdf`.
 
 # DynareR functions for base R
 
@@ -442,11 +442,11 @@ The DynareR package is also designed to work with base R. The following function
 Use this function to embed the graphs Impulse Response Function (IRF) in R Markdown or Quarto document.
 
 
-The Impulse Response Function (IRF) of the BKK model can be fetched using the following R chunk. Note that only the last part of the IRF's name (`E_H2`)  is needed, that is `BKK_IRF_` is excluded. Also note that `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white space above and below the IRF.
+The Impulse Response Function (IRF) of the `bkk` model can be fetched using the following R chunk. Note that only the last part of the IRF's name (`E_H2`)  is needed, that is `bkk_IRF_` is excluded. Also note that `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white space above and below the IRF.
 
 ````
 ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} `r ''`
-include_IRF("BKK","E_H2")
+include_IRF("bkk","E_H2")
 
 # Alternative, use the path arguement 
 
@@ -455,11 +455,11 @@ include_IRF("BKK","E_H2")
 
 ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"}
 
-include_IRF(model="BKK",IRF = "E_H2")
+include_IRF(model="bkk",IRF = "E_H2")
 
 # Alternative, use the path arguement 
 
-include_IRF(path="BKK/BKK/graphs/BKK_IRF_E_H2.pdf")
+include_IRF(path="bkk/bkk/graphs/bkk_IRF_E_H2.pdf")
 
 ```
 
@@ -632,11 +632,23 @@ Run multiple existing `mod` or `dyn` files.
 
 Use this function to execute multiple existing Dynare files. Use `run_models(model="someModel")` if the Dynare files live in the current working directory. Use `run_models(model="path/to/someDirectory/someModel")` if the Dynare files live in the path different from the current working directory. Use `run_models()` to exectute all the `dynare` models in the current working directory. Use `run_models("path/to/someDirectory*)` to run all the `dynare` models in `path/to/someDirectory`.
 
-Where `example1.mod`, `example2.mod`, `agtrend.mod` and `bkk.mod` are the Dynare model files (with `mod` or `dyn` extension), which live in the current working directory. 
+Where `agtrend.mod`, `bkk.mod` and `example1.mod` are the Dynare model files (with `mod` or `dyn` extension), which live in the current working directory. 
 
-```{r exampleRunModels,eval=F}
+```{r exampleRunModels}
 
-run_models(model=c("example1","example2","agtrend","bkk"))
+demo(agtrend)
+demo(bkk)
+demo(example1)
+
+# Provide the list of the `Dynare` files in a vector
+# Ensure that "agtrend.mod", "bkk.mod" and "example1.mod"
+# live in the current working directory
+
+# Copy the dynare files to the current working directory
+
+lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,"/",x,".mod"),"."))
+
+run_models(c("agtrend","bkk","example1")) # Run the models in the vector.
 
 
 ```
@@ -646,8 +658,7 @@ To run all `Dynare` models that live in the current working directory, use the f
 
 
 ```{r runAllDynare}
-run_models()
-
+run_models() # Run all models in Current Working Directory.
 ```
 
 To run all `Dynare` models that live in particular path (for example 'DynareR/run_models/' folder), use the following:
@@ -659,14 +670,14 @@ run_models(model = 'DynareR/run_models*') # notice the * at the end
 
 # import_log function
 
-This function returns the `dynare` log output as a list of dataframes, which include `summary`, `shocks`, `policy`, `moments`, `decomposition`, `correlation` and `autocorrelation`. The list is accessible via `dynare$modelName`. if the model name is `BKK`, the policy variables can be obtained via `dynare$BKK$policy` as a dataframe. 
+This function returns the `dynare` log output as a list of dataframes, which include `summary`, `shocks`, `policy`, `moments`, `decomposition`, `correlation` and `autocorrelation`. The list is accessible via `dynare$modelName`. if the model name is `bkk`, the policy variables can be obtained via `dynare$bkk$policy` as a dataframe. 
 
 ```{r importLog}
-import_log(model="BKK")
+import_log(model="bkk")
 
-import_log(path="BKK/BKK.log")
+import_log(path="bkk/bkk.log")
 
-knitr::kable(dynare$BKK$autocorrelation)  %>% kableExtra::kable_styling(latex_options = c("basic","hold_position","scale_down")) %>%
+knitr::kable(dynare$bkk$autocorrelation)  %>% kableExtra::kable_styling(latex_options = c("basic","hold_position","scale_down")) %>%
  kableExtra::footnote(general="Some footnote with equation $\\alpha x^2+\\beta x+c=0$", general_title = "*",footnote_as_chunk=T,threeparttable=T,escape=F) %>%
 kableExtra::row_spec(0,bold=T)
 ```
@@ -701,6 +712,12 @@ app_path('path/to/matlab')
 # Demo
 
 The demo files are included and can be accessed via demo(package="DynareR")
+
+```{r demo}
+demo(run_dynare)
+demo(run_models)
+demo(import_log)
+```
 
 # Template
 

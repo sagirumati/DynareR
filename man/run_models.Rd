@@ -16,24 +16,36 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
 Use this function to execute multiple \bold{existing} \code{Dynare} files.
-Use \code{run_models(file)}  if the Dynare files live in the current working directory.
-Use \code{run_models(file,path)}  if the Dynare files live in the path different from the current working directory.
+Use \code{run_models(model='someModel')}  if the Dynare files live in the current working directory.
+Use \code{run_models(model='someDirectory/someModel')}  if the Dynare files live in the path different from the current working directory (for example, \code{someDirectory}).
 }
 \examples{
 library(DynareR)
 
-# Provide the list of the `Dynare` files in a vector
-
-# Ensure that "example1.mod","example2.mod","agtrend.mod"
-# and "bkk.mod" live in the path.
-
 \dontrun{
+demo(agtrend)
+demo(bkk)
+demo(example1)
 
-run_models(model=c("example1","example2","agtrend","bkk"))
+# Provide the list of the `Dynare` files in a vector
+# Ensure that "agtrend.mod", "bkk.mod" and "example1.mod"
+# live in the current working directory
 
-# You can run all models that live in "DynareR/run_models/" folder
+# Copy the dynare files to the current working directory
 
-run_models(path="DynareR/run_models")
+lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,"/",x,".mod"),"."))
+
+run_models(c("agtrend","bkk","example1")) # Run the models in the vector.
+
+run_models() # Run all models in Current Working Directory.
+
+# You can run all models that live in "DynareR/run_dynare/" folder
+
+# Copy the dynare files to the 'DynareR/run_dynare' directory
+
+lapply(c("agtrend","BKK","example1"),\(x) file.copy(paste0(x,".mod"),"DynareR/run_dynare"))
+
+run_models("DynareR/run_dynare*") # Note the * at the end.
 }
 }
 \seealso{

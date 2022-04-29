@@ -1,24 +1,37 @@
 #' Import `dynare` log file as a list of R dataframes.
 #'
-#' Use `write_dyn(model,code)`  if you want the `Dynare` file to live in the current working directory.
-#' Use `write_dyn(model,code,path)`  if you want the `Dynare` file to live in the path different from the current working directory.
-#' @usage import_log(path=".",model="")
+#' Use  this function to import `dynare` log file as a list of R dataframes.
+#' The imported list can be accessed via `dynare$modelNmae`.
 #' @inheritParams run_dynare
 #' @param path A character string for the path to the `dynare` log file.
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
-#' @examples library(DynareR)
+#' @examples
 #' \dontrun{
-#' import_log(model="BKK")
+#'
+#' library(DynareR)
+#'
+#' demo(bkk)
+#'
+#' import_log(model="bkk")
 #'
 #' # Alternatively, use the path to the log file
 #'
-#' import_log(path="BKK/BKK.log")
+#' import_log(path="bkk/bkk.log")
+#'
+#' # Access the mported list
+#'
+#' dynare$bkk
+#'
+#' dynare$bkk$moments
+#'
+#' knitr::kable(dynare$bkk$decomposition,format='pandoc')
 #'}
 #' @family important functions
 #' @keywords documentation
 #' @export
 import_log <- function(path=".",model="") {
 
+if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 
   if(model!="" && path!=".") warning(paste0("Both 'path' and 'model' are not blank. So '",path, "' is used and '",model,"' is ignored."))
 

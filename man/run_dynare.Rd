@@ -18,8 +18,8 @@ Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 }
 \description{
 Use this function to create and run \code{Dynare} \code{mod} file.
-Use \code{run_dynare(model,code)}  if you want the \code{Dynare} files to live in the current working directory.
-Use \code{run_dynare(model,code,path)} if you want the \code{Dynare} files to live in the path different from the current working directory.
+Use \code{run_dynare(code="someCode",model="someModel")}  if you want the \code{Dynare} files to live in the current working directory.
+Use \code{run_dynare(run_dynare(code="someCode",model="someDirectory/someModel"))} if you want the \code{Dynare} files to live in the path different from the current working directory (for example, \code{someDirectory}).
 }
 \examples{
 library(DynareR)
@@ -68,9 +68,17 @@ stoch_simul;'
 run_dynare(code=DynareCodes,model="example1",import_log=T)
 
 # import_log=T returns the `dynare` log file as a list of dataframes in an environment `dynare`,
-which can be accessed using `dynare$example1`
+# which can be accessed using `dynare$modelName`
 
-# This is "example1" of the `Dynare` example files executed in "DynareR/run_dynare"
+dynare$example1
+
+dynare$example1$correlations
+
+dynare$example1$autocorrelation[4,3]
+
+knitr::kable(dynare$example1$moments,format='pandoc')
+
+# This is "example1" of the `Dynare` example files executed in "DynareR/run_dynare/" folder
 
 run_dynare(code=DynareCodes,model="DynareR/run_dynare/example1")
 }
