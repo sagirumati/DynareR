@@ -28,18 +28,16 @@
 run_models=function(model="*",import_log=FALSE){
 
  if (length(model)==1 && endsWith(model,"*")) {
-   path=gsub("\\*","",model)
-   if(path=="") path="."
+   modelDir=gsub("\\*","",model)
+   if(modelDir=="") modelDir="."
 
-    model=list.files(path = path,pattern = "(\\.mod|\\.dyn)$") %>%
+    model=list.files(path = modelDir,pattern = "(\\.mod|\\.dyn)$") %>%
      gsub("(\\.mod|\\.dyn)$","",.) %>% unique()
 
     if(length(model)==0) stop(paste0("Dynare mod/dyn files are not available in '",normalizePath(path),"'"))
 
-    if(path!=".") model= paste0(path,'/',model)
+    if(modelDir!=".") model= paste0(modelDir,'/',model)
  }
-
-  print(model)
 
 
     for(i in model)  run_model(i,import_log=import_log)

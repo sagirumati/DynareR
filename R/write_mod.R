@@ -7,7 +7,7 @@
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @examples library(DynareR)
 #' \dontrun{
-#' DynareCodes='var y, c, k, a, h, b;
+#' dynareCodes='var y, c, k, a, h, b;
 #' varexo e, u;
 #' parameters beta, rho, alpha, delta, theta, psi, tau;
 #' alpha = 0.36;
@@ -48,7 +48,7 @@
 #'
 #' # This writes "example1" of the `Dynare` example with mod extension
 #'
-#' write_mod(model="example1",code=dynareCodes)
+#' write_mod(code=dynareCodes,model="example1")
 #'
 #' # This writes "example1" of the `Dynare` example with mod extension in "DynareR/write_mod" folder
 #'
