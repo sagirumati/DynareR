@@ -23,9 +23,6 @@ library(magrittr)
 library(DynareR)
 ```
 
-```{r setup1, include=FALSE}
-library(DynareR)
-```
 
 # About DynareR
 
@@ -36,11 +33,20 @@ DynareR is an R package that can run `Dynare` program from R Markdown.
 
 Users need the following in order to knit this document:
 
-* Dynare 4.6.1 or above
+1. Dynare 4.6.1 or above
 
-* Octave 5.2.0 or above
+1. Octave 5.2.0 or above
 
-It is also assumed that `dynare` is installed in standard location.
+1. Dynare is installed in the standard location as follows:
+
+  * `/usr/lib/dynare/matlab` for `Linux`
+ 
+  * `/usr/lib/dynare/matlab` for `macOS` 
+ 
+  * `c:/dynare/x.y/matlab` for `Windows`, where `x.y` is `Dynare` version number.
+
+
+If `dynare` and `Octave` are installed in standard location, `DynareR` package will take care of the configurations, which include adding `matlab` directory to path, using the latest installed `dynare` and so on. Otherwise, users have to specify the `matlab` folder using `add_path` function, set the `Octave` path using the `set_octave_path` function, or set `dynare` version using the `set_dynare_version` function.
 
 # Installation
 
@@ -426,7 +432,11 @@ The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the
 current directory.
 
-Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder `bkk/` will be created in your current working directory.
+Please note that DynareR uses the chunk name as the model name. So, the outpus of Dynare are saved in a folder with its respective chunk name. Thus a new folder `bkk/` will be created in your current working directory. 
+
+By default, `dynare` chunk imports log output as a list of dataframes, which can be accessed via `dynare$modelName`. Therefore to access the outputs of the `bkk` model produced by the `dynare` chunk, use `dynare$bkk`. 
+
+Use inline code `` `r knitr::inline_expr('dynare$bkk$moments[2,3]', 'md')` `` to access the value of second row and third column of the `moments`, which is `r dynare$bkk$moments[2,3]`.
 
 
 # Plotting the IRF
@@ -677,6 +687,7 @@ run_models(model = 'DynareR/run_dynare*') # notice the * at the end
 
 This function returns the `dynare` log output as a list of dataframes, which include `summary`, `shocks`, `policy`, `moments`, `decomposition`, `correlation` and `autocorrelation`. The list is accessible via `dynare$modelName`. if the model name is `bkk`, the policy variables can be obtained via `dynare$bkk$policy` as a dataframe. 
 
+
 ```{r importLog}
 import_log(model="bkk")
 
@@ -708,10 +719,17 @@ set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave20.e
 
 # add_path function
 
-This function is a wrapper of `addpath` in `Octave`. If `dynare` is not installed in the standard location, use this function to add the `matlab` subdirectory.  By default, `DynareR` does this for if `dynare` is installed in the standard location. The default `path` is `/usr/lib/dynare/matlab` for `Linux`, `/usr/lib/dynare/matlab` for `macOS` and `c:/dynare/x.y/matlab` for `Windows`, where x.y is `Dynare` version number.
+This function is a wrapper of `addpath` in `Octave`. If `dynare` is not installed in the standard location, use this function to add the `matlab` subdirectory.  By default, `DynareR` does this for if `dynare` is installed in the standard location. 
 
 ```{r addPath,eval=FALSE}
-app_path('path/to/matlab')
+
+add_path('/usr/lib/dynare/matlab')#  Default for Linux
+
+add_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of
+# `Dynare` is installed.
+
+add_path('/usr/lib/dynare/matlab') # Default for macOS
+
 ```
 
 # Demo

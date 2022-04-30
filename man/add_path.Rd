@@ -20,6 +20,7 @@ Use this function if \code{Dynare} is \strong{NOT} installed in the standard loc
 library(DynareR)
 \dontrun{
 add_path('/usr/lib/dynare/matlab') #  Default for Linux
+
 add_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of
 # `Dynare` is installed.
 

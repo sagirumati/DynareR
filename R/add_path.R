@@ -8,6 +8,7 @@
 #' @examples library(DynareR)
 #' \dontrun{
 #' add_path('/usr/lib/dynare/matlab') #  Default for Linux
+#'
 #' add_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of
 #' # `Dynare` is installed.
 #'
@@ -17,5 +18,5 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-add_path <- \(path) addPath<<-paste('addpath',path)
+add_path <- \(path) if(dir.exists(path) && endsWith(path,"matlab")) addPath<<-paste('addpath',path) else stop(paste0("'",path,"' is not a valid directory or does not end with 'matlab'"))
 

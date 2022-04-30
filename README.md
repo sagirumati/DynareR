@@ -1,21 +1,46 @@
+DynareR: A Seamless Integration of R and Dynare
+================
 
-# DynareR: A Seamless Integration of R and Dynare
+# About the Author
 
-Sagiru Mati 2020-08-08
+The author of this package, **Sagiru Mati**, obtained his PhD in
+Economics from the Near East University, North Cyprus. He works at the
+Department of Economics, Yusuf Maitama Sule (Northwest) University,
+Kano, Nigeria. Please visit his [website](https://smati.com.ng) for more
+details.
 
-# About DynareR
+Please follow his publications on [**ORCID: 0000-0003-1413-3974**](https://orcid.org/0000-0003-1413-3974)
+
+# 1 About DynareR
 
 DynareR is an R package that can run `Dynare` program from R Markdown.
 
-# Requirements
+# 2 Requirements
 
 Users need the following in order to knit this document:
 
--   Dynare 4.6.1 or above
+1.  Dynare 4.6.1 or above
 
--   Octave 5.2.0 or above
+2.  Octave 5.2.0 or above
 
-# Installation
+3.  Dynare is installed in the standard location as follows:
+
+-   `/usr/lib/dynare/matlab` for `Linux`
+
+-   `/usr/lib/dynare/matlab` for `macOS`
+
+-   `c:/dynare/x.y/matlab` for `Windows`, where `x.y` is `Dynare`
+    version number.
+
+If `dynare` and `Octave` are installed in standard location, `DynareR`
+package will take care of the configurations, which include adding
+`matlab` directory to path, using the latest installed `dynare` and so
+on. Otherwise, users have to specify the `matlab` folder using
+`add_path` function, set the `Octave` path using the `set_octave_path`
+function, or set `dynare` version using the `set_dynare_version`
+function.
+
+# 3 Installation
 
 DynareR can be installed using the following commands in R.
 
@@ -27,19 +52,18 @@ install.packages("DynareR")
 devtools::install_github('sagirumati/DynareR')
 ```
 
-# Usage
+# 4 Usage
 
 Please load the DynareR package as follows:
 
-    ```r
+    ```{r DynareR}                                                             
     library(DynareR)
     ```
 
-Then create a chunk for `dynare` (adopted from Dynare example file BKK)
-as shown below:
+Then create a chunk for `dynare` (adopted from Dynare example file
+`bkk`) as shown below:
 
-
-    ```dynare
+    ```{dynare bkk,eval=T} 
     /*
      * This file implements the multi-country RBC model with time to build,
      * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -212,8 +236,8 @@ as shown below:
     steady;
     check;
 
-    stoch_simul(order=1, hp_filter=1600, nograph);
-    ```
+    stoch_simul(order=1, hp_filter=1600);
+    ```  
 
 The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the current
@@ -221,62 +245,72 @@ directory.
 
 Please note that DynareR uses the chunk name as the model name. So, the
 outpus of Dynare are saved in a folder with its respective chunk name.
-Thus a new folder BKK will be created in your current working directory.
+Thus a new folder `bkk/` will be created in your current working
+directory.
 
-# Plotting the IRF
+By default, `dynare` chunk imports log output as a list of dataframes,
+which can be accessed via `dynare$modelName`. Therefore to access the
+outputs of the `bkk` model produced by the `dynare` chunk, use
+`dynare$bkk`.
+
+Use inline code `` `r dynare$bkk$moments[2,3]` `` to access the value of
+second row and third column of the `moments`, which is 0.0024.
+
+# 5 Plotting the IRF
 
 The Impulse Response Function (IRF) is saved by default in
-`BKK/BKK/graphs/` folder with the IRF’s name `BKK_IRF_E_H2.pdf`, where
-`BKK` is the Dynare model’s name.
+`bkk/bkk/graphs/` folder with the IRF’s name `bkk_IRF_E_H2.pdf`, where
+`bkk` is the Dynare model’s name. Therefore, you need to add
+`stoch_simul(graph_format = (pdf))` to change the default saving
+behaviour of `Dynare` from `eps` to `pdf`.
 
-## The include_IRF function
+# 6 DynareR functions for base R
 
-Use this function to embed the graphs of Impulse Response Function (IRF)
-in R Markdown document.
+The DynareR package is also designed to work with base R. The following
+functions show how to work with DynareR outside the R Markdown or Quarto
+documents.
 
-``` r
-include_IRF(model="",IRF="",path="")
-```
+## 6.1 The include_IRF function
 
-The Impulse Response Function (IRF) of the BKK model can be fetched
+Use this function to embed the graphs Impulse Response Function (IRF) in
+R Markdown or Quarto document.
+
+The Impulse Response Function (IRF) of the `bkk` model can be fetched
 using the following R chunk. Note that only the last part of the IRF’s
-name (`E_H2`) is needed, that is `BKK_IRF_` is excluded. Also note that
+name (`E_H2`) is needed, that is `bkk_IRF_` is excluded. Also note that
 `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white
-space above and below the IRF
+space above and below the IRF.
 
-    ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"}  
-    include_IRF("BKK","E_H2")
+    ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} 
+    include_IRF("bkk","E_H2")
+
+    # Alternative, use the path arguement 
+
     ```
 
 ``` r
-knitr::include_graphics("inst/images/IRF.png")
+include_IRF(model="bkk",IRF = "E_H2")
+
+# Alternative, use the path arguement 
+
+include_IRF(path="bkk/bkk/graphs/bkk_IRF_E_H2.pdf")
 ```
 
-![Example of an IRF imported using include_IRF
-function](inst/images/IRF.png) However, Dynare figure can only be
-dynamically included if the output format is pdf as Dynare produces pdf
-and eps graphs only.
+However, Dynare figure can only be dynamically included if the output
+format is pdf as Dynare produces pdf and eps graphs only.
 
-# DynareR functions for base R
-
-The DynareR package is also designed to work with base R. The following
-functions show how to work with DynareR outside R Markdown.
-
-## The write_dyn function
+## 6.2 The write_dyn function
 
 This function writes a new `dyn` file.
 
-``` r
-write_dyn(model, code, path = "")
-```
-
-Use `write_dyn(model,code)` if you want the `Dynare` file to live in the
-current working directory. Use `write_dyn(model,code,path)` if you want
-the Dynare file to live in the path different from the current working
-directory.
+Use `write_dyn(code="code",model="someModel")` if you want the `Dynare`
+file to live in the current working directory. Use
+`write_dyn(code="code",model="path/to/someDirectory/someModel")` if you
+want the Dynare file to live in the path different from the current
+working directory.
 
 ``` r
-DynareCodes='var y, c, k, a, h, b;
+dynareCodes='var y, c, k, a, h, b;
 varexo e, u;
 parameters beta, rho, alpha, delta, theta, psi, tau;
 alpha = 0.36;
@@ -315,24 +349,21 @@ end;
 
 stoch_simul;'
 
-model<-"example1"  
-code<-DynareCodes
 
-write_dyn(model,code)
+write_dyn(code=dynareCodes, model="example1")
+
+write_dyn(code=dynareCodes,model="DynareR/write_dyn/example1")
 ```
 
-## The write_mod function
+## 6.3 The write_mod function
 
 This function writes a new `mod` file.
 
-``` r
-write_mod(model, code, path = "")
-```
-
-Use `write_mod(model,code)` if you want the `Dynare` file to live in the
-current working directory. Use `write_mod(model,code,path)` if you want
-the Dynare file to live in the path different from the current working
-directory.
+Use `write_mod(code="code",model="someModel")` if you want the `Dynare`
+file to live in the current working directory. Use
+`write_mod(code="code",model="path/to/someDirectory/someModel")` if you
+want the Dynare file to live in the path different from the current
+working directory.
 
 ``` r
 DynareCodes='var y, c, k, a, h, b;
@@ -374,25 +405,24 @@ end;
 
 stoch_simul;'
 
-model<-"example1"  
-code<-DynareCodes
 
-write_mod(model,code)
+write_mod(model="example1",code=dynareCodes)
+
+write_mod(code=dynareCodes,model="DynareR/write_mod/example1")
 ```
 
-## The run_dynare function
+## 6.4 The run_dynare function
 
 Create and run Dynare `mod` file
 
-``` r
-run_dynare(model,code,path)
-```
-
 Use this function to create and run Dynare mod file. Use
-run_dynare(model,code) if you want the Dynare files to live in the
-current working directory. Use run_dynare(model,code,path) if you want
-the Dynare files to live in the path different from the current working
-directory.
+`run_dynare(code="code",model="someModel")` if you want the Dynare files
+to live in the current working directory. Use
+`run_dynare(code="code",model="path/to/someDirectory/someModel")` if you
+want the Dynare files to live in the path different from the current
+working directory. Use `import_log=T` argument to return the `dynare`
+log file as list of dataframes in an environment `dynare`, which can be
+accessed via `dynare$modelName`.
 
 ``` r
 DynareCodes='var y, c, k, a, h, b;
@@ -434,151 +464,134 @@ end;
 
 stoch_simul;'
 
-model<-"example1"  
-code<-DynareCodes
-
-run_dynare(model,code)
+run_dynare(code=DynareCodes,model="example1",import_log = T)
+run_dynare(code=DynareCodes,model="DynareR/run_dynare/example1")
 ```
 
-## The run_models function
+## 6.5 The run_models function
 
 Run multiple existing `mod` or `dyn` files.
 
-``` r
-run_models(model, path = "")
-```
-
 Use this function to execute multiple existing Dynare files. Use
-`run_models(file)` if the Dynare files live in the current working
-directory. Use `run_models(file,path)` if the Dynare files live in the
-path different from the current working directory.
+`run_models(model="someModel")` if the Dynare files live in the current
+working directory. Use
+`run_models(model="path/to/someDirectory/someModel")` if the Dynare
+files live in the path different from the current working directory. Use
+`run_models()` to exectute all the `dynare` models in the current
+working directory. Use `run_models("path/to/someDirectory*)` to run all
+the `dynare` models in `path/to/someDirectory`.
 
-``` r
-model=c("example1","example2","agtrend","bkk")
-run_models(model)
-```
-
-Where `example1`, `example2`, `agtrend` and `bkk` are the Dynare model
+Where `agtrend.mod`, `bkk.mod` and `example1.mod` are the Dynare model
 files (with `mod` or `dyn` extension), which live in the current working
 directory.
 
-# Demo
+``` r
+demo(agtrend)
+demo(bkk)
+demo(example1)
+
+# Provide the list of the `Dynare` files in a vector
+# Ensure that "agtrend.mod", "bkk.mod" and "example1.mod"
+# live in the current working directory
+
+# Copy the dynare files to the current working directory
+
+lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,"/",x,".mod"),"."))
+
+run_models(c("agtrend","bkk","example1")) # Run the models in the vector.
+```
+
+To run all `Dynare` models that live in the current working directory,
+use the following:
+
+``` r
+run_models() # Run all models in Current Working Directory.
+```
+
+To run all `Dynare` models that live in particular path (for example
+‘DynareR/run_dynare/’ folder), use the following:
+
+``` r
+# Copy the dynare files to the 'DynareR/run_dynare' directory
+
+lapply(c("agtrend","bkk","example1"),\(x) file.copy(paste0(x,".mod"),"DynareR/run_dynare"))
+
+run_models(model = 'DynareR/run_dynare*') # notice the * at the end
+```
+
+# 7 import_log function
+
+This function returns the `dynare` log output as a list of dataframes,
+which include `summary`, `shocks`, `policy`, `moments`, `decomposition`,
+`correlation` and `autocorrelation`. The list is accessible via
+`dynare$modelName`. if the model name is `bkk`, the policy variables can
+be obtained via `dynare$bkk$policy` as a dataframe.
+
+``` r
+import_log(model="bkk")
+
+import_log(path="bkk/bkk.log")
+
+knitr::kable(dynare$bkk$autocorrelation)  %>% kableExtra::kable_styling(latex_options = c("basic","hold_position","scale_down")) %>%
+ kableExtra::footnote(general="Some footnote with equation $\\alpha x^2+\\beta x+c=0$", general_title = "*",footnote_as_chunk=T,threeparttable=T,escape=F) %>%
+kableExtra::row_spec(0,bold=T)
+```
+
+# 8 set_dynare_version function
+
+On Windows, you can set the version of dynare you want to use. By
+default, `DynareR` package does this for you if the dynare version
+ranges from 4.6.1 to 9.9. However, if you are using the development
+version of `dynare`, for example version
+`6-unstable-2022-04-03-0800-700a0e3a`, you can override the default as
+follows
+
+``` r
+set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
+```
+
+# 9 set_octave_path function
+
+You can use this function if `Octave` is not installed in the standard
+location
+
+``` r
+set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave20.exe')
+```
+
+# 10 add_path function
+
+This function is a wrapper of `addpath` in `Octave`. If `dynare` is not
+installed in the standard location, use this function to add the
+`matlab` subdirectory. By default, `DynareR` does this for if `dynare`
+is installed in the standard location.
+
+``` r
+add_path('/usr/lib/dynare/matlab')#  Default for Linux
+
+add_path('c:/dynare/5.1/matlab') # Default for Windows, but 5.1 can change if later version of
+# `Dynare` is installed.
+
+add_path('/usr/lib/dynare/matlab') # Default for macOS
+```
+
+# 11 Demo
 
 The demo files are included and can be accessed via
 demo(package=“DynareR”)
 
-# Template
+``` r
+demo(run_dynare)
+demo(run_models)
+demo(import_log)
+```
+
+# 12 Template
 
 Template for R Markdown is created. Go to
 `file->New File->R Markdown-> From Template->DynareR`.
 
-# Examples
-
-The
-[examples](https://github.com/sagirumati/DynareR/tree/master/inst/examples)
-folder contains R scripts for demonstrating the use of DynareR. We use
-“example1” of the Dynare example files for all the functions.
-
-# STEPS to run the Dynare files
-
-1.  Please load the DynareR package in R using the following code
-
-``` r
-library(DynareR)
-```
-
-2.  Please enusre that the “current working directory” is “examples”
-    folder.
-
-3.  Please run the R scripts individually using the following codes:
-
-``` r
-source("agtrend.R")
-source("bkk.R")
-source("example1.R")
-source("example2.R")
-source("run_dynare.R")
-source("write_dyn.R")
-source("write_mod.R")
-```
-
-If you are using R Studio, you can open each of the files above and run
-the entire codes.
-
-4.  Please run all the above models using the following code:
-
-``` r
-source("run_all.R")
-```
-
-You can also open the `run_all.R` file in R Studio and run the entire
-code.
-
-The outputs of each model (example1, bkk, agtrend etc) will be saved in
-a new folder with the model’s name created in the current working
-directory (demo). The outputs of each DynareR function (write_mod,
-write_dyn, run_dynare) will be saved in a folder with the function’s
-name.
-
-# Working with existing mod files
-
-The folder
-[DynareFiles](https://github.com/sagirumati/DynareR/tree/master/inst/examples/DynareFiles/)
-contains the Dynare built-in example files
-
-# STEPS to run the Dynare built-in example files
-
-1.  If DynareR package is not installed on your R, please install it
-    using the following codes
-
-2.  Please load the DynareR package in R using the following code
-
-``` r
-library(DynareR)
-```
-
-3.  Please ensure that the “current working directory” is `DynareFiles`
-    folder.
-
-4.  Please run a single model using the following code:
-
-``` r
-run_models("example1")
-```
-
-5.  Please run multiple models using the following code
-
-``` r
-run_models(c("agtrend","example1","bkk","example2"))
-```
-
-7)  If the files live in different folder from the R “current working
-    directory”, please provide the folder,for example, as follows:
-
-``` r
-path="path/to/the/Dynare_files"
-```
-
-Then use the following codes to run the models:
-
-To run a single Dynare model;
-
-``` r
-run_models("example1",path)
-```
-
-To run multiple existing Dynare models;
-
-``` r
-run_models(c("agtrend","example1","bkk","example2"),path) 
-```
-
-The outputs of each model (example1, bkk, agtrend etc) will be saved in
-a new folder with the model’s name created in the current working
-directory (DynareFiles).
-
 <br><br><br><br>
 
-Please visit my
-[Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/)
-for a better explanation and example files.
+Please download the example files from
+[Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/).

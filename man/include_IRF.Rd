@@ -2,7 +2,7 @@
 % Please edit documentation in R/include_IRF.R
 \name{include_IRF}
 \alias{include_IRF}
-\title{Embed the graphs Impulse Response Function (IRF) in R Markdown document}
+\title{Embed the graphs of Impulse Response Function (IRF) in R Markdown document}
 \usage{
 include_IRF(path = ".", model = "", IRF = "")
 }

@@ -1,4 +1,4 @@
-#' Embed the graphs Impulse Response Function (IRF) in R Markdown document
+#' Embed the graphs of Impulse Response Function (IRF) in R Markdown document
 #'
 #' Use this function to include \code{Dynare} IRF into the R Markdown document
 #'
