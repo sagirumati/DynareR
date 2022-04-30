@@ -284,14 +284,14 @@ space above and below the IRF.
     ```{r IRF,out.extra='trim={0cm 7cm 0cm 7cm},clip',fig.cap="Another of figure generated from Dynare software"} 
     include_IRF("bkk","E_H2")
 
-    # Alternative, use the path arguement 
+    # Alternatively, use the path argument 
 
     ```
 
 ``` r
 include_IRF(model="bkk",IRF = "E_H2")
 
-# Alternative, use the path arguement 
+# Alternatively, use the path argument 
 
 include_IRF(path="bkk/bkk/graphs/bkk_IRF_E_H2.pdf")
 ```

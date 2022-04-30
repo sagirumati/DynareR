@@ -10,7 +10,7 @@ What is new?
 
 * `run_models` and `run_dynare` functions gained new argument `import_log=F`. Whether to import `Dynare` log file as a list of dataframes (`FALSE` by default)
 
-* `path` argument has been dropped in `write_dyn`, `write_mod`, `run_models` and `run_dynare` functions.
+* `path` argument has been dropped in `write_dyn`, `write_mod`, `run_models` and `run_dynare` functions. You can now include the path in the `model` argument. For example `model='someModel'` for model in the current working directory, `model='some/path/to/the/somemodel'` for model in `some/path/to/the/` directory.
 
 * The default directory of `dynare` chunk is the current working directory.
 
