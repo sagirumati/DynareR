@@ -2,7 +2,7 @@
 
 What is new? 
 
-* Bug fixes
+* Bug fixes: updated `dynare` configurations for all platforms
 
 * New function `import_log`, `set_dynare_version`, `set_octave_path` and `add_path`.
 
