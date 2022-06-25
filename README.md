@@ -1,6 +1,15 @@
 DynareR: A Seamless Integration of R and Dynare
 ================
 
+#  <img src="inst/Dynare/DynareR.png" align="right" width="150" />
+
+<!-- badges: start -->
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/DynareR)](https://cran.r-project.org/package=DynareR)
+[![CRAN_Status_Badge](https://cranlogs.r-pkg.org/badges/grand-total/DynareR?color=49C31B)](https://cranlogs.r-pkg.org/badges/grand-total/DynareR?color=49C31B)
+[![](https://cranlogs.r-pkg.org/badges/DynareR?color=49C31B)](https://cranlogs.r-pkg.org/badges/DynareR?color=49C31B)
+
+<!-- badges: end -->
+
 # About the Author
 
 The author of this package, **Sagiru Mati**, obtained his PhD in
