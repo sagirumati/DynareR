@@ -1,7 +1,7 @@
 DynareR: A Seamless Integration of R and Dynare
 ================
 
-#  <img src="inst/Dynare/DynareR.png" align="right" width="150" />
+#  <img src="inst/Dynare/DynareR.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/DynareR)](https://cran.r-project.org/package=DynareR)
