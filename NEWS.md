@@ -6,9 +6,14 @@ What is new?
 
 * Updated Octave search path
 
+* Updated `set_dynare_version()` function
+
 * Author's email changed to <sagirumati@gmail.com>
 
 * Package Title changed to "Bringing the Power of Dynare to R, R Markdown, and Quarto"
+
+* Startup message with citation information
+
 
 # Dynare 0.1.3
 
