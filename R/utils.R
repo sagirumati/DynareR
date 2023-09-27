@@ -10,6 +10,28 @@
 if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage("Thank you for using URooTab!
+
+          To acknowledge our work, please cite the package:
+
+                        PLAIN TEXT:
+
+  Sagiru Mati (2019). DynareR: Bringing the Power of Dynare to R, R
+  Markdown, and Quarto. CRAN. https://CRAN.R-project.org/package=DynareR
+
+              BIBTEX:
+
+
+  @Article{Mati2019,
+    title = {DynareR: Bringing the Power of {Dynare} to {R}, {R Markdown}, and {Quarto}},
+    author = {Sagiru Mati},
+    year = {2019},
+    journal = {CRAN},
+    url = {https://CRAN.R-project.org/package=DynareR},
+  }")
+}
+
 
 
 # dir_create
@@ -18,7 +40,7 @@ dir_create=function(x) if(!dir.exists(x)) dir.create(x,recursive = T)
 
 #  globalVariables
 
-globalVariables(c("."))
+globalVariables(c("." ))
 
 # run_model
 
