@@ -2,10 +2,10 @@
 #'
 #' Use this function to include TeX file in R Markdown or Quarto document.
 #'
-#' @param path Object or a character string representing the path(s) to the `TeX` file
-#' @param start Numeric. The start line of the `TeX` file to include.
-#' @param end Numeric. The last line of the `TeX` file to include.
-#' @return Set of \code{Tex} text
+#' @param path Object or a character string representing the path to the `TeX` file
+#' @param start Numeric. The start line(s) of the `TeX` file to include.
+#' @param end Numeric. The last line(s) of the `TeX` file to include.
+#' @return Set of \code{TeX} text
 #' @family important functions
 #' @examples library(DynareR)
 #' \dontrun{
@@ -26,6 +26,6 @@ input_tex <- function(path,start=NA,end=NA) {
   if(!is.na(start) && is.na(end)) path=readLines(path) %>% .[start:length(.)]
   if(is.na(start) && !is.na(end)) path=readLines(path) %>% .[(1:end)]
   if(!is.na(start) && !is.na(end)) path=readLines(path) %>% .[start:end]
-
-if (!is.na(start) || !is.na(end)) asis_output(path) else asis_output(paste0("\\input{",path,"}"))
+  if(is.na(start) && is.na(end)) path=readLines(path)
+  asis_output(paste0("\\input{",path,"}"))
 }

@@ -16,8 +16,10 @@ Set of \code{Dynare} (open-source software for DSGE modelling) codes
 This package runs on top of knitr to facilitate communication with Dynare. Run Dynare scripts from R Markdown document.
 }
 \details{
-The \code{dynare} engine can be activated via\preformatted{knitr::knit_engines$set(dynare = DynareR::eng_dynare)
-}
+The \code{dynare} engine can be activated via
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{knitr::knit_engines$set(dynare = DynareR::eng_dynare)
+}\if{html}{\out{</div>}}
 
 This will be set within an R Markdown document's setup chunk.
 }
@@ -40,6 +42,7 @@ Other important functions:
 \code{\link{add_path}()},
 \code{\link{import_log}()},
 \code{\link{include_IRF}()},
+\code{\link{input_tex}()},
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},

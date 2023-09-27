@@ -2,6 +2,14 @@
 
 What is new? 
 
+* New function `input_tex()` has been added. It can be used to include raw LaTeX file into R Markdown or Quarto.
+
+* Updated Octave search path
+
+# Dynare 0.1.3
+
+What is new? 
+
 * Bug fixes: updated `dynare` configurations for all platforms
 
 * New function `import_log`, `set_dynare_version`, `set_octave_path` and `add_path`.

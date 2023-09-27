@@ -6,7 +6,7 @@
 \alias{DynareR-package}
 \title{DynareR: A Seamless Integration of 'R' and 'Dynare'}
 \description{
-It allows running 'Dynare' program from base R and R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models. This package does not only integrate R and Dynare but also serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' (<https://www.dynare.org/>) and 'Octave' (<https://www.gnu.org/software/octave/download.html>). Write all your 'Dynare' commands in R or R Markdown chunk.
+It allows running 'Dynare' program from base R and R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models. This package does not only integrate R and Dynare but also serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' (\url{https://www.dynare.org/}) and 'Octave' (\url{https://www.gnu.org/software/octave/download.html}). Write all your 'Dynare' commands in R or R Markdown chunk.
 }
 \seealso{
 Useful links:
@@ -21,6 +21,7 @@ Other important functions:
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},
 \code{\link{include_IRF}()},
+\code{\link{input_tex}()},
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},
