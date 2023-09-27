@@ -15,44 +15,17 @@
 #' @keywords documentation
 #' @export
 
-input_tex <- function(path=".",chunk="",tex="",start=NA,end=NA) {
+input_tex <- function(path,start=NA,end=NA) {
 
-  if(chunk!="" && tex!=""){
-    tex=gsub("\\.tex$","",tex)
-    tex1=paste0(tex,".tex")
-    path=paste0('DynareR/',chunk,'/',tex1)
-    }
-if(path!=".") {
-  path=gsub("\\.tex","",path)
-  path=paste0(path,".tex")
-}
+    # tex=basename(path) %>% gsub("\\.tex$","",.) %>% paste0(".tex")
+    # path=paste0(dirname(path),'/',tex)
 
-  if(!is.na(start) && is.na(end)){
-    path=readLines(path)
-    path=path[start:length(path)]
-    # newTex=basename(tempfile("newTex",".",".tex"))
-    # writeLines(path,newTex)
-    # path=newTex
-    }
+  if(!endsWith(path,".tex")) path=paste0(path,".tex") # Same as above code, add ".tex" if the path does not end with it
 
 
-  if(is.na(start) && !is.na(end)){
-    path=readLines(path)
-    path=path[(1:end)]
-    # newTex=basename(tempfile("newTex",".",".tex"))
-    # writeLines(path,newTex)
-    # path=newTex
-  }
-
-
-  if(!is.na(start) && !is.na(end)){
-    path=readLines(path)
-    path=path[start:end]
-    # newTex=basename(tempfile("newTex",".",".tex"))
-    # writeLines(path,newTex)
-    # path=newTex
-  }
-
+  if(!is.na(start) && is.na(end)) path=readLines(path) %>% .[start:length(.)]
+  if(is.na(start) && !is.na(end)) path=readLines(path) %>% .[(1:end)]
+  if(!is.na(start) && !is.na(end)) path=readLines(path) %>% .[start:end]
 
 if (!is.na(start) || !is.na(end)) asis_output(path) else asis_output(paste0("\\input{",path,"}"))
 }
