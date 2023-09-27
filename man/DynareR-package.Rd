@@ -4,7 +4,7 @@
 \name{DynareR-package}
 \alias{DynareR}
 \alias{DynareR-package}
-\title{DynareR: A Seamless Integration of 'R' and 'Dynare'}
+\title{DynareR: Bringing the Power of 'Dynare' to 'R', 'R Markdown', and 'Quarto'}
 \description{
 It allows running 'Dynare' program from base R and R Markdown. 'Dynare' is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium ('DSGE') and overlapping generations ('OLG') models. This package does not only integrate R and Dynare but also serves as a 'Dynare' Knit-Engine for 'knitr' package. The package requires 'Dynare' (\url{https://www.dynare.org/}) and 'Octave' (\url{https://www.gnu.org/software/octave/download.html}). Write all your 'Dynare' commands in R or R Markdown chunk.
 }
@@ -30,7 +30,7 @@ Other important functions:
 \code{\link{write_mod}()}
 }
 \author{
-\strong{Maintainer}: Sagiru Mati \email{smati@smati.com.ng} (\href{https://orcid.org/0000-0003-1413-3974}{ORCID})
+\strong{Maintainer}: Sagiru Mati \email{sagirumati@gmail.com} (\href{https://orcid.org/0000-0003-1413-3974}{ORCID})
 
 }
 \concept{important functions}

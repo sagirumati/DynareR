@@ -1,14 +1,19 @@
 citHeader("To cite the 'DynareR' package in publications use:")
 
-year = sub('.*(2[[:digit:]]{3})-.*', '\\1', meta$Date, perl = TRUE)
+# year = sub('.*(2[[:digit:]]{3})-.*', '\\1', meta$Date, perl = TRUE)
+year = 2019
 vers = paste('R package version', meta$Version)
+title=paste('DynareR:', meta$Title) %>% gsub("'","",.)
 
-citEntry(
-  entry = 'manual',
-  title = paste('DynareR:', meta$Title),
+bibentry(
+  bibtype = 'article',
+  title = title,
   author = Filter(function(p) 'aut' %in% p$role, as.person(meta$Author)),
   year = year,
   note = vers,
+  journal="CRAN",
   url = meta$URL,
-  textVersion = paste('Sagiru Mati (', year, '). DynareR: ', meta$Title, '. ', vers, '.', sep = '')
+  key="Mati2019",
+  textVersion = paste('Sagiru Mati (', year, '). DynareR: ', title, '. ',  'CRAN. ',meta$URL, sep = '')
 )
+

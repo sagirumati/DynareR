@@ -7,14 +7,14 @@
 input_tex(path, start = NA, end = NA)
 }
 \arguments{
-\item{path}{Object or a character string representing the path(s) to the \code{TeX} file}
+\item{path}{Object or a character string representing the path to the \code{TeX} file}
 
-\item{start}{Numeric. The start line of the \code{TeX} file to include.}
+\item{start}{Numeric. The start line(s) of the \code{TeX} file to include.}
 
-\item{end}{Numeric. The last line of the \code{TeX} file to include.}
+\item{end}{Numeric. The last line(s) of the \code{TeX} file to include.}
 }
 \value{
-Set of \code{Tex} text
+Set of \code{TeX} text
 }
 \description{
 Use this function to include TeX file in R Markdown or Quarto document.
@@ -27,7 +27,7 @@ input_tex("DynareR/TeXFolder/olsTable.tex")
 }
 }
 \seealso{
-Other important functions:
+Other important functions: 
 \code{\link{DynareR}},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
