@@ -26,24 +26,28 @@ set_dynare_version <- function(dynare_version="") {
   if(dynare_version=="") dynare_version=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,9.9,0.1))) else dynare_version=dynare_version
 
   if(dir.exists("C:/dynare")){  # for Windows
-    dynare_version=paste0("C:/dynare/",dynare_version,"/matlab") %>%
+    matlab_path=paste0("C:/dynare/",dynare_version,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
+    if(dynare_version=="") dynare_version <<- regmatches(input_string, regexpr("(?<=dynare/).*?(?=/matlab)", input_string, perl = TRUE))
+
   }
 
   if(dir.exists("/Applications/Dynare")){  # for macOS
-    dynare_version=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
+    matlab_path=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
+    if(dynare_version=="") dynare_version <<- regmatches(input_string, regexpr("(?<=dynare/).*?(?=/matlab)", input_string, perl = TRUE))
+
   }
 
-  if(dir.exists("/usr/lib/dynare/matlab")) dynare_version<-"addpath /usr/lib/dynare/matlab" # for Linux
-  if(dir.exists(" /usr/lib64/dynare/matlab")) dynare_version<-"addpath  /usr/lib64/dynare/matlab" # for on openSUSE
-  if(dir.exists("/usr/local/lib/dynare/matlab")) dynare_version<-"addpath /usr/local/lib/dynare/matlab" # for macOS
+  if(dir.exists("/usr/lib/dynare/matlab")) matlab_path<-"addpath /usr/lib/dynare/matlab" # for Linux
+  if(dir.exists(" /usr/lib64/dynare/matlab")) matlab_path<-"addpath  /usr/lib64/dynare/matlab" # for on openSUSE
+  if(dir.exists("/usr/local/lib/dynare/matlab")) matlab_path<-"addpath /usr/local/lib/dynare/matlab" # for macOS
 
 
-  addPath<<-dynare_version
+  addPath<<-matlab_path
 
   }
