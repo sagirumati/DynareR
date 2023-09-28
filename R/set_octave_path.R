@@ -31,21 +31,13 @@ set_octave_path <- function(engine_path=""){
    #                       "5.3", Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe"),
    #                       "5.4", Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe"))
 
-
-  if(engine_path=="") engine_path=Sys.which("EViews13_x64")
-  if(engine_path=="") engine_path=Sys.which("EViews13_x86")
-  if(engine_path=="") engine_path=Sys.which("EViews12_x64")
-  if(engine_path=="") engine_path=Sys.which("EViews12_x86")
-  if(engine_path=="") engine_path=Sys.which("EViews11_x64")
-  if(engine_path=="") engine_path=Sys.which("EViews11_x86")
-  if(engine_path=="") engine_path=Sys.which("EViews10_x64")
-  if(engine_path=="") engine_path=Sys.which("EViews10_x86")
-  if(engine_path=="") engine_path=Sys.which("EViews9_x64")
-  if(engine_path=="") engine_path=Sys.which("EViews9_x86")
-  if(engine_path=="") engine_path=Sys.which("EViews10")
-  if(engine_path=="") stop("EViews executable cannot be found, please use 'set_eviews_path' function to set the path to the EViews executable")
  }
 
+
+  if (tolower(system_info$sysname) == "darwin" & engine_path==""){
+
+    if (dynare_version %in% c("4.6.1","4.6.2","4.6.3")) engine_path=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
+  }
 
   engine_path<<-engine_path
 
