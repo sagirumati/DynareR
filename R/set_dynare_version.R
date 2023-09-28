@@ -30,8 +30,8 @@ set_dynare_version <- function(dynare_version="") {
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(dynare_version=="") dynare_version <<- regmatches(input_string, regexpr("(?<=dynare/).*?(?=/matlab)", input_string, perl = TRUE))
-
+    if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
+      # if there is no matlab subdirectory, `matlab_path="addpath "`
   }
 
   if(dir.exists("/Applications/Dynare")){  # for macOS
@@ -39,7 +39,7 @@ set_dynare_version <- function(dynare_version="") {
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(dynare_version=="") dynare_version <<- regmatches(input_string, regexpr("(?<=dynare/).*?(?=/matlab)", input_string, perl = TRUE))
+    if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
 
   }
 
@@ -49,5 +49,6 @@ set_dynare_version <- function(dynare_version="") {
 
 
   addPath<<-matlab_path
+  set_octave_path()
 
   }

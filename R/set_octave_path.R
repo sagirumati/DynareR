@@ -2,7 +2,6 @@
 #'
 #' Use this function to set `Octave` path
 #'
-#' @usage set_octave_path(engine_path="octave")
 #' @param engine_path Path to the Octave executable
 #' @return Character
 #'
@@ -14,7 +13,7 @@
 #' @keywords documentation
 #' @export
 set_octave_path <- function(engine_path=""){
-  engine_path=Sys.which(engine_path)
+  # engine_path=Sys.which(engine_path)
 
  if (Sys.info()['sysname']=="Windows" & engine_path==""){
 
@@ -34,7 +33,7 @@ set_octave_path <- function(engine_path=""){
  }
 
 
-  if (tolower(system_info$sysname) == "darwin" & engine_path==""){
+  if (tolower(Sys.info()['sysname']) == "darwin" & engine_path==""){
 
     if (dynare_version %in% c("4.6.1","4.6.2","4.6.3")) engine_path=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
   }

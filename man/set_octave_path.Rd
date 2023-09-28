@@ -4,7 +4,7 @@
 \alias{set_octave_path}
 \title{Set \code{Octave} path}
 \usage{
-set_octave_path(engine_path="octave")
+set_octave_path(engine_path = "")
 }
 \arguments{
 \item{engine_path}{Path to the Octave executable}
