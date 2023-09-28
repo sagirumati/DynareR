@@ -41,6 +41,4 @@ set_octave_path <- function(engine_path=""){
 
   engine_path<<-engine_path
 
-
-
 }
