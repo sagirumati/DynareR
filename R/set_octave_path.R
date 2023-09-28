@@ -19,14 +19,18 @@ set_octave_path <- function(engine_path=""){
  if (Sys.info()['sysname']=="Windows" & engine_path==""){
 
    if (dynare_version %in% c("4.6.1","4.6.2","4.6.3")) engine_path=Sys.which("C:/Octave/Octave-5.2.0.0/mingw64/bin/octave-cli.exe")
-   if (dynare_version=="4.6.4")                  engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave.exe")
-   if (dynare_version %in% c("5.0","5.1","5.2")) engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave.exe")
-   if (dynare_version=="5.3")                   engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe")
-   if (dynare_version=="5.4")                   engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe")
+   if (dynare_version=="4.6.4")                        engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave.exe")
+   if (dynare_version %in% c("5.0","5.1","5.2"))       engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave.exe")
+   if (dynare_version=="5.3")                          engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe")
+   if (dynare_version=="5.4")                          engine_path=Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe")
 
-   dynare_version=c("4.6.1","4.6.2","4.6.3","4.6.4","5.0")
-    octave_version=c('7.3.0','8.1.0')
-  C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe
+   # engine_path <- switch(dynare_version,
+   #                       "4.6.1" | "4.6.2" | "4.6.3", Sys.which("C:/Octave/Octave-5.2.0.0/mingw64/bin/octave-cli.exe"),
+   #                       "4.6.4", Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave.exe"),
+   #                       "5.0" | "5.1" | "5.2", Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave.exe"),
+   #                       "5.3", Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe"),
+   #                       "5.4", Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe"))
+
 
   if(engine_path=="") engine_path=Sys.which("EViews13_x64")
   if(engine_path=="") engine_path=Sys.which("EViews13_x86")
