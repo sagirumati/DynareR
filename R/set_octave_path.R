@@ -12,7 +12,7 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-set_octave_path <- function(engine_path="octave",force=FALSE){
+set_octave_path <- function(engine_path="octave"){
   if(exists(engine_path)) engine_path1=engine_path
 
   engine_path=Sys.which(engine_path)
@@ -51,6 +51,11 @@ set_octave_path <- function(engine_path="octave",force=FALSE){
 
 
 # FOR UBUNTU
-#
+
+# ERROR MESSAGE: /usr/lib/R/bin/config: 1: eval: make: not found
 # sudo apt-get update
 # sudo apt-get install r-base-dev
+
+
+# ERROR MESSAGE: Package "fontconfig" not found
+# sudo apt-get install libfontconfig-dev
