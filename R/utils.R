@@ -11,7 +11,7 @@ if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Thank you for using URooTab!
+  packageStartupMessage("Thank you for using DynareR!
 
           To acknowledge our work, please cite the package:
 
