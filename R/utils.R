@@ -7,7 +7,6 @@
 .onLoad<-function(libname,pkgname){
   knit_engines$set(dynare=eng_dynare)
   set_dynare_version()
-  # set_octave_path()
 if(!exists("dynare") || !is.environment(dynare)) dynare<<-new.env()
 }
 
