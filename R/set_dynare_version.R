@@ -52,4 +52,8 @@ set_dynare_version <- function(dynare_version="") {
   addPath<<-matlab_path
   set_octave_path()
 
-  }
+}
+
+
+# Dynare dev version
+# 6-unstable-2023-09-28-1543-f2abdb6e
