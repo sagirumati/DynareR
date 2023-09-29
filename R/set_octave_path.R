@@ -14,7 +14,7 @@
 #' @export
 set_octave_path <- function(engine_path="octave"){
 
-  engine_path=Sys.which(engine_path)
+  engine_path=Sys.which(engine_path) # for Linux and macOS
 
  if (Sys.info()['sysname']=="Windows"){
 
@@ -37,10 +37,10 @@ set_octave_path <- function(engine_path="octave"){
  }
 
 
-  if (tolower(Sys.info()['sysname']) == "darwin"){
-
-    if (dynare_version %in% c("4.6.1","4.6.2","4.6.3")) engine_path=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
-  }
+  # if (tolower(Sys.info()['sysname']) == "darwin"){
+  #
+  #   if (dynare_version %in% c("4.6.1","4.6.2","4.6.3")) engine_path=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
+  # }
 
   if(engine_path=="")  warning('Please provide the correct path to the Octave executable compatible with the Dynare Version')
 
