@@ -1,4 +1,4 @@
-DynareR: A Seamless Integration of R and Dynare
+DynareR: Bringing the Power of Dynare to R, R Markdown, and Quarto
 ================
 
 #  <img src="inst/Dynare/DynareR.png" align="right" width="120" />

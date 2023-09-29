@@ -1,5 +1,5 @@
 ---
-title: "DynareR: A Seamless Integration of R and Dynare"
+title: "DynareR: Bringing the Power of Dynare to R, R Markdown, and Quarto"
 author: Sagiru Mati (PhD)
 output: bookdown::github_document2
 linkcolor: blue

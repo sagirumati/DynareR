@@ -1,10 +1,10 @@
 ---
-title: "DynareR: A Seamless Integration of R and Dynare"
+title: "DynareR: Bringing the Power of Dynare to R, R Markdown, and Quarto"
 author: "Sagiru Mati"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{DynareR: A Seamless Integration of R and Dynare}
+  %\VignetteIndexEntry{DynareR: Bringing the Power of Dynare to R, R Markdown, and Quarto}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

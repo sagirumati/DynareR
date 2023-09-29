@@ -6,6 +6,8 @@ What is new?
 
 * Updated Octave search path
 
+* The package now chooses the `Octave` version  compatible with installed Dynare, or with the dynare version chosen via `set_dynare_version()` function
+
 * Updated `set_dynare_version()` function
 
 * Author's email changed to <sagirumati@gmail.com>
