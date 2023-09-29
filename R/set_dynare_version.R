@@ -32,7 +32,8 @@ set_dynare_version <- function(dynare_version="") {
       paste0("addpath ",.)
     if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
       # if there is no matlab subdirectory, `matlab_path="addpath "`
-  }
+    if(matlab_path=="addpath ") stop("The Dynare version does not exist")
+    }
 
   if(dir.exists("/Applications/Dynare")){  # for macOS
     matlab_path=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
@@ -40,7 +41,7 @@ set_dynare_version <- function(dynare_version="") {
       .[length(.)] %>%
       paste0("addpath ",.)
     if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
-
+    if(matlab_path=="addpath ") stop("The Dynare version does not exist")
   }
 
   if(dir.exists("/usr/lib/dynare/matlab")) matlab_path<-"addpath /usr/lib/dynare/matlab" # for Linux
