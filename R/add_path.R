@@ -18,5 +18,5 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-add_path <- \(path) if(dir.exists(path) && endsWith(path,"matlab")) addPath<<-paste('addpath',path) else stop(paste0("'",path,"' is not a valid directory or does not end with 'matlab'"))
+add_path <- \(path) if(dir.exists(path) && endsWith(path,"matlab")) matlabPath<<-paste('addpath',path) else stop(paste0("'",path,"' is not a valid directory or does not end with 'matlab'"))
 

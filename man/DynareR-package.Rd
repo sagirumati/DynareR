@@ -17,6 +17,7 @@ Useful links:
 
 
 Other important functions: 
+\code{\link{add_matlab_path}()},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},

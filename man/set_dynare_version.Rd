@@ -31,6 +31,7 @@ set_dynare_version("5.2")
 \seealso{
 Other important functions: 
 \code{\link{DynareR}},
+\code{\link{add_matlab_path}()},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
 \code{\link{import_log}()},

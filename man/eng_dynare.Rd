@@ -39,6 +39,7 @@ Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In 
 \seealso{
 Other important functions: 
 \code{\link{DynareR}},
+\code{\link{add_matlab_path}()},
 \code{\link{add_path}()},
 \code{\link{import_log}()},
 \code{\link{include_IRF}()},

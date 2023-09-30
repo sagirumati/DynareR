@@ -4,6 +4,8 @@ What is new?
 
 * New function `input_tex()` has been added. It can be used to include raw LaTeX file into R Markdown or Quarto.
 
+* Added new funciton `add_matlab_path()` to replace ``add_path()` function, which is still available for backward compatibility.
+
 * The dependency on kableExtra has been removed
 
 * Updated Octave search path
