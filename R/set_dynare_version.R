@@ -49,7 +49,7 @@ set_dynare_version <- function(dynare_version="") {
   if(dir.exists("/usr/local/lib/dynare/matlab")) matlab_path<-"addpath /usr/local/lib/dynare/matlab" # for macOS
 
 
-  addPath<<-matlab_path
+  if(exists("matlab_pth")) addPath<<-matlab_path else addPath<<-""
   set_octave_path()
 
 }
