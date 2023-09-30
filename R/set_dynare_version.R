@@ -30,7 +30,7 @@ set_dynare_version <- function(dynare_version="") {
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE))
+    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE)) else dynare_version<<-""
       # if there is no matlab subdirectory, `matlabPath="addpath "`
     if(matlabPath=="addpath ") stop("The Dynare version does not exist")
     }
