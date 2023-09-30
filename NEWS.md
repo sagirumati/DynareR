@@ -4,6 +4,8 @@ What is new?
 
 * New function `input_tex()` has been added. It can be used to include raw LaTeX file into R Markdown or Quarto.
 
+* The dependency on kableExtra has been removed
+
 * Updated Octave search path
 
 * The package now chooses the `Octave` version  compatible with installed Dynare, or with the dynare version chosen via `set_dynare_version()` function
