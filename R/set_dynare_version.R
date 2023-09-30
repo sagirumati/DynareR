@@ -26,30 +26,30 @@ set_dynare_version <- function(dynare_version="") {
   if(dynare_version=="") dynare_version=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,9.9,0.1))) else dynare_version=dynare_version
 
   if(dir.exists("C:/dynare")){  # for Windows
-    matlab_path=paste0("C:/dynare/",dynare_version,"/matlab") %>%
+    matlabPath=paste0("C:/dynare/",dynare_version,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
-      # if there is no matlab subdirectory, `matlab_path="addpath "`
-    if(matlab_path=="addpath ") stop("The Dynare version does not exist")
+    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE))
+      # if there is no matlab subdirectory, `matlabPath="addpath "`
+    if(matlabPath=="addpath ") stop("The Dynare version does not exist")
     }
 
   if(dir.exists("/Applications/Dynare")){  # for macOS
-    matlab_path=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
+    matlabPath=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(matlab_path!="addpath ") dynare_version <<- regmatches(matlab_path, regexpr("(?<=dynare/).*?(?=/matlab)", matlab_path, perl = TRUE))
-    if(matlab_path=="addpath ") stop("The Dynare version does not exist")
+    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE))
+    if(matlabPath=="addpath ") stop("The Dynare version does not exist")
   }
 
-  if(dir.exists("/usr/lib/dynare/matlab")) matlab_path<-"addpath /usr/lib/dynare/matlab" # for Linux
-  if(dir.exists(" /usr/lib64/dynare/matlab")) matlab_path<-"addpath  /usr/lib64/dynare/matlab" # for on openSUSE
-  if(dir.exists("/usr/local/lib/dynare/matlab")) matlab_path<-"addpath /usr/local/lib/dynare/matlab" # for macOS
+  if(dir.exists("/usr/lib/dynare/matlab")) matlabPath<-"addpath /usr/lib/dynare/matlab" # for Linux
+  if(dir.exists(" /usr/lib64/dynare/matlab")) matlabPath<-"addpath  /usr/lib64/dynare/matlab" # for on openSUSE
+  if(dir.exists("/usr/local/lib/dynare/matlab")) matlabPath<-"addpath /usr/local/lib/dynare/matlab" # for macOS
 
 
-  if(exists("matlab_pth")) addPath<<-matlab_path else addPath<<-""
+  if(exists("matlab_pth")) matlabPath<<-matlabPath else matlabPath<<-""
   set_octave_path()
 
 }

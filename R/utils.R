@@ -67,9 +67,9 @@ run_model <- function(model,import_log=F) {
 
   octaveFile<-basename(tempfile(model, '.',".m"))   # m is file extension of octave/matlab
 
-  if(!exists("addPath")) set_dynare_version()
+  if(!exists("matlabPath")) set_dynare_version()
 
-  writeLines(c(addPath,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
+  writeLines(c(matlabPath,paste0('cd ',modelDir),sprintf("dynare %s",dynarePath)), octaveFile)
 
 
   on.exit(unlink(octaveFile),add = T)
@@ -81,10 +81,10 @@ run_model <- function(model,import_log=F) {
 # system_exec
 
 system_exec=function(){
-  if(!exists("engine_path")) set_octave_path()
-  engine_path=eval(expression(engine_path),envir = parent.frame())
+  if(!exists("octavePath")) set_octave_path()
+  octavePath=eval(expression(octavePath),envir = parent.frame())
   octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
-  system2(set_octave_path(engine_path),paste("--eval",shQuote(paste("run",octaveFile))))
+  system2(set_octave_path(octavePath),paste("--eval",shQuote(paste("run",octaveFile))))
 }
 
 
