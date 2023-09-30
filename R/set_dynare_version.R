@@ -22,26 +22,27 @@
 #' @export
 set_dynare_version <- function(dynare_version="") {
 
+  dynareVersion=dynare_version
 
-  if(dynare_version=="") dynare_version=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,9.9,0.1))) else dynare_version=dynare_version
+  if(dynareVersion=="") dynareVersion=append(c("4.6.1","4.6.2","4.6.3","4.6.4"), format(seq(5.0,9.9,0.1))) else dynareVersion=dynareVersion
 
-  if(dir.exists("C:/dynare")){  # for Windows
-    matlabPath=paste0("C:/dynare/",dynare_version,"/matlab") %>%
+  if(Sys.info()['sysname']=="Windows"){  # for Windows
+    matlabPath=paste0("C:/dynare/",dynareVersion,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE)) else dynare_version<<-""
+    if(matlabPath!="addpath ") dynareVersion <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE)) else dynareVersion<<-""
       # if there is no matlab subdirectory, `matlabPath="addpath "`
-    if(matlabPath=="addpath ") stop("The Dynare version does not exist")
+    if(matlabPath=="addpath ") warning("The Dynare version does not exist")
     }
 
-  if(dir.exists("/Applications/Dynare")){  # for macOS
-    matlabPath=paste0("/Applications/Dynare/",dynare_version,"/matlab") %>%
+  if(Sys.info()['sysname']=="Darwin"){  # for macOS
+    matlabPath=paste0("/Applications/Dynare/",dynareVersion,"/matlab") %>%
       .[dir.exists(.)] %>%
       .[length(.)] %>%
       paste0("addpath ",.)
-    if(matlabPath!="addpath ") dynare_version <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE))
-    if(matlabPath=="addpath ") stop("The Dynare version does not exist")
+    if(matlabPath!="addpath ") dynareVersion <<- regmatches(matlabPath, regexpr("(?<=dynare/).*?(?=/matlab)", matlabPath, perl = TRUE)) else dynareVersion<<-""
+      if(matlabPath=="addpath ") warning("The Dynare version does not exist")
   }
 
   if(dir.exists("/usr/lib/dynare/matlab")) matlabPath<-"addpath /usr/lib/dynare/matlab" # for Linux
