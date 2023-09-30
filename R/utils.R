@@ -1,4 +1,4 @@
-#' @import kableExtra magrittr knitr utils
+#' @import magrittr knitr utils
 
 
 
