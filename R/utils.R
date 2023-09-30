@@ -84,8 +84,9 @@ system_exec=function(){
   if(!exists("octavePath")) set_octave_path()
   octavePath=eval(expression(octavePath),envir = parent.frame())
   octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
+  if(octavePath=="")  stop('Please provide the correct path to the Octave executable compatible with the Dynare Version')
   system2(set_octave_path(octavePath),paste("--eval",shQuote(paste("run",octaveFile))))
-}
+  }
 
 
 

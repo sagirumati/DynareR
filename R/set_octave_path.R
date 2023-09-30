@@ -42,7 +42,7 @@ set_octave_path <- function(octave_path="octave"){
   #   if (dynareVersion %in% c("4.6.1","4.6.2","4.6.3")) octavePath=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
   # }
 
-  if(octavePath=="")  warning('Please provide the correct path to the Octave executable compatible with the Dynare Version')
+  # if(octavePath=="")  warning('Please provide the correct path to the Octave executable compatible with the Dynare Version')
 
   octavePath<<-octavePath
 
