@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Mati"
+given-names: "Sagiru"
+orcid: "https://orcid.org/0000-0003-1413-3974"
+title: "Bringing the Power of 'Dynare' to R, R Markdown, and Quarto"
+date-released: 2019
+url: "https://cran.r-project.org/web/packages/DynareR/index.html"
