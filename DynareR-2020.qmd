@@ -574,7 +574,7 @@ set_dynare_version("6-unstable-2022-04-03-0800-700a0e3a")
 # 9 set_octave_path function
 
 You can use this function if `Octave` is not installed in the standard
-location
+location.
 
 ``` r
 set_octave_path('C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave20.exe')
