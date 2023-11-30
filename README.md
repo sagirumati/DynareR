@@ -598,7 +598,7 @@ demo(import_log)
 Template for R Markdown is created. Go to
 `file->New File->R Markdown-> From Template->DynareR`.
 
-# 9 Similar Packages
+# Similar Packages
 
 Similar packages include
 [EviewsR](https://github.com/sagirumati/EviewsR) (Mati 2022b, 2020b,Mati,
@@ -606,7 +606,7 @@ Civcir, and Abba 2023),
 [gretlR](https://github.com/sagirumati/gretlR) (Mati 2020c, 2022c), and
 [URooTab](https://github.com/sagirumati/URooTab) (Mati 2023b, 2023a)
 
-For further details, consult Mati (2020a) and Mati (2022a) and 
+For further details, consult Mati (2020a) and Mati (2022a).
 
 <br><br><br><br>
 
