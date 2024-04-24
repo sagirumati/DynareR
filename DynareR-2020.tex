@@ -117,6 +117,29 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
@@ -194,7 +217,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, breakable, boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{shadecolor}, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{about-the-author}{%
 \section{About the Author}\label{about-the-author}}
@@ -690,8 +713,67 @@ demo(package=``DynareR'')
 Template for R Markdown is created. Go to
 \texttt{file-\textgreater{}New\ File-\textgreater{}R\ Markdown-\textgreater{}\ From\ Template-\textgreater{}DynareR}.
 
+\hypertarget{similar-packages}{%
+\section{Similar packages}\label{similar-packages}}
+
+Similar packages include
+\href{https://github.com/sagirumati/EviewsR}{EviewsR} (Mati 2022b,
+2020b; Mati, Civcir, and Abba 2023),
+\href{https://github.com/sagirumati/gretlR}{gretlR} (Mati 2020c, 2022c),
+and \href{https://github.com/sagirumati/URooTab}{URooTab} (Mati 2023b,
+2023a)
+
+For further details, consult Mati (2020a) and Mati (2022a).
+
 Please download the example files from
 \href{https://github.com/sagirumati/DynareR/tree/master/inst/examples/}{Github}.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-Mati2020}{}}%
+Mati, Sagiru. 2020a. {``DynareR: Bringing the Power of Dynare to {R, R
+Markdown, and Quarto}.''} \emph{CRAN}.
+\url{https://CRAN.R-project.org/package=DynareR}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mati2020a}{}}%
+---------. 2020b. \emph{EviewsR: A Seamless Integration of {EViews} and
+{R}}. \url{https://CRAN.R-project.org/package=EviewsR}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mati2020b}{}}%
+---------. 2020c. \emph{gretlR: A Seamless Integration of {Gretl} and
+{R}}. \url{https://CRAN.R-project.org/package=gretlR}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mati2022dynarer}{}}%
+---------. 2022a. {``Package {`DynareR'}.''}
+\url{https://cran.r-project.org/web/packages/DynareR/DynareR.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mati2022eviewsr}{}}%
+---------. 2022b. {``Package {`EviewsR'}.''}
+\url{https://cran.r-project.org/web/packages/EviewsR/EviewsR.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mati2022gretlr}{}}%
+---------. 2022c. {``Package {`gretlR'}.''}
+\url{https://cran.r-project.org/web/packages/gretlR/gretlR.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mati2023urootab}{}}%
+---------. 2023a. {``Package {`URooTab'}.''}
+\url{https://cran.r-project.org/web/packages/URooTab/URooTab.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mati2023a}{}}%
+---------. 2023b. \emph{{URooTab}: Tabular Reporting of {EViews} Unit
+Root Tests}. \url{https://github.com/sagirumati/URooTab}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mati2023}{}}%
+Mati, Sagiru, Irfan Civcir, and S. I. Abba. 2023. {``{EviewsR}: An r
+Package for Dynamic and Reproducible Research Using {EViews}, r, r
+Markdown and Quarto.''} \emph{The R Journal} 15 (2): 169--205.
+\url{https://doi.org/10.32614/rj-2023-045}.
+
+\end{CSLReferences}
 
 
 
