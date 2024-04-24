@@ -5,6 +5,7 @@ date: "2019/06/25"
 format: pdf
 execute: 
   echo: fenced
+bibliography: references.bib
 ---
 
 ```{r,echo=F,message=FALSE}
@@ -612,7 +613,18 @@ demo(import_log)
 Template for R Markdown is created. Go to
 `file->New File->R Markdown-> From Template->DynareR`.
 
+# Similar packages
+
+Similar packages include [EviewsR](https://github.com/sagirumati/EviewsR) [@mati2022eviewsr;@Mati2020a;@Mati2023], [gretlR](https://github.com/sagirumati/gretlR) [@Mati2020b;@mati2022gretlr], and  [URooTab](https://github.com/sagirumati/URooTab) [@Mati2023a;@mati2023urootab]
+
+For further details, consult @Mati2020 and @mati2022dynarer.
+
+
+
 <br><br><br><br>
 
 Please download the example files from
 [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/).
+
+
+# References
