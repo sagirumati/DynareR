@@ -98,8 +98,6 @@ options_.linear = false;
 options_.block = false;
 options_.bytecode = false;
 options_.use_dll = false;
-M_.nonzero_hessian_eqs = [1 2 3 4];
-M_.hessian_eq_zero = isempty(M_.nonzero_hessian_eqs);
 M_.orig_eq_nbr = 6;
 M_.eq_nbr = 6;
 M_.ramsey_eq_nbr = 0;
@@ -129,7 +127,7 @@ M_.nboth   = 1;
 M_.nsfwrd   = 3;
 M_.nspred   = 3;
 M_.ndynamic   = 5;
-M_.dynamic_tmp_nbr = [6; 8; 0; 0; ];
+M_.dynamic_tmp_nbr = [5; 0; 0; 0; ];
 M_.model_local_variables_dynamic_tt_idxs = {
 };
 M_.equations_tags = {
@@ -162,7 +160,7 @@ M_.maximum_exo_lead = 0;
 oo_.exo_steady_state = zeros(2, 1);
 M_.params = NaN(7, 1);
 M_.endo_trends = struct('deflator', cell(6, 1), 'log_deflator', cell(6, 1), 'growth_factor', cell(6, 1), 'log_growth_factor', cell(6, 1));
-M_.NNZDerivatives = [26; 48; -1; ];
+M_.NNZDerivatives = [26; -1; -1; ];
 M_.static_tmp_nbr = [4; 0; 0; 0; ];
 M_.model_local_variables_static_tt_idxs = {
 };
@@ -208,7 +206,9 @@ M_.Sigma_e(2, 2) = (0.009)^2;
 M_.Sigma_e(1, 2) = 0.009*0.009*phi;
 M_.Sigma_e(2, 1) = M_.Sigma_e(1, 2);
 M_.sigma_e_is_diagonal = 0;
-options_.order = 2;
+options_.hp_filter = 1600;
+options_.order = 1;
+options_.graph_format = {'pdf'};
 var_list_ = {};
 [info, oo_, options_, M_] = stoch_simul(M_, options_, oo_, var_list_);
 

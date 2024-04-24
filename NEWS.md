@@ -1,3 +1,7 @@
+# Dynare 0.1.5
+
+* include_IRF() function gained a new arguement `crop=TRUE`. This crops the white space around IRF graphs
+
 # Dynare 0.1.4
 
 What is new? 

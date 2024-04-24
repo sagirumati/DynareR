@@ -65,4 +65,4 @@ var u; stderr 0.009;
 var e, u = phi*0.009*0.009;
 end;
 
-stoch_simul;
+stoch_simul(order=1, hp_filter=1600,graph_format=pdf);

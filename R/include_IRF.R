@@ -34,12 +34,12 @@
 #' @family important functions
 #' @keywords documentation
 #' @export
-include_IRF <- function(path=".",model="",IRF="") {
+include_IRF <- function(path=".",model="",IRF="",crop=TRUE) {
 
   if(path!=".") IRFPath=path
 
   if(path=="." && model!="" && IRF!="") IRFPath=paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf")
-
+if(crop) plot_crop(IRFPath)
   include_graphics(IRFPath)
 }
 
