@@ -1,5 +1,5 @@
 ---
-title: "DynareR: Bringing the Power of Dynare to R, R Markdown, and Quarto"
+title: "DynareR Manual"
 author: Sagiru Mati
 date: "2020/06/25"
 format: pdf
@@ -70,14 +70,14 @@ devtools::install_github('sagirumati/DynareR')
 
 Please load the DynareR package as follows:
 
-    ```{r DynareR}                                                             
-    library(DynareR)
-    ```
+```{r DynareR}                                                             
+library(DynareR)
+```
 
 Then create a chunk for `dynare` (adopted from Dynare example file
 `bkk`) as shown below:
 
-    ```{dynare bkk,eval=T} 
+```{dynare bkk,eval=T} 
     /*
      * This file implements the multi-country RBC model with time to build,
      * described in Backus, Kehoe and Kydland (1992): "International Real Business
@@ -250,8 +250,8 @@ Then create a chunk for `dynare` (adopted from Dynare example file
     steady;
     check;
 
-    stoch_simul(order=1, hp_filter=1600);
-    ```  
+    stoch_simul(order=1, hp_filter=1600,irf=60,graph,graph_format = pdf);
+```  
 
 The above chunk creates a Dynare program with the chunk’s content, then
 automatically run Dynare, which will save Dynare outputs in the current
@@ -297,12 +297,12 @@ name (`E_H2`) is needed, that is `bkk_IRF_` is excluded.
 <!-- `out.extra='trim={0cm 7cm 0cm 7cm},clip'` is used to trim the white -->
 <!-- space above and below the IRF. -->
 
-    ```{r IRF,fig.cap="Another of figure generated from Dynare software"} 
+ ```{r IRF,fig.cap="Another of figure generated from Dynare software"} 
     include_IRF("bkk","E_H2")
 
     # Alternatively, use the path argument 
-
-    ```
+ 
+ ```
 
 ``` r
 include_IRF(model="bkk",IRF = "E_H2")
@@ -326,7 +326,7 @@ working directory:
 
 `write_dyn(code="code",model="path/to/someDirectory/someModel")` 
 
-``` r
+ ``` r
 dynareCodes='var y, c, k, a, h, b;
 varexo e, u;
 parameters beta, rho, alpha, delta, theta, psi, tau;
@@ -370,7 +370,7 @@ stoch_simul;'
 write_dyn(code=dynareCodes, model="example1")
 
 write_dyn(code=dynareCodes,model="DynareR/write_dyn/example1")
-```
+ ```
 
 ## 6.3 The write_mod function
 
@@ -500,7 +500,7 @@ files live in the path different from the current working directory:
 
 `run_models(model="path/to/someDirectory/someModel")` 
 
-Use `run_models()` to exectute all the `dynare` models in the current
+Use `run_models()` to execute all the `dynare` models in the current
 working directory. Use `run_models("path/to/someDirectory*)` to run all
 the `dynare` models in `path/to/someDirectory`.
 

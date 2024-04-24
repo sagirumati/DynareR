@@ -595,7 +595,10 @@ M_.sigma_e_is_diagonal = 0;
 steady;
 oo_.dr.eigval = check(M_,options_,oo_);
 options_.hp_filter = 1600;
+options_.irf = 60;
+options_.nograph = false;
 options_.order = 1;
+options_.graph_format = {'pdf'};
 var_list_ = {};
 [info, oo_, options_, M_] = stoch_simul(M_, options_, oo_, var_list_);
 
