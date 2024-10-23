@@ -90,7 +90,17 @@ system_exec=function(){
 
 
 
+# Convert pdf to png
 
+pdf2png <- function(path) {
+  # only do the conversion for non-LaTeX output
+  if (knitr::is_latex_output())
+    return(path)
+  path2 <- with_ext(path, "png")
+  img <- image_read_pdf(path)
+  image_write(img, path2, format = "png")
+  path2
+}
 
 
 

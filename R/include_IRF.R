@@ -40,6 +40,9 @@ include_IRF <- function(path=".",model="",IRF="",crop=TRUE) {
 
   if(path=="." && model!="" && IRF!="") IRFPath=paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf")
 if(crop) plot_crop(IRFPath)
+
+  IRFPath=pdf2png(IRFPath)
+
   include_graphics(IRFPath)
 }
 
