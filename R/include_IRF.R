@@ -39,7 +39,10 @@ include_IRF <- function(path=".",model="",IRF="",crop=TRUE) {
   if(path!=".") IRFPath=path
 
   if(path=="." && model!="" && IRF!="") IRFPath=paste0(model,"/",model,"/","graphs/",model,"_IRF_",IRF,".pdf")
-if(crop) plot_crop(IRFPath)
+
+  knit_hooks$set(crop = knitr::hook_pdfcrop)
+
+  if(crop) plot_crop(IRFPath)
 
   IRFPath=pdf2png(IRFPath)
 

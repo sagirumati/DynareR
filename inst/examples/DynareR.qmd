@@ -1,7 +1,7 @@
 ---
 title: "DynareR: A Seamless Integration of R and Dynare"
 author: Sagiru Mati (PhD)
-output: bookdown::pdf_document2
+format: pdf
 always_allow_html: true
 linkcolor: blue
 toc: false
@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
   
 )
 
-library(xfun)
 
 
 library(magrittr)
@@ -466,6 +465,8 @@ include_IRF("bkk","E_H2")
 ````
 
 ```{r IRF,fig.cap="Another of figure generated from Dynare software"}
+#| out-width: \textwidth
+#| out-height: \textwidth
 
 include_IRF(model="bkk",IRF = "E_H2")
 

@@ -37,8 +37,8 @@ EIGENVALUES:
           0.9946           0.9946                0
            1.032            1.032                0
            1.113            1.113                0
-        1.65e+16         1.65e+16                0
-             Inf              Inf                0
+       5.633e+15        5.633e+15                0
+        1.21e+16        -1.21e+16                0
 
 
 There are 4 eigenvalue(s) larger than 1 in modulus 
@@ -101,4 +101,4 @@ Order          1       2       3       4       5
 tb_y      0.9687  0.9403  0.9145  0.8907  0.8687
 c_y       0.9937  0.9874  0.9812  0.9749  0.9685
 i_y       0.9089  0.8254  0.7490  0.6790  0.6150
-Total computing time : 0h00m05s
+Total computing time : 0h00m06s

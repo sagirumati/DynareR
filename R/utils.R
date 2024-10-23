@@ -102,8 +102,36 @@ pdf2png <- function(path) {
   path2
 }
 
+# Imported xfun
+
+with_ext=function (x, ext, extra = "")
+{
+  if (anyNA(ext))
+    stop("NA is not allowed in 'ext'")
+  n1 = length(x)
+  n2 = length(ext)
+  if (n1 * n2 == 0)
+    return(x)
+  i = !grepl("^[.]", ext) & ext != ""
+  ext[i] = paste0(".", ext[i])
+  if (all(ext == ""))
+    ext = ""
+  r = sub("[$]$", "?$", reg_ext(extra))
+  if (length(ext) == 1)
+    return(sub(r, ext, x))
+  if (n1 > 1 && n1 != n2)
+    stop("'ext' must be of the same length as 'x'")
+  mapply(sub, r, ext, x, USE.NAMES = FALSE)
+}
 
 
+# Imported xfun
+
+reg_ext=function (extra = "")
+{
+  sprintf("([.](([%s[:alnum:]]+|tar[.](gz|bz2|xz)|nb[.]html)[~#]?))$",
+          extra)
+}
 
 
 
