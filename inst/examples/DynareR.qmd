@@ -753,3 +753,5 @@ Template for R Markdown is created. Go to `file->New File->R Markdown-> From Tem
 
 Please download the example files from  [Github](https://github.com/sagirumati/DynareR/tree/master/inst/examples/).
 
+
+

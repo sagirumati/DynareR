@@ -139,7 +139,9 @@ reg_ext=function (extra = "")
 plot_crop=function (x){
   if(endsWith(x,".pdf")){
     img = image_read_pdf(x,density = 600)
-    image_write(image_trim(img), x,density = 600, quality = 100)
+
+    x=gsub(".pdf$", "_cropped.pdf", x)
+    image_write(image_trim(img),x,format = "pdf",density = 600, quality = 100)
 }  else{
   img = image_read(x)
   image_write(image_trim(img), x,quality = 100)
