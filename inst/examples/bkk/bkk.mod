@@ -170,5 +170,4 @@ end;
 steady;
 check;
 
-stoch_simul(order=1, hp_filter=1600,graph_format=pdf);
-
+stoch_simul(order=1, hp_filter=1600,graph_format = (pdf));

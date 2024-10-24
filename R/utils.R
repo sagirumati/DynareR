@@ -134,7 +134,18 @@ reg_ext=function (extra = "")
 }
 
 
+# Crop white space of images
 
+plot_crop=function (x){
+  if(endsWith(x,".pdf")){
+    img = image_read_pdf(x,density = 600)
+    image_write(image_trim(img), x,density = 600, quality = 100)
+}  else{
+  img = image_read(x)
+  image_write(image_trim(img), x,quality = 100)
+}
+
+ }
 
 
 
