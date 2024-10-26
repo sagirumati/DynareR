@@ -12,6 +12,8 @@ include_IRF(path = ".", model = "", IRF = "", crop = TRUE)
 \item{model}{Object or a character string representing the name of the \code{Dynare} model file (\code{.mod} or \code{.dyn} extension)}
 
 \item{IRF}{A character string for the name of the Impulse Response Function as defined in the \code{Dynare} codes.}
+
+\item{crop}{Whether to crop the white space around the graph}
 }
 \value{
 Set of \code{Dynare} (open-source software for DSGE modelling) outputs

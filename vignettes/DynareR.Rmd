@@ -784,16 +784,16 @@ and Reopening on the Active COVID-19 Cases in Nigeria.” *Social Science
 <https://doi.org/10.1016/j.socscimed.2020.113645>.
 
 ———. 2022a. “Package ‘DynareR’.”
-<https://cran.r-project.org/web/packages/DynareR/DynareR.pdf>.
+<https://CRAN.R-project.org/package=DynareR/DynareR.pdf>.
 
 ———. 2022b. “Package ‘EviewsR’.”
-<https://cran.r-project.org/web/packages/EviewsR/EviewsR.pdf>.
+<https://CRAN.R-project.org/package=EviewsR/EviewsR.pdf>.
 
 ———. 2022c. “Package ‘gretlR’.”
-<https://cran.r-project.org/web/packages/gretlR/gretlR.pdf>.
+<https://CRAN.R-project.org/package=gretlR/gretlR.pdf>.
 
 ———. 2023a. “Package ‘URooTab’.”
-<https://cran.r-project.org/web/packages/URooTab/URooTab.pdf>.
+<https://CRAN.R-project.org/package=URooTab/URooTab.pdf>.
 
 ———. 2023b. *URooTab: Tabular Reporting of EViews Unit Root Tests*.
 <https://github.com/sagirumati/URooTab>.

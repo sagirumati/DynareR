@@ -27,7 +27,7 @@
 #'
 #' Mati S. 2023a. URooTab: Tabular Reporting of EViews Unit Root Tests. <https://CRAN.R-project.org/package=URooTab>.
 #'
-#' Mati S, Civcir I., and Abba S. I. 2023. “EviewsR: An r Package for Dynamic and Reproducible Research Using EViews, r, r Markdown and Quarto.” The R Journal 15 (2): 169–205. <https://doi.org/10.32614/rj-2023-045>.
+#' Mati S, Civcir I., and Abba S. I. 2023. “EviewsR: An r Package for Dynamic and Reproducible Research Using EViews, r, r Markdown and Quarto.” The R Journal 15 (2): 169–205. \doi{10.32614/rj-2023-045}.
 #'
 #' Bob Rudis (2015).Running Go language chunks in R Markdown (Rmd) files. Available at:  https://gist.github.com/hrbrmstr/9accf90e63d852337cb7
 #'

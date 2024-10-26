@@ -1,2 +1,15 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+\.pdf$
+\.qmd$
+\.mod$
+\.csl$
+\.bib$
+\.m$
+\.dyn$
+^Dynare*
+^bkk$
+^agtrend$
+^example1$
+^run_dynare$
+CITATION.cff

@@ -4,6 +4,7 @@
 #'
 #' @param IRF A character string for the name of the Impulse Response Function as defined in the `Dynare` codes.
 #' @param path A character string for the path to the IRF graph.
+#' @param crop Whether to crop the white space around the graph
 #' @inheritParams run_dynare
 #' @return Set of \code{Dynare} (open-source software for DSGE modelling) outputs
 #' @author [Sagiru Mati](https://smati.com.ng), [ORCID: 0000-0003-1413-3974](https://orcid.org/0000-0003-1413-3974)

@@ -7,7 +7,7 @@
 set_matlab_path(matlab_path = "matlab")
 }
 \arguments{
-\item{matlab_path}{Path to the Matlab executable}
+\item{matlab_path}{Path to the Matlab executable. This overwrites \code{set_octave_path()} function.}
 }
 \value{
 Character
@@ -18,7 +18,7 @@ Use this function to set \code{Matlab} path
 \examples{
 library(DynareR)
 \dontrun{
-set_matlab_path('C:/Program Files/GNU Matlab/Matlab-6.4.0/mingw64/bin/matlab20.exe')
+set_matlab_path('C:/Program Files/MATLAB/R2024a/bin/matlab')
 }
 }
 \seealso{

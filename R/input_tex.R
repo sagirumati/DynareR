@@ -14,7 +14,6 @@
 #'}
 #' @keywords documentation
 #' @export
-
 input_tex <- function(path,start=NA,end=NA) {
 
     # tex=basename(path) %>% gsub("\\.tex$","",.) %>% paste0(".tex")

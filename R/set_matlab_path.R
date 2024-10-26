@@ -2,12 +2,12 @@
 #'
 #' Use this function to set `Matlab` path
 #'
-#' @param matlab_path Path to the Matlab executable
+#' @param matlab_path Path to the Matlab executable. This overwrites `set_octave_path()` function.
 #' @return Character
 #'
 #' @examples library(DynareR)
 #' \dontrun{
-#' set_matlab_path('C:/Program Files/GNU Matlab/Matlab-6.4.0/mingw64/bin/matlab20.exe')
+#' set_matlab_path('C:/Program Files/MATLAB/R2024a/bin/matlab')
 #'}
 #' @family important functions
 #' @keywords documentation
