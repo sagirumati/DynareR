@@ -4,7 +4,7 @@
 \alias{include_IRF}
 \title{Embed the graphs of Impulse Response Function (IRF) in R Markdown document}
 \usage{
-include_IRF(path = ".", model = "", IRF = "")
+include_IRF(path = ".", model = "", IRF = "", crop = TRUE)
 }
 \arguments{
 \item{path}{A character string for the path to the IRF graph.}
@@ -45,7 +45,7 @@ Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In 
 }
 \seealso{
 Other important functions: 
-\code{\link{DynareR}},
+\code{\link{DynareR-package}},
 \code{\link{add_matlab_path}()},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
@@ -54,6 +54,7 @@ Other important functions:
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},
+\code{\link{set_matlab_path}()},
 \code{\link{set_octave_path}()},
 \code{\link{write_dyn}()},
 \code{\link{write_mod}()}

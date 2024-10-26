@@ -1,4 +1,5 @@
 #' @import magrittr knitr utils
+#' @importFrom magick image_read image_read_pdf image_trim image_write
 
 
 
@@ -73,23 +74,36 @@ run_model <- function(model,import_log=F) {
 
 
   on.exit(unlink(octaveFile),add = T)
-  system_exec()
+
+  if(octaveExecPath=="") matlab_exec() else octave_exec()
 
   if(import_log) import_log(paste0(modelDir,'/',model,'.log'))
   }
 
-# system_exec
+# octave_exec
 
-system_exec=function(){
-  if(!exists("octavePath")) set_octave_path()
-  octavePath=eval(expression(octavePath),envir = parent.frame())
+octave_exec=function(){
+  if(!exists("octaveExecPath")) set_octave_path()
+  octaveExecPath=eval(expression(octaveExecPath),envir = parent.frame())
   octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
-  if(octavePath=="")  stop('Please provide the correct path to the Octave executable compatible with the Dynare Version')
-  system2(set_octave_path(octavePath),paste("--eval",shQuote(paste("run",octaveFile))))
+  if(octaveExecPath=="")  stop('Please provide the correct path to the Octave executable compatible with the Dynare Version')
+  system2(set_octave_path(octaveExecPath),paste("--eval",shQuote(paste("run",octaveFile))))
   }
 
 
 
+# matlab_exec
+
+matlab_exec=function(){
+  if(!exists("matlabExecPath")) set_matlab_path()
+  matlabExecPath=eval(expression(matlabExecPath),envir = parent.frame())
+  octaveFile=eval(expression(octaveFile),envir = parent.frame()) # Dynamic scoping
+  if(matlabExecPath=="")  stop('Please provide the correct path to the Matlab executable compatible with the Dynare Version')
+
+  octaveFile=gsub(".m$","",octaveFile)
+
+  system2(set_matlab_path(matlabExecPath),paste("-batch",octaveFile))
+}
 # Convert pdf to png
 
 pdf2png <- function(path) {

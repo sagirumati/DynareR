@@ -1,14 +1,24 @@
-Starting Dynare (version 5.3).
+Starting Dynare (version 6.2).
 Calling Dynare with arguments: none
-Starting preprocessing of the model file ...
-Found 6 equation(s).
-Evaluating expressions...done
-Computing static model derivatives (order 1).
-Computing dynamic model derivatives (order 2).
-Processing outputs ...
-done
-Preprocessing completed.
-
+Starting preprocessing of the model file ... 
+Found 6 equation(s). 
+Evaluating expressions... 
+Computing static model derivatives (order 1). 
+Normalizing the static model... 
+Finding the optimal block decomposition of the static model... 
+2 block(s) found: 
+  0 recursive block(s) and 2 simultaneous block(s). 
+  the largest simultaneous block has 4 equation(s) 
+                                 and 4 feedback variable(s). 
+Computing dynamic model derivatives (order 2). 
+Normalizing the dynamic model... 
+Finding the optimal block decomposition of the dynamic model... 
+2 block(s) found: 
+  0 recursive block(s) and 2 simultaneous block(s). 
+  the largest simultaneous block has 4 equation(s) 
+                                 and 4 feedback variable(s). 
+Preprocessing completed. 
+Preprocessing time: 0h00m00s.
 
 MODEL SUMMARY
 
@@ -55,9 +65,9 @@ VARIABLE         MEAN  STD. DEV.   VARIANCE
 y              1.0847     0.0897     0.0080
 c              0.8065     0.0529     0.0028
 k             11.1870     1.2603     1.5883
-a              0.0000     0.0340     0.0012
+a             -0.0000     0.0340     0.0012
 h              0.2917     0.0119     0.0001
-b              0.0000     0.0340     0.0012
+b             -0.0000     0.0340     0.0012
 
 
 
@@ -91,4 +101,4 @@ k         0.9992  0.9971  0.9937  0.9891  0.9834
 a         0.9641  0.9299  0.8973  0.8662  0.8365
 h         0.9195  0.8442  0.7739  0.7082  0.6468
 b         0.9641  0.9299  0.8973  0.8662  0.8365
-Total computing time : 0h00m14s
+Total computing time : 0h00m08s

@@ -26,6 +26,7 @@ Other important functions:
 \code{\link{run_dynare}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},
+\code{\link{set_matlab_path}()},
 \code{\link{set_octave_path}()},
 \code{\link{write_dyn}()},
 \code{\link{write_mod}()}

@@ -23,23 +23,11 @@ if T_flag
     T = run_dynare.dynamic_resid_tt(T, y, x, params, steady_state, it_);
 end
 residual = zeros(6, 1);
-lhs = y(5)*params(5)*T(1);
-rhs = (1-params(3))*y(4);
-residual(1) = lhs - rhs;
-lhs = y(6);
-rhs = params(1)*T(2)*T(3);
-residual(2) = lhs - rhs;
-lhs = y(4);
-rhs = T(6);
-residual(3) = lhs - rhs;
-lhs = y(6);
-rhs = exp(y(9))*(y(4)-y(5))+(1-params(4))*y(1);
-residual(4) = lhs - rhs;
-lhs = y(7);
-rhs = params(2)*y(2)+params(7)*y(3)+x(it_, 1);
-residual(5) = lhs - rhs;
-lhs = y(9);
-rhs = y(2)*params(7)+params(2)*y(3)+x(it_, 2);
-residual(6) = lhs - rhs;
+    residual(1) = (y(5)*params(5)*T(1)) - ((1-params(3))*y(4));
+    residual(2) = (y(6)) - (params(1)*T(2)*T(3));
+    residual(3) = (y(4)) - (T(6));
+    residual(4) = (y(6)) - (exp(y(9))*(y(4)-y(5))+(1-params(4))*y(1));
+    residual(5) = (y(7)) - (params(2)*y(2)+params(7)*y(3)+x(it_, 1));
+    residual(6) = (y(9)) - (y(2)*params(7)+params(2)*y(3)+x(it_, 2));
 
 end

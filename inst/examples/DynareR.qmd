@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
 
 library(magrittr)
 library(DynareR)
-set_dynare_version("5.3")
+# set_dynare_version("5.3")
+set_matlab_path()
 ```
 
 

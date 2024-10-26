@@ -37,7 +37,5 @@ g1(5,4)=1-params(2);
 g1(5,6)=(-params(7));
 g1(6,4)=(-params(7));
 g1(6,6)=1-params(2);
-if ~isreal(g1)
-    g1 = real(g1)+2*imag(g1);
-end
+
 end

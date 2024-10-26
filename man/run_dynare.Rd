@@ -85,7 +85,7 @@ run_dynare(code=DynareCodes,model="DynareR/run_dynare/example1")
 }
 \seealso{
 Other important functions: 
-\code{\link{DynareR}},
+\code{\link{DynareR-package}},
 \code{\link{add_matlab_path}()},
 \code{\link{add_path}()},
 \code{\link{eng_dynare}()},
@@ -94,6 +94,7 @@ Other important functions:
 \code{\link{input_tex}()},
 \code{\link{run_models}()},
 \code{\link{set_dynare_version}()},
+\code{\link{set_matlab_path}()},
 \code{\link{set_octave_path}()},
 \code{\link{write_dyn}()},
 \code{\link{write_mod}()}

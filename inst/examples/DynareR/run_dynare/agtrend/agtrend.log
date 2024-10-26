@@ -1,14 +1,24 @@
-Starting Dynare (version 5.3).
+Starting Dynare (version 6.2).
 Calling Dynare with arguments: none
-Starting preprocessing of the model file ...
-Found 15 equation(s).
-Evaluating expressions...done
-Computing static model derivatives (order 1).
-Computing dynamic model derivatives (order 1).
-Processing outputs ...
-done
-Preprocessing completed.
-
+Starting preprocessing of the model file ... 
+Found 15 equation(s). 
+Evaluating expressions... 
+Computing static model derivatives (order 1). 
+Normalizing the static model... 
+Finding the optimal block decomposition of the static model... 
+5 block(s) found: 
+  4 recursive block(s) and 1 simultaneous block(s). 
+  the largest simultaneous block has 8 equation(s) 
+                                 and 8 feedback variable(s). 
+Computing dynamic model derivatives (order 1). 
+Normalizing the dynamic model... 
+Finding the optimal block decomposition of the dynamic model... 
+5 block(s) found: 
+  4 recursive block(s) and 1 simultaneous block(s). 
+  the largest simultaneous block has 8 equation(s) 
+                                 and 8 feedback variable(s). 
+Preprocessing completed. 
+Preprocessing time: 0h00m00s.
 
 STEADY-STATE RESULTS:
 
@@ -30,20 +40,16 @@ i_y  		 -1.69411
 
 EIGENVALUES:
          Modulus             Real        Imaginary
-
             0.72             0.72                0
           0.9224           0.9224                0
             0.94             0.94                0
           0.9946           0.9946                0
            1.032            1.032                0
            1.113            1.113                0
-       5.633e+15        5.633e+15                0
-        1.21e+16        -1.21e+16                0
+       1.048e+18        1.048e+18                0
+             Inf              Inf                0
 
-
-There are 4 eigenvalue(s) larger than 1 in modulus 
-for 4 forward-looking variable(s)
-
+There are 4 eigenvalue(s) larger than 1 in modulus for 4 forward-looking variable(s)
 The rank condition is verified.
 
 

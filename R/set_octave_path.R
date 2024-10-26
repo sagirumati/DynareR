@@ -14,20 +14,24 @@
 #' @export
 set_octave_path <- function(octave_path="octave"){
 
-  octavePath=Sys.which(octave_path) # for Linux and macOS
+  octaveExecPath=Sys.which(octave_path) # for Linux and macOS
 
  if (Sys.info()['sysname']=="Windows" & exists("dynareVersion")){
 
-   if (dynareVersion %in% c("4.6.1","4.6.2","4.6.3")) octavePath=Sys.which("C:/Octave/Octave-5.2.0.0/mingw64/bin/octave-cli.exe")
-   if (dynareVersion=="4.6.4")                        octavePath=Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave-cli.exe")
-   if (dynareVersion %in% c("5.0","5.1","5.2"))       octavePath=Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave-cli.exe")
-   if (dynareVersion=="5.3")                          octavePath=Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe")
-   if (dynareVersion=="5.4")                          octavePath=Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe")
+   if (dynareVersion %in% c("4.6.1","4.6.2","4.6.3")) octaveExecPath=Sys.which("C:/Octave/Octave-5.2.0.0/mingw64/bin/octave-cli.exe")
+   if (dynareVersion=="4.6.4")                        octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave-cli.exe")
+   if (dynareVersion %in% c("5.0","5.1","5.2"))       octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave-cli.exe")
+   if (dynareVersion=="5.3")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-7.3.0/mingw64/bin/octave.exe")
+   if (dynareVersion=="5.4")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-8.1.0/mingw64/bin/octave.exe")
+   if (dynareVersion=="5.5")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-8.3.0/mingw64/bin/octave.exe")
+   if (dynareVersion=="6.0")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-8.4.0/mingw64/bin/octave.exe")
+   if (dynareVersion=="6.1")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-9.1.0/mingw64/bin/octave.exe")
+   if (dynareVersion=="6.2")                          octaveExecPath=Sys.which("C:/Program Files/GNU Octave/Octave-9.2.0/mingw64/bin/octave.exe")
 
-   # if (!dynareVersion %in% c("4.6.1","4.6.2","4.6.3","4.6.4","5.0","5.1","5.2","5.3","5.4")) octavePath=Sys.which(octave_path)
+      # if (!dynareVersion %in% c("4.6.1","4.6.2","4.6.3","4.6.4","5.0","5.1","5.2","5.3","5.4")) octaveExecPath=Sys.which(octave_path)
 
 
-    # octavePath <- switch(dynareVersion,
+    # octaveExecPath <- switch(dynareVersion,
    #                       "4.6.1" | "4.6.2" | "4.6.3", Sys.which("C:/Octave/Octave-5.2.0.0/mingw64/bin/octave-cli.exe"),
    #                       "4.6.4", Sys.which("C:/Program Files/GNU Octave/Octave-6.2.0/mingw64/bin/octave.exe"),
    #                       "5.0" | "5.1" | "5.2", Sys.which("C:/Program Files/GNU Octave/Octave-6.4.0/mingw64/bin/octave.exe"),
@@ -39,12 +43,12 @@ set_octave_path <- function(octave_path="octave"){
 
   # if (tolower(Sys.info()['sysname']) == "darwin"){
   #
-  #   if (dynareVersion %in% c("4.6.1","4.6.2","4.6.3")) octavePath=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
+  #   if (dynareVersion %in% c("4.6.1","4.6.2","4.6.3")) octaveExecPath=Sys.which("/usr/local/Cellar/octave/4.4.1/bin/octave-cli.exe")
   # }
 
-  # if(octavePath=="")  warning('Please provide the correct path to the Octave executable compatible with the Dynare Version')
+  # if(octaveExecPath=="")  warning('Please provide the correct path to the Octave executable compatible with the Dynare Version')
 
-  octavePath<<-octavePath
+  octaveExecPath<<-octaveExecPath
 
 }
 

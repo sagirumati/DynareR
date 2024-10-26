@@ -14,11 +14,11 @@
 #' @export
 set_matlab_path <- function(matlab_path="matlab"){
 
-  matlabPath=Sys.which(matlab_path) # for Linux and macOS
+  matlabExecPath=Sys.which(matlab_path) # for Linux and macOS
 
-  octavePath<<-""
+  octaveExecPath<<-""
 
-  matlabPath<<-matlabPath
+  matlabExecPath<<-matlabExecPath
 
 }
 

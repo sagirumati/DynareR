@@ -4,20 +4,16 @@
 % Warning : this file is generated automatically by Dynare
 %           from model file (.mod)
 
-if isoctave || matlab_ver_less_than('8.6')
-    clear all
-else
-    clearvars -global
-    clear_persistent_variables(fileparts(which('dynare')), false)
-end
+clearvars -global
+clear_persistent_variables(fileparts(which('dynare')), false)
 tic0 = tic;
 % Define global variables.
-global M_ options_ oo_ estim_params_ bayestopt_ dataset_ dataset_info estimation_info ys0_ ex0_
+global M_ options_ oo_ estim_params_ bayestopt_ dataset_ dataset_info estimation_info
 options_ = [];
 M_.fname = 'bkk';
-M_.dynare_version = '5.3';
-oo_.dynare_version = '5.3';
-options_.dynare_version = '5.3';
+M_.dynare_version = '6.2';
+oo_.dynare_version = '6.2';
+options_.dynare_version = '6.2';
 %
 % Some global variables initialization
 %
@@ -325,7 +321,6 @@ M_.aux_vars(19).type = 1;
 M_.aux_vars(19).orig_index = 20;
 M_.aux_vars(19).orig_lead_lag = -2;
 M_.aux_vars(19).orig_expr = 'AUX_ENDO_LAG_32_1(-1)';
-M_ = setup_solvers(M_);
 M_.Sigma_e = zeros(2, 2);
 M_.Correlation_matrix = eye(2, 2);
 M_.H = 0;
@@ -333,15 +328,21 @@ M_.Correlation_matrix_ME = 1;
 M_.sigma_e_is_diagonal = true;
 M_.det_shocks = [];
 M_.surprise_shocks = [];
+M_.learnt_shocks = [];
+M_.learnt_endval = [];
 M_.heteroskedastic_shocks.Qvalue_orig = [];
 M_.heteroskedastic_shocks.Qscale_orig = [];
+M_.matched_irfs = {};
+M_.matched_irfs_weights = {};
 options_.linear = false;
 options_.block = false;
 options_.bytecode = false;
 options_.use_dll = false;
-M_.orig_eq_nbr = 23;
+options_.ramsey_policy = false;
+options_.discretionary_policy = false;
 M_.eq_nbr = 42;
-M_.ramsey_eq_nbr = 0;
+M_.ramsey_orig_eq_nbr = 0;
+M_.ramsey_orig_endo_nbr = 0;
 M_.set_auxiliary_variables = exist(['./+' M_.fname '/set_auxiliary_variables.m'], 'file') == 2;
 M_.epilogue_names = {};
 M_.epilogue_var_list_ = {};
@@ -405,8 +406,6 @@ M_.nsfwrd   = 16;
 M_.nspred   = 20;
 M_.ndynamic   = 34;
 M_.dynamic_tmp_nbr = [52; 18; 0; 0; ];
-M_.model_local_variables_dynamic_tt_idxs = {
-};
 M_.equations_tags = {
   1 , 'name' , 'Y_H' ;
   2 , 'name' , 'K_H' ;
@@ -460,7 +459,6 @@ M_.mapping.LGM.eqidx = [6 7 8 9 17 18 19 20 ];
 M_.static_and_dynamic_models_differ = false;
 M_.has_external_function = false;
 M_.state_var = [4 5 6 8 9 15 16 17 19 20 33 34 35 36 37 38 39 40 41 42 ];
-M_.exo_names_orig_ord = [1:2];
 M_.maximum_lag = 1;
 M_.maximum_lead = 1;
 M_.maximum_endo_lag = 1;
@@ -472,9 +470,218 @@ oo_.exo_steady_state = zeros(2, 1);
 M_.params = NaN(26, 1);
 M_.endo_trends = struct('deflator', cell(42, 1), 'log_deflator', cell(42, 1), 'growth_factor', cell(42, 1), 'log_growth_factor', cell(42, 1));
 M_.NNZDerivatives = [154; -1; -1; ];
-M_.static_tmp_nbr = [42; 20; 0; 0; ];
-M_.model_local_variables_static_tt_idxs = {
+M_.dynamic_g1_sparse_rowval = int32([4 5 2 33 1 11 23 10 21 3 36 15 16 13 38 12 22 23 10 21 14 41 34 27 35 1 7 3 37 3 39 30 40 12 18 14 42 14 6 7 11 23 5 6 7 1 4 5 7 4 2 9 11 23 3 11 23 1 7 10 2 3 11 1 7 11 23 17 18 22 23 16 17 18 12 15 16 18 15 13 20 22 23 14 22 23 12 18 21 13 14 22 12 18 22 23 6 7 8 9 17 18 19 20 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 27 27 9 27 30 30 20 30 8 9 19 20 24 27 30 8 19 25 8 19 26 8 19 28 29 8 31 32 19 10 21 ]);
+M_.dynamic_g1_sparse_colval = int32([4 4 5 5 6 6 6 8 8 9 9 15 15 16 16 17 17 17 19 19 20 20 33 34 34 35 35 36 36 37 38 39 39 40 40 41 41 42 43 43 43 43 44 44 44 45 45 45 45 46 47 48 48 48 49 49 49 50 50 50 51 51 52 53 53 53 53 54 54 54 54 55 55 55 56 56 56 56 57 58 59 59 59 60 60 60 61 61 61 62 62 63 64 64 64 64 65 65 65 65 65 65 65 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 87 92 95 95 98 103 106 106 107 107 107 107 107 107 107 108 108 108 109 109 109 110 110 111 112 113 114 115 116 127 128 ]);
+M_.dynamic_g1_sparse_colptr = int32([1 1 1 1 3 5 8 8 10 12 12 12 12 12 12 14 16 19 19 21 23 23 23 23 23 23 23 23 23 23 23 23 23 24 26 28 30 31 32 34 36 38 39 43 46 50 51 52 55 58 61 63 64 68 72 75 79 80 81 84 87 90 92 93 97 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 124 124 125 125 125 125 125 126 126 126 128 128 128 129 129 129 129 129 130 130 130 132 139 142 145 147 148 149 150 151 152 153 153 153 153 153 153 153 153 153 153 153 154 155 ]);
+M_.lhs = {
+'Y_H'; 
+'K_H'; 
+'X_H'; 
+'A_H'; 
+'L_H'; 
+'(C_H^mu_H*L_H^(1-mu_H))^gamma_H*mu_H*psi_H/C_H'; 
+'(-alpha_H)*(C_H^mu_H*L_H^(1-mu_H))^gamma_H*(1-mu_H)*psi_H/L_H'; 
+'phi_H*LGM+phi_H*beta_H*LGM(1)+phi_H*beta_H^2*AUX_ENDO_LEAD_106(1)+phi_H*beta_H^3*AUX_ENDO_LEAD_111(1)-(1-delta_H)*phi_H*beta_H*LGM(1)-(1-delta_H)*phi_H*beta_H^2*AUX_ENDO_LEAD_106(1)-(1-delta_H)*phi_H*beta_H^3*AUX_ENDO_LEAD_111(1)-(1-delta_H)*phi_H*beta_H^4*AUX_ENDO_LEAD_122(1)'; 
+'LGM'; 
+'LAMBDA_H-1'; 
+'NX_H'; 
+'Y_F'; 
+'K_F'; 
+'X_F'; 
+'A_F'; 
+'L_F'; 
+'(C_F^mu_F*L_F^(1-mu_F))^gamma_F*mu_F*psi_F/C_F'; 
+'(-alpha_F)*(C_F^mu_F*L_F^(1-mu_F))^gamma_F*(1-mu_F)*psi_F/L_F'; 
+'LGM*phi_F+phi_F*LGM(1)*beta_F+phi_F*beta_F^2*AUX_ENDO_LEAD_106(1)+phi_F*beta_F^3*AUX_ENDO_LEAD_111(1)-(1-delta_F)*phi_F*LGM(1)*beta_F-(1-delta_F)*phi_F*beta_F^2*AUX_ENDO_LEAD_106(1)-(1-delta_F)*phi_F*beta_F^3*AUX_ENDO_LEAD_111(1)-(1-delta_F)*phi_F*beta_F^4*AUX_ENDO_LEAD_122(1)'; 
+'LGM'; 
+'LAMBDA_F-1'; 
+'NX_F'; 
+'Z_F+X_F+Z_H+X_H+C_H-Z_H(-1)+C_F-Z_F(-1)'; 
+'AUX_ENDO_LEAD_106'; 
+'AUX_ENDO_LEAD_111'; 
+'AUX_ENDO_LEAD_122'; 
+'AUX_ENDO_LEAD_386'; 
+'AUX_ENDO_LEAD_403'; 
+'AUX_ENDO_LEAD_139'; 
+'AUX_ENDO_LEAD_453'; 
+'AUX_ENDO_LEAD_470'; 
+'AUX_ENDO_LEAD_291'; 
+'AUX_ENDO_LAG_4_1'; 
+'AUX_ENDO_LAG_4_2'; 
+'AUX_ENDO_LAG_4_3'; 
+'AUX_ENDO_LAG_8_1'; 
+'AUX_ENDO_LAG_8_2'; 
+'AUX_ENDO_LAG_28_1'; 
+'AUX_ENDO_LAG_28_2'; 
+'AUX_ENDO_LAG_28_3'; 
+'AUX_ENDO_LAG_32_1'; 
+'AUX_ENDO_LAG_32_2'; 
 };
+M_.static_tmp_nbr = [44; 20; 0; 0; ];
+M_.block_structure_stat.block(1).Simulation_Type = 6;
+M_.block_structure_stat.block(1).endo_nbr = 2;
+M_.block_structure_stat.block(1).mfs = 2;
+M_.block_structure_stat.block(1).equation = [ 10 21];
+M_.block_structure_stat.block(1).variable = [ 19 8];
+M_.block_structure_stat.block(2).Simulation_Type = 6;
+M_.block_structure_stat.block(2).endo_nbr = 38;
+M_.block_structure_stat.block(2).mfs = 38;
+M_.block_structure_stat.block(2).equation = [ 1 2 3 4 5 6 7 8 9 42 12 13 14 15 16 17 18 19 20 41 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
+M_.block_structure_stat.block(2).variable = [ 11 9 7 4 2 1 3 29 6 42 14 20 18 15 13 23 22 32 17 41 12 24 25 26 34 27 28 39 30 31 5 33 35 36 37 16 38 40];
+M_.block_structure_stat.block(3).Simulation_Type = 1;
+M_.block_structure_stat.block(3).endo_nbr = 2;
+M_.block_structure_stat.block(3).mfs = 2;
+M_.block_structure_stat.block(3).equation = [ 22 11];
+M_.block_structure_stat.block(3).variable = [ 21 10];
+M_.block_structure_stat.variable_reordered = [ 19 8 11 9 7 4 2 1 3 29 6 42 14 20 18 15 13 23 22 32 17 41 12 24 25 26 34 27 28 39 30 31 5 33 35 36 37 16 38 40 21 10];
+M_.block_structure_stat.equation_reordered = [ 10 21 1 2 3 4 5 6 7 8 9 42 12 13 14 15 16 17 18 19 20 41 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 22 11];
+M_.block_structure_stat.incidence.sparse_IM = [
+ 1 3;
+ 1 6;
+ 1 8;
+ 1 11;
+ 1 35;
+ 2 5;
+ 2 9;
+ 3 7;
+ 3 9;
+ 3 36;
+ 3 37;
+ 4 3;
+ 4 4;
+ 5 2;
+ 5 3;
+ 5 4;
+ 6 1;
+ 6 2;
+ 6 23;
+ 7 1;
+ 7 2;
+ 7 3;
+ 7 8;
+ 7 11;
+ 7 23;
+ 7 35;
+ 8 23;
+ 8 24;
+ 8 25;
+ 8 26;
+ 8 29;
+ 9 6;
+ 9 11;
+ 9 23;
+ 10 8;
+ 10 19;
+ 11 1;
+ 11 7;
+ 11 10;
+ 11 11;
+ 12 14;
+ 12 17;
+ 12 19;
+ 12 22;
+ 12 40;
+ 13 16;
+ 13 20;
+ 14 18;
+ 14 20;
+ 14 41;
+ 14 42;
+ 15 14;
+ 15 15;
+ 16 13;
+ 16 14;
+ 16 15;
+ 17 12;
+ 17 13;
+ 17 23;
+ 18 12;
+ 18 13;
+ 18 14;
+ 18 19;
+ 18 22;
+ 18 23;
+ 18 40;
+ 19 23;
+ 19 24;
+ 19 25;
+ 19 26;
+ 19 32;
+ 20 17;
+ 20 22;
+ 20 23;
+ 21 8;
+ 21 19;
+ 22 12;
+ 22 18;
+ 22 21;
+ 22 22;
+ 23 1;
+ 23 7;
+ 23 11;
+ 23 12;
+ 23 18;
+ 23 22;
+ 24 23;
+ 24 24;
+ 25 24;
+ 25 25;
+ 26 25;
+ 26 26;
+ 27 3;
+ 27 8;
+ 27 11;
+ 27 23;
+ 27 27;
+ 27 34;
+ 28 27;
+ 28 28;
+ 29 28;
+ 29 29;
+ 30 14;
+ 30 19;
+ 30 22;
+ 30 23;
+ 30 30;
+ 30 39;
+ 31 30;
+ 31 31;
+ 32 31;
+ 32 32;
+ 33 5;
+ 33 33;
+ 34 33;
+ 34 34;
+ 35 34;
+ 35 35;
+ 36 9;
+ 36 36;
+ 37 36;
+ 37 37;
+ 38 16;
+ 38 38;
+ 39 38;
+ 39 39;
+ 40 39;
+ 40 40;
+ 41 20;
+ 41 41;
+ 42 41;
+ 42 42;
+];
+M_.block_structure_stat.tmp_nbr = 56;
+M_.block_structure_stat.block(1).g1_sparse_rowval = int32([1 2 1 2 ]);
+M_.block_structure_stat.block(1).g1_sparse_colval = int32([1 1 2 2 ]);
+M_.block_structure_stat.block(1).g1_sparse_colptr = int32([1 3 5 ]);
+M_.block_structure_stat.block(2).g1_sparse_rowval = int32([1 7 9 21 25 2 3 34 3 21 4 5 5 6 7 6 7 21 1 4 5 7 25 8 27 1 9 10 13 11 14 15 17 28 12 13 20 13 21 14 15 15 16 17 6 7 8 9 16 17 18 19 22 25 28 11 17 19 21 28 18 30 11 19 10 13 20 16 17 21 8 18 22 23 8 18 23 24 8 18 24 25 32 33 25 26 26 27 28 37 38 28 29 29 30 2 31 31 32 1 7 33 3 34 35 3 35 12 36 36 37 11 17 38 ]);
+M_.block_structure_stat.block(2).g1_sparse_colval = int32([1 1 1 1 1 2 2 2 3 3 4 4 5 5 5 6 6 6 7 7 7 7 7 8 8 9 9 10 10 11 11 11 11 11 12 12 12 13 13 14 14 15 15 15 16 16 16 16 16 16 16 16 16 16 16 17 17 17 17 17 18 18 19 19 20 20 20 21 21 21 22 22 22 22 23 23 23 23 24 24 24 25 25 25 26 26 27 27 28 28 28 29 29 30 30 31 31 32 32 33 33 33 34 34 34 35 35 36 36 37 37 38 38 38 ]);
+M_.block_structure_stat.block(2).g1_sparse_colptr = int32([1 6 9 11 13 16 19 24 26 28 30 35 38 40 42 45 56 61 63 65 68 71 75 79 82 85 87 89 92 94 96 98 100 103 106 108 110 112 115 ]);
+M_.block_structure_stat.block(3).g1_sparse_rowval = int32([]);
+M_.block_structure_stat.block(3).g1_sparse_colval = int32([]);
+M_.block_structure_stat.block(3).g1_sparse_colptr = int32([]);
+M_.static_g1_sparse_rowval = int32([6 7 11 23 5 6 7 1 4 5 7 27 4 5 2 33 1 9 3 11 23 1 7 10 21 27 2 3 36 11 1 7 9 11 23 27 17 18 22 23 16 17 18 12 15 16 18 30 15 16 13 38 12 20 14 22 23 10 12 18 21 30 13 14 41 22 12 18 20 22 23 30 6 7 8 9 17 18 19 20 24 27 30 8 19 24 25 8 19 25 26 8 19 26 27 28 28 29 8 29 30 31 31 32 19 32 33 34 27 34 35 1 7 35 3 36 37 3 37 38 39 30 39 40 12 18 40 14 41 42 14 42 ]);
+M_.static_g1_sparse_colval = int32([1 1 1 1 2 2 2 3 3 3 3 3 4 4 5 5 6 6 7 7 7 8 8 8 8 8 9 9 9 10 11 11 11 11 11 11 12 12 12 12 13 13 13 14 14 14 14 14 15 15 16 16 17 17 18 18 18 19 19 19 19 19 20 20 20 21 22 22 22 22 22 22 23 23 23 23 23 23 23 23 23 23 23 24 24 24 24 25 25 25 25 26 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 34 35 35 35 36 36 36 37 37 38 38 39 39 39 40 40 40 41 41 41 42 42 ]);
+M_.static_g1_sparse_colptr = int32([1 5 8 13 15 17 19 22 27 30 31 37 41 44 49 51 53 55 58 63 66 67 73 84 88 92 95 97 99 101 103 105 107 109 112 115 118 120 122 125 128 131 133 ]);
 M_.params(1) = 0.99;
 beta_H = M_.params(1);
 M_.params(4) = 0.34;
@@ -594,6 +801,7 @@ M_.Correlation_matrix(2, 1) = M_.Correlation_matrix(1, 2);
 M_.sigma_e_is_diagonal = 0;
 steady;
 oo_.dr.eigval = check(M_,options_,oo_);
+options_.graph_format = {'pdf'};
 options_.hp_filter = 1600;
 options_.order = 1;
 var_list_ = {};
@@ -623,6 +831,9 @@ if exist('dataset_info', 'var') == 1
 end
 if exist('oo_recursive_', 'var') == 1
   save([M_.dname filesep 'Output' filesep 'bkk_results.mat'], 'oo_recursive_', '-append');
+end
+if exist('options_mom_', 'var') == 1
+  save([M_.dname filesep 'Output' filesep 'bkk_results.mat'], 'options_mom_', '-append');
 end
 if ~isempty(lastwarn)
   disp('Note: warning(s) encountered in MATLAB/Octave code')
