@@ -1,5 +1,6 @@
 # Dynare 0.1.5
 
+
 * Added support for Matlab. The package now works with both Octave and Matlab
 
 * Added ``set_matlab_path()` function, which sets path to the Matlab executable to use.
